@@ -1,0 +1,51 @@
+<div class="ui left vertical  inverted labeled icon visible sidebar menu" style="width: 85px">
+    <a class="item">
+        <i class="home icon"></i>
+        主页
+    </a>
+    <a class="item">
+        <i class="plus icon"></i>
+        新建分组
+    </a>
+    <a class="item">
+        <i class="sort content descending icon"></i>
+        智能排序
+    </a>
+    <a class="item">
+        <i class="paw icon"></i>
+        智能分组
+    </a>
+    <a class="item">
+        <i class="bug icon"></i>
+        智能检测
+    </a>
+    <a class="item">
+        <i class="unlink icon"></i>
+        删除失效
+    </a>
+    <a class="item">
+        <i class="comments icon"></i>
+        奖励
+    </a>
+    <a class="item">
+        <i class="shop icon"></i>
+        注册
+    </a>
+    <a class="item">
+        <i class="settings icon"></i>
+        登录
+    </a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('.left.demo.sidebar').sidebar('attach events', '.attached.button');
+//        $('.visible.ui.sidebar')
+//                .sidebar({
+//                    context: '.visible.bottom.segment'
+//                })
+//                .sidebar('hide')
+//        ;
+    })
+
+</script>
