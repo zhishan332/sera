@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+    <properties>
+        <!-- 日志路径 -->
+        <property name="LOG_HOME">/Users/wangqing/Documents/other/logs</property>
+        <!-- INFO级别日志名称 -->
+        <property name="LOG_INFO_NAME">sera-web.log</property>
+        <!-- INFO级别备份日志名称 -->
+        <property name="BACKUP_INFO_NAME">sera-web-%d{MM-dd-yyyy}-%i.log</property>
+        <!-- ERROR级别日志名称 -->
+        <property name="LOG_ERROR_NAME">sera-web-err.log</property>
+        <!-- ERROR级别备份日志名称-->
+        <property name="BACKUP_ERROR_NAME">sera-web-err-%d{MM-dd-yyyy}-%i.log</property>
+    </properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="[%p][%date{yyyy-MM-dd HH:mm:ss.SSS}]%msg[%thread]([%c:%line])%n"/>
+        </Console>
+        <RollingFile name="AllLog" fileName="${LOG_HOME}/${LOG_INFO_NAME}"
+                     filePattern="${LOG_HOME}/${BACKUP_INFO_NAME}">
+            <PatternLayout charset="UTF-8" pattern="[%p][%date{yyyy-MM-dd HH:mm:ss.SSS}]%msg[%thread]([%c:%line])%n"/>
+            <SizeBasedTriggeringPolicy size="50MB"/>
+        </RollingFile>
+        <RollingFile name="ErrLog" fileName="${LOG_HOME}/${LOG_ERROR_NAME}"
+                     filePattern="${LOG_HOME}/${BACKUP_ERROR_NAME}">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout charset="UTF-8" pattern="[%p][%date{yyyy-MM-dd HH:mm:ss.SSS}]%msg[%thread]([%c:%line])%n"/>
+            <SizeBasedTriggeringPolicy size="50MB"/>
+        </RollingFile>
+    </appenders>
+    <Loggers>
+        <logger name="java.sql" level="ERROR" additivity="false"/>
+        <logger name="java.sql.ResultSet" level="ERROR" additivity="false"/>
+        <logger name="com.ibatis" level="ERROR" additivity="false"/>
+        <logger name="org.apache" level="ERROR" additivity="false"/>
+        <logger name="org.apache.ibatis" level="ERROR" additivity="false"/>
+        <logger name="org.springframework" level="ERROR" additivity="false"/>
+        <logger name="com.mchange" level="ERROR" additivity="false"/>
+        <logger name="org.apache.commons" level="ERROR" additivity="false"/>
+        <logger name="com.cainiao.cplogin" level="ERROR" additivity="false"/>
+        <logger name="org.apache.ignite" level="WARN" additivity="false"/>
+
+        <root level="info">
+            <appenderRef ref="AllLog"/>
+            <appenderRef ref="Console"/>
+        </root>
+    </Loggers>
+</configuration>

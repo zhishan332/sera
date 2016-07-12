@@ -13,6 +13,7 @@ public class FavGroupEntity implements Serializable {
 	private Long id;//(字段：id)
 	private Long groupId;//(字段：group_id)
 	private String groupName;//(字段：group_name)
+	private Integer covert;
 	private Long userId;//(字段：user_id)
 	private String userName;//(字段：user_name)
 	private Timestamp createTime;//(字段：create_time)
@@ -65,4 +66,11 @@ public class FavGroupEntity implements Serializable {
 		this.createTime = createTime;
 	}
 
+	public Integer getCovert() {
+		return covert;
+	}
+
+	public void setCovert(Integer covert) {
+		this.covert = covert;
+	}
 }

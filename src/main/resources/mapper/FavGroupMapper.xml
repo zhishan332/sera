@@ -7,6 +7,7 @@
 		<id property="id" column="id" jdbcType="BIGINT"/>
 		<result property="groupId" column="group_id" jdbcType="BIGINT"/>
 		<result property="groupName" column="group_name" jdbcType="VARCHAR"/>
+		<result property="covert" column="covert" jdbcType="TINYINT"/>
 		<result property="userId" column="user_id" jdbcType="BIGINT"/>
 		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
 		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -14,7 +15,7 @@
 
 	<!-- 所有字段  -->
 	<sql id="sqlColumns">
-		id, group_id, group_name, user_id, user_name, create_time
+		id, group_id, group_name,covert, user_id, user_name, create_time
 	</sql>
 
 	<!-- 单条新增数据  -->
@@ -25,6 +26,7 @@
 		#{id,jdbcType=BIGINT},
 		#{groupId,jdbcType=BIGINT},
 		#{groupName,jdbcType=VARCHAR},
+		#{covert,jdbcType=TINYINT},
 		#{userId,jdbcType=BIGINT},
 		#{userName,jdbcType=VARCHAR},
 		#{createTime,jdbcType=TIMESTAMP}
@@ -32,7 +34,7 @@
 	</insert>
 
 	<!-- 根据主键删除数据  -->
-	<delete id="delByPk" parameterType="java.lang.Integer">
+	<delete id="delByPk" parameterType="long">
 		delete from fav_group
 		where id = #{id,jdbcType=BIGINT}
 	</delete>

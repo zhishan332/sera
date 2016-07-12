@@ -11,22 +11,22 @@ import java.util.List;
  */
 public interface FavService {
 
-    boolean addFavGroup();
+    boolean addFavGroup(FavGroupEntity favGroupEntity);
 
-    boolean delFavGroup();
+    boolean delFavGroup(long groupId);
 
-    List<FavGroupEntity> findFavGroup();
+    List<FavGroupEntity> findFavGroup(long userId);
 
-    boolean protectFavGroup();
+    boolean protectFavGroup(long groupId, int type);
 
-    boolean addFav();
+    boolean addFav(FavListEntity favListEntity);
 
-    boolean delFav();
+    boolean delFav(long favId);
 
-    boolean checkFav();
+    boolean checkFav(long userId);
 
-    boolean focusFav();
+    boolean focusFav(long favId);
 
-    List<FavListEntity> findByGroup(long group, int start, int limit);
+    List<FavListEntity> findByGroup(long groupId, int start, int limit);
 
 }
