@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- Created with MTool.  -->
+<mapper namespace="com.sera.dao.UserInfoMapper">
+
+	<resultMap id="userInfoMap" type="UserInfoEntity">
+		<id property="id" column="id" jdbcType="BIGINT"/>
+		<result property="userId" column="user_id" jdbcType="BIGINT"/>
+		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
+		<result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
+		<result property="sex" column="sex" jdbcType="TINYINT"/>
+		<result property="birthday" column="birthday" jdbcType="DATE"/>
+		<result property="tinyurl" column="tinyurl" jdbcType="VARCHAR"/>
+		<result property="headurl" column="headurl" jdbcType="VARCHAR"/>
+		<result property="mainurl" column="mainurl" jdbcType="VARCHAR"/>
+		<result property="hometown" column="hometown" jdbcType="VARCHAR"/>
+		<result property="workHistory" column="work_history" jdbcType="VARCHAR"/>
+		<result property="universityHistory" column="university_history" jdbcType="VARCHAR"/>
+		<result property="hsHistory" column="hs_history" jdbcType="VARCHAR"/>
+		<result property="province" column="province" jdbcType="VARCHAR"/>
+		<result property="city" column="city" jdbcType="VARCHAR"/>
+		<result property="socialUid" column="social_uid" jdbcType="BIGINT"/>
+		<result property="mediaUid" column="media_uid" jdbcType="VARCHAR"/>
+		<result property="meidaType" column="meida_type" jdbcType="VARCHAR"/>
+		<result property="weibo" column="weibo" jdbcType="VARCHAR"/>
+		<result property="qq" column="qq" jdbcType="VARCHAR"/>
+		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<!-- 所有字段  -->
+	<sql id="sqlColumns">
+		id, user_id, user_name, user_phone, sex, birthday, tinyurl, headurl, mainurl, hometown, work_history, 
+		university_history, hs_history, province, city, social_uid, media_uid, meida_type, weibo, 
+		qq, create_time
+	</sql>
+
+	<!-- 单条新增数据  -->
+	<insert id="insert" parameterType="UserInfoEntity">
+		insert into user_info
+		(<include refid="sqlColumns"/>)
+		values(
+		#{id,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
+		#{userName,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR},
+		#{sex,jdbcType=TINYINT},
+		#{birthday,jdbcType=DATE},
+		#{tinyurl,jdbcType=VARCHAR},
+		#{headurl,jdbcType=VARCHAR},
+		#{mainurl,jdbcType=VARCHAR},
+		#{hometown,jdbcType=VARCHAR},
+		#{workHistory,jdbcType=VARCHAR},
+		#{universityHistory,jdbcType=VARCHAR},
+		#{hsHistory,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{socialUid,jdbcType=BIGINT},
+		#{mediaUid,jdbcType=VARCHAR},
+		#{meidaType,jdbcType=VARCHAR},
+		#{weibo,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<!-- 根据主键删除数据  -->
+	<delete id="delByPk" parameterType="java.lang.Integer">
+		delete from user_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!-- 根据主键批量删除数据  -->
+	<delete id="deleteBatch" parameterType="list">
+		delete from user_info
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!-- 根据主键全量更新  -->
+	<update id="updateByPk" parameterType="UserInfoEntity">
+		update user_info
+		set
+		user_id = #{userId,jdbcType=BIGINT},
+		user_name = #{userName,jdbcType=VARCHAR},
+		user_phone = #{userPhone,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=TINYINT},
+		birthday = #{birthday,jdbcType=DATE},
+		tinyurl = #{tinyurl,jdbcType=VARCHAR},
+		headurl = #{headurl,jdbcType=VARCHAR},
+		mainurl = #{mainurl,jdbcType=VARCHAR},
+		hometown = #{hometown,jdbcType=VARCHAR},
+		work_history = #{workHistory,jdbcType=VARCHAR},
+		university_history = #{universityHistory,jdbcType=VARCHAR},
+		hs_history = #{hsHistory,jdbcType=VARCHAR},
+		province = #{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		social_uid = #{socialUid,jdbcType=BIGINT},
+		media_uid = #{mediaUid,jdbcType=VARCHAR},
+		meida_type = #{meidaType,jdbcType=VARCHAR},
+		weibo = #{weibo,jdbcType=VARCHAR},
+		qq = #{qq,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id = #{id}
+	</update>
+
+	<!-- 根据主键有选择的更新  -->
+	<update id="updateSegmentByPk" parameterType="UserInfoEntity">
+		update user_info
+		<set>
+			<if test="userId != null" >
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName !=null and userName != ''" >
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone !=null and userPhone != ''" >
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null" >
+				sex = #{sex,jdbcType=TINYINT},
+			</if>
+			<if test="birthday != null" >
+				birthday = #{birthday,jdbcType=DATE},
+			</if>
+			<if test="tinyurl !=null and tinyurl != ''" >
+				tinyurl = #{tinyurl,jdbcType=VARCHAR},
+			</if>
+			<if test="headurl !=null and headurl != ''" >
+				headurl = #{headurl,jdbcType=VARCHAR},
+			</if>
+			<if test="mainurl !=null and mainurl != ''" >
+				mainurl = #{mainurl,jdbcType=VARCHAR},
+			</if>
+			<if test="hometown !=null and hometown != ''" >
+				hometown = #{hometown,jdbcType=VARCHAR},
+			</if>
+			<if test="workHistory !=null and workHistory != ''" >
+				work_history = #{workHistory,jdbcType=VARCHAR},
+			</if>
+			<if test="universityHistory !=null and universityHistory != ''" >
+				university_history = #{universityHistory,jdbcType=VARCHAR},
+			</if>
+			<if test="hsHistory !=null and hsHistory != ''" >
+				hs_history = #{hsHistory,jdbcType=VARCHAR},
+			</if>
+			<if test="province !=null and province != ''" >
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city !=null and city != ''" >
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="socialUid != null" >
+				social_uid = #{socialUid,jdbcType=BIGINT},
+			</if>
+			<if test="mediaUid !=null and mediaUid != ''" >
+				media_uid = #{mediaUid,jdbcType=VARCHAR},
+			</if>
+			<if test="meidaType !=null and meidaType != ''" >
+				meida_type = #{meidaType,jdbcType=VARCHAR},
+			</if>
+			<if test="weibo !=null and weibo != ''" >
+				weibo = #{weibo,jdbcType=VARCHAR},
+			</if>
+			<if test="qq !=null and qq != ''" >
+				qq = #{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<!-- 根据主键查询  -->
+	<select id="getByPk" parameterType="java.lang.Integer" resultMap="userInfoMap">
+		select
+		<include refid="sqlColumns"/>
+		from user_info
+		where id = #{id}
+	</select>
+
+	<!-- 根据传入的字段值查询  -->
+	<select id="find"  resultMap="userInfoMap">
+		select
+		<include refid="sqlColumns"/>
+		from user_info
+		<where>
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName !=null and userName != ''" >
+				and user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone !=null and userPhone != ''" >
+				and user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null" >
+				and sex = #{sex,jdbcType=TINYINT},
+			</if>
+			<if test="birthday != null" >
+				and birthday = #{birthday,jdbcType=DATE},
+			</if>
+			<if test="tinyurl !=null and tinyurl != ''" >
+				and tinyurl = #{tinyurl,jdbcType=VARCHAR},
+			</if>
+			<if test="headurl !=null and headurl != ''" >
+				and headurl = #{headurl,jdbcType=VARCHAR},
+			</if>
+			<if test="mainurl !=null and mainurl != ''" >
+				and mainurl = #{mainurl,jdbcType=VARCHAR},
+			</if>
+			<if test="hometown !=null and hometown != ''" >
+				and hometown = #{hometown,jdbcType=VARCHAR},
+			</if>
+			<if test="workHistory !=null and workHistory != ''" >
+				and work_history = #{workHistory,jdbcType=VARCHAR},
+			</if>
+			<if test="universityHistory !=null and universityHistory != ''" >
+				and university_history = #{universityHistory,jdbcType=VARCHAR},
+			</if>
+			<if test="hsHistory !=null and hsHistory != ''" >
+				and hs_history = #{hsHistory,jdbcType=VARCHAR},
+			</if>
+			<if test="province !=null and province != ''" >
+				and province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city !=null and city != ''" >
+				and city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="socialUid != null" >
+				and social_uid = #{socialUid,jdbcType=BIGINT},
+			</if>
+			<if test="mediaUid !=null and mediaUid != ''" >
+				and media_uid = #{mediaUid,jdbcType=VARCHAR},
+			</if>
+			<if test="meidaType !=null and meidaType != ''" >
+				and meida_type = #{meidaType,jdbcType=VARCHAR},
+			</if>
+			<if test="weibo !=null and weibo != ''" >
+				and weibo = #{weibo,jdbcType=VARCHAR},
+			</if>
+			<if test="qq !=null and qq != ''" >
+				and qq = #{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -12,7 +12,7 @@
                 <input type="text" placeholder="搜索...">
                 <i class="search icon"></i>
             </div>
-            <div class="compact ui purple icon button"> <i class="plus icon"></i>添加收藏</div>
+            <div class="compact ui purple icon button"> <i class="plus icon"></i>新建分组</div>
             <div class="compact ui green icon button"><i class="download icon"></i>收藏工具</div>
         </div>
     </div>
@@ -27,12 +27,12 @@
                 <div class="compact ui red   icon button right  floated"> <i class="remove icon"></i>删除分组</div>
             </div>
 
-            <div class="ui divided list">
+            <div class="ui mini divided list">
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui green empty circular label"></div>
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -42,9 +42,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui red empty circular label"></div>
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -54,8 +54,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -65,8 +66,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -76,8 +78,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -94,11 +97,12 @@
     <div class="eight wide column" style="padding: 10px">
         <div class="ui raised segment">
             <a class="ui red ribbon label">工作</a>
-            <div class="ui divided list">
+            <div class="ui mini divided list">
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -108,8 +112,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -119,8 +124,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -130,8 +136,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">
@@ -141,8 +148,9 @@
                 </div>
                 <div class="item">
                     <div class="right floated">
-                        <div class="ui purple  icon  button"> <i class="empty heart icon"></i></div>
-                        <div class="ui red  icon  button"> <i class="remove icon"></i></div>
+                        <div class="compact ui green empty circular label"></div>
+                        <div class="compact ui purple  icon  button"> <i class="empty heart icon"></i></div>
+                        <div class="compact ui red  icon  button"> <i class="remove icon"></i></div>
                     </div>
                     <img class="ui avatar image" src="/statics/img/stevie.jpg">
                     <div class="content">

@@ -24,9 +24,13 @@
         <!-- 全局别名设置，在映射文件中只需写别名，而不必写出整个类路径  -->
     </settings>
     <typeAliases>
-        <typeAlias alias="WebSiteEntity" type="com.yermoon.ocm.entity.WebSiteEntity"/>
+        <typeAlias alias="FavGroupEntity" type="com.sera.entity.FavGroupEntity"/>
+        <typeAlias alias="FavListEntity" type="com.sera.entity.FavListEntity"/>
+        <typeAlias alias="UserInfoEntity" type="com.sera.entity.UserInfoEntity"/>
     </typeAliases>
     <mappers>
-        <mapper resource="mapper/WebSiteMapper.xml"/>
+        <mapper resource="mapper/FavGroupMapper.xml"/>
+        <mapper resource="mapper/FavListMapper.xml"/>
+        <mapper resource="mapper/UserInfoMapper.xml"/>
     </mappers>
 </configuration>

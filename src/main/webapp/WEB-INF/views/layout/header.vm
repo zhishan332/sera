@@ -4,16 +4,12 @@
         主页
     </a>
     <a class="item">
-        <i class="plus icon"></i>
-        新建分组
+        <i class="map icon"></i>
+        发现
     </a>
     <a class="item">
         <i class="sort content descending icon"></i>
         智能排序
-    </a>
-    <a class="item">
-        <i class="paw icon"></i>
-        智能分组
     </a>
     <a class="item">
         <i class="bug icon"></i>
@@ -24,8 +20,8 @@
         删除失效
     </a>
     <a class="item">
-        <i class="comments icon"></i>
-        奖励
+        <i class="Payment icon"></i>
+        捐助
     </a>
     <a class="item">
         <i class="shop icon"></i>

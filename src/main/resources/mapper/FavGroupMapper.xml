@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- Created with MTool.  -->
+<mapper namespace="com.sera.dao.FavGroupMapper">
+
+	<resultMap id="favGroupMap" type="FavGroupEntity">
+		<id property="id" column="id" jdbcType="BIGINT"/>
+		<result property="groupId" column="group_id" jdbcType="BIGINT"/>
+		<result property="groupName" column="group_name" jdbcType="VARCHAR"/>
+		<result property="userId" column="user_id" jdbcType="BIGINT"/>
+		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
+		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<!-- 所有字段  -->
+	<sql id="sqlColumns">
+		id, group_id, group_name, user_id, user_name, create_time
+	</sql>
+
+	<!-- 单条新增数据  -->
+	<insert id="insert" parameterType="FavGroupEntity">
+		insert into fav_group
+		(<include refid="sqlColumns"/>)
+		values(
+		#{id,jdbcType=BIGINT},
+		#{groupId,jdbcType=BIGINT},
+		#{groupName,jdbcType=VARCHAR},
+		#{userId,jdbcType=BIGINT},
+		#{userName,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<!-- 根据主键删除数据  -->
+	<delete id="delByPk" parameterType="java.lang.Integer">
+		delete from fav_group
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<!-- 根据主键批量删除数据  -->
+	<delete id="deleteBatch" parameterType="list">
+		delete from fav_group
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!-- 根据主键全量更新  -->
+	<update id="updateByPk" parameterType="FavGroupEntity">
+		update fav_group
+		set
+		group_id = #{groupId,jdbcType=BIGINT},
+		group_name = #{groupName,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=BIGINT},
+		user_name = #{userName,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id = #{id}
+	</update>
+
+	<!-- 根据主键有选择的更新  -->
+	<update id="updateSegmentByPk" parameterType="FavGroupEntity">
+		update fav_group
+		<set>
+			<if test="groupId != null" >
+				group_id = #{groupId,jdbcType=BIGINT},
+			</if>
+			<if test="groupName !=null and groupName != ''" >
+				group_name = #{groupName,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName !=null and userName != ''" >
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<!-- 根据主键查询  -->
+	<select id="getByPk" parameterType="java.lang.Integer" resultMap="favGroupMap">
+		select
+		<include refid="sqlColumns"/>
+		from fav_group
+		where id = #{id}
+	</select>
+
+	<!-- 根据传入的字段值查询  -->
+	<select id="find"  resultMap="favGroupMap">
+		select
+		<include refid="sqlColumns"/>
+		from fav_group
+		<where>
+			<if test="groupId != null" >
+				and group_id = #{groupId,jdbcType=BIGINT},
+			</if>
+			<if test="groupName !=null and groupName != ''" >
+				and group_name = #{groupName,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName !=null and userName != ''" >
+				and user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				and create_time = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+</mapper>
