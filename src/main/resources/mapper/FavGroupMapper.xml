@@ -21,74 +21,36 @@
 	<!-- 单条新增数据  -->
 	<insert id="insert" parameterType="FavGroupEntity">
 		insert into fav_group
-		(<include refid="sqlColumns"/>)
+		(group_id, group_name,covert, user_id, user_name)
 		values(
-		#{id,jdbcType=BIGINT},
 		#{groupId,jdbcType=BIGINT},
 		#{groupName,jdbcType=VARCHAR},
 		#{covert,jdbcType=TINYINT},
 		#{userId,jdbcType=BIGINT},
-		#{userName,jdbcType=VARCHAR},
-		#{createTime,jdbcType=TIMESTAMP}
+		#{userName,jdbcType=VARCHAR}
 		)
 	</insert>
 
 	<!-- 根据主键删除数据  -->
-	<delete id="delByPk" parameterType="long">
+	<delete id="delByUserIdAndId" parameterType="FavGroupEntity">
 		delete from fav_group
-		where id = #{id,jdbcType=BIGINT}
-	</delete>
-
-	<!-- 根据主键批量删除数据  -->
-	<delete id="deleteBatch" parameterType="list">
-		delete from fav_group
-		where id in
-		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-			#{item}
-		</foreach>
+		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
 	<!-- 根据主键全量更新  -->
-	<update id="updateByPk" parameterType="FavGroupEntity">
+	<update id="updateForProtect" parameterType="FavGroupEntity">
 		update fav_group
-		set
-		group_id = #{groupId,jdbcType=BIGINT},
-		group_name = #{groupName,jdbcType=VARCHAR},
-		user_id = #{userId,jdbcType=BIGINT},
-		user_name = #{userName,jdbcType=VARCHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP}
-		where id = #{id}
+		set covert=#{covert,jdbcType=TINYINT}
+		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</update>
 
-	<!-- 根据主键有选择的更新  -->
-	<update id="updateSegmentByPk" parameterType="FavGroupEntity">
-		update fav_group
-		<set>
-			<if test="groupId != null" >
-				group_id = #{groupId,jdbcType=BIGINT},
-			</if>
-			<if test="groupName !=null and groupName != ''" >
-				group_name = #{groupName,jdbcType=VARCHAR},
-			</if>
-			<if test="userId != null" >
-				user_id = #{userId,jdbcType=BIGINT},
-			</if>
-			<if test="userName !=null and userName != ''" >
-				user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="createTime != null" >
-				create_time = #{createTime,jdbcType=TIMESTAMP}
-			</if>
-		</set>
-		where id = #{id}
-	</update>
-
-	<!-- 根据主键查询  -->
-	<select id="getByPk" parameterType="java.lang.Integer" resultMap="favGroupMap">
+	<select id="getByGroupId"  resultMap="favGroupMap">
 		select
 		<include refid="sqlColumns"/>
 		from fav_group
-		where id = #{id}
+		<where>
+			group_id = #{groupId,jdbcType=BIGINT}
+		</where>
 	</select>
 
 	<!-- 根据传入的字段值查询  -->
@@ -97,21 +59,18 @@
 		<include refid="sqlColumns"/>
 		from fav_group
 		<where>
-			<if test="groupId != null" >
-				and group_id = #{groupId,jdbcType=BIGINT},
-			</if>
-			<if test="groupName !=null and groupName != ''" >
-				and group_name = #{groupName,jdbcType=VARCHAR},
-			</if>
-			<if test="userId != null" >
-				and user_id = #{userId,jdbcType=BIGINT},
-			</if>
-			<if test="userName !=null and userName != ''" >
-				and user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="createTime != null" >
-				and create_time = #{createTime,jdbcType=TIMESTAMP}
-			</if>
+			user_id = #{userId,jdbcType=BIGINT}
 		</where>
+	</select>
+
+	<select id="findForDiscovery"  resultMap="favGroupMap">
+		select
+		<include refid="sqlColumns"/>
+		from fav_group
+		<where>
+			covert = #{covert,jdbcType=TINYINT}
+		</where>
+		order by create_time desc
+		limit #{start,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
 	</select>
 </mapper>

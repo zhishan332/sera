@@ -10,6 +10,7 @@
 		<result property="groupName" column="group_name" jdbcType="VARCHAR"/>
 		<result property="favTitle" column="fav_title" jdbcType="VARCHAR"/>
 		<result property="favUrl" column="fav_url" jdbcType="VARCHAR"/>
+		<result property="favIco" column="fav_ico" jdbcType="VARCHAR"/>
 		<result property="userId" column="user_id" jdbcType="BIGINT"/>
 		<result property="userName" column="user_name" jdbcType="VARCHAR"/>
 		<result property="favStatus" column="fav_status" jdbcType="INTEGER"/>
@@ -22,121 +23,48 @@
 
 	<!-- 所有字段  -->
 	<sql id="sqlColumns">
-		id, fav_id, group_id, group_name, fav_title, fav_url, user_id, user_name, fav_status, fav_focus, 
+		id, fav_id, group_id, group_name, fav_title, fav_url,fav_ico, user_id, user_name, fav_status, fav_focus,
 		fav_sort, create_time, check_time, update_time
 	</sql>
 
 	<!-- 单条新增数据  -->
 	<insert id="insert" parameterType="FavListEntity">
 		insert into fav_list
-		(<include refid="sqlColumns"/>)
+		(fav_id, group_id, group_name, fav_title, fav_url,fav_ico, user_id, user_name, fav_status, fav_focus,
+		fav_sort, update_time)
 		values(
-		#{id,jdbcType=BIGINT},
 		#{favId,jdbcType=BIGINT},
 		#{groupId,jdbcType=BIGINT},
 		#{groupName,jdbcType=VARCHAR},
 		#{favTitle,jdbcType=VARCHAR},
 		#{favUrl,jdbcType=VARCHAR},
+		#{favIco,jdbcType=VARCHAR},
 		#{userId,jdbcType=BIGINT},
 		#{userName,jdbcType=VARCHAR},
 		#{favStatus,jdbcType=INTEGER},
 		#{favFocus,jdbcType=TINYINT},
 		#{favSort,jdbcType=INTEGER},
-		#{createTime,jdbcType=TIMESTAMP},
-		#{checkTime,jdbcType=TIMESTAMP},
 		#{updateTime,jdbcType=TIMESTAMP}
 		)
 	</insert>
 
 	<!-- 根据主键删除数据  -->
-	<delete id="delByPk" parameterType="java.lang.Integer">
+	<delete id="delByUserIdAndId" parameterType="FavListEntity">
 		delete from fav_list
-		where id = #{id,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
 	<!-- 根据主键批量删除数据  -->
-	<delete id="deleteBatch" parameterType="list">
+	<delete id="deleteByGroup" parameterType="FavListEntity">
 		delete from fav_list
-		where id in
-		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-			#{item}
-		</foreach>
+		where group_id = #{groupId,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
-	<!-- 根据主键全量更新  -->
-	<update id="updateByPk" parameterType="FavListEntity">
-		update fav_list
-		set
-		fav_id = #{favId,jdbcType=BIGINT},
-		group_id = #{groupId,jdbcType=BIGINT},
-		group_name = #{groupName,jdbcType=VARCHAR},
-		fav_title = #{favTitle,jdbcType=VARCHAR},
-		fav_url = #{favUrl,jdbcType=VARCHAR},
-		user_id = #{userId,jdbcType=BIGINT},
-		user_name = #{userName,jdbcType=VARCHAR},
-		fav_status = #{favStatus,jdbcType=INTEGER},
-		fav_focus = #{favFocus,jdbcType=TINYINT},
-		fav_sort = #{favSort,jdbcType=INTEGER},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		check_time = #{checkTime,jdbcType=TIMESTAMP},
-		update_time = #{updateTime,jdbcType=TIMESTAMP}
-		where id = #{id}
+	<update id="updateFocus" parameterType="FavGroupEntity">
+		update fav_group
+		set fav_focus=#{favFocus,jdbcType=TINYINT}
+		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</update>
-
-	<!-- 根据主键有选择的更新  -->
-	<update id="updateSegmentByPk" parameterType="FavListEntity">
-		update fav_list
-		<set>
-			<if test="favId != null" >
-				fav_id = #{favId,jdbcType=BIGINT},
-			</if>
-			<if test="groupId != null" >
-				group_id = #{groupId,jdbcType=BIGINT},
-			</if>
-			<if test="groupName !=null and groupName != ''" >
-				group_name = #{groupName,jdbcType=VARCHAR},
-			</if>
-			<if test="favTitle !=null and favTitle != ''" >
-				fav_title = #{favTitle,jdbcType=VARCHAR},
-			</if>
-			<if test="favUrl !=null and favUrl != ''" >
-				fav_url = #{favUrl,jdbcType=VARCHAR},
-			</if>
-			<if test="userId != null" >
-				user_id = #{userId,jdbcType=BIGINT},
-			</if>
-			<if test="userName !=null and userName != ''" >
-				user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="favStatus != null" >
-				fav_status = #{favStatus,jdbcType=INTEGER},
-			</if>
-			<if test="favFocus != null" >
-				fav_focus = #{favFocus,jdbcType=TINYINT},
-			</if>
-			<if test="favSort != null" >
-				fav_sort = #{favSort,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null" >
-				create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="checkTime != null" >
-				check_time = #{checkTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null" >
-				update_time = #{updateTime,jdbcType=TIMESTAMP}
-			</if>
-		</set>
-		where id = #{id}
-	</update>
-
-	<!-- 根据主键查询  -->
-	<select id="getByPk" parameterType="java.lang.Integer" resultMap="favListMap">
-		select
-		<include refid="sqlColumns"/>
-		from fav_list
-		where id = #{id}
-	</select>
 
 	<!-- 根据传入的字段值查询  -->
 	<select id="find"  resultMap="favListMap">
@@ -144,45 +72,18 @@
 		<include refid="sqlColumns"/>
 		from fav_list
 		<where>
-			<if test="favId != null" >
-				and fav_id = #{favId,jdbcType=BIGINT},
+		    user_id = #{userId,jdbcType=BIGINT}
+
+			<if test="group_id != null and group_id >0" >
+				and group_id = #{groupId,jdbcType=BIGINT}
 			</if>
-			<if test="groupId != null" >
-				and group_id = #{groupId,jdbcType=BIGINT},
-			</if>
-			<if test="groupName !=null and groupName != ''" >
-				and group_name = #{groupName,jdbcType=VARCHAR},
-			</if>
-			<if test="favTitle !=null and favTitle != ''" >
-				and fav_title = #{favTitle,jdbcType=VARCHAR},
-			</if>
-			<if test="favUrl !=null and favUrl != ''" >
-				and fav_url = #{favUrl,jdbcType=VARCHAR},
-			</if>
-			<if test="userId != null" >
-				and user_id = #{userId,jdbcType=BIGINT},
-			</if>
-			<if test="userName !=null and userName != ''" >
-				and user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="favStatus != null" >
-				and fav_status = #{favStatus,jdbcType=INTEGER},
-			</if>
-			<if test="favFocus != null" >
-				and fav_focus = #{favFocus,jdbcType=TINYINT},
-			</if>
-			<if test="favSort != null" >
-				and fav_sort = #{favSort,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null" >
-				and create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="checkTime != null" >
-				and check_time = #{checkTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null" >
-				and update_time = #{updateTime,jdbcType=TIMESTAMP}
+
+			<if test="searchKey != null" >
+				and (fav_title like CONCAT('%','${searchKey}','%' ) or fav_url like CONCAT('%','${searchKey}','%' ))
 			</if>
 		</where>
+		order by fav_sort desc , create_time asc
+		limit #{start,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
 	</select>
+
 </mapper>

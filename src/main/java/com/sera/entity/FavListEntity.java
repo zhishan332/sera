@@ -16,6 +16,7 @@ public class FavListEntity implements Serializable {
 	private String groupName;//(字段：group_name)
 	private String favTitle;//(字段：fav_title)
 	private String favUrl;//(字段：fav_url)
+	private String favIco;
 	private Long userId;//(字段：user_id)
 	private String userName;//(字段：user_name)
 	private Integer favStatus;//状态1表示正常，2表示已失效，其他状态值继续扩展(字段：fav_status)
@@ -71,6 +72,14 @@ public class FavListEntity implements Serializable {
 
 	public void setFavUrl(String favUrl) {
 		this.favUrl = favUrl;
+	}
+
+	public String getFavIco() {
+		return favIco;
+	}
+
+	public void setFavIco(String favIco) {
+		this.favIco = favIco;
 	}
 
 	public Long getUserId() {

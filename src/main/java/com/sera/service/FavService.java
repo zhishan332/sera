@@ -13,20 +13,20 @@ public interface FavService {
 
     boolean addFavGroup(FavGroupEntity favGroupEntity);
 
-    boolean delFavGroup(long groupId);
+    boolean delFavGroup(long userId,long groupId);
 
     List<FavGroupEntity> findFavGroup(long userId);
 
-    boolean protectFavGroup(long groupId, int type);
+    boolean protectFavGroup(long userId,long groupId, int type);
 
     boolean addFav(FavListEntity favListEntity);
 
-    boolean delFav(long favId);
+    boolean delFav(long userId,long favId);
 
     boolean checkFav(long userId);
 
-    boolean focusFav(long favId);
+    boolean focusFav(long userId,long favId,int type);
 
-    List<FavListEntity> findByGroup(long groupId, int start, int limit);
+    List<FavListEntity> findByGroup(long userId, long groupId,String searchKey, int start, int num);
 
 }

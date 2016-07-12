@@ -1,12 +1,18 @@
 package com.sera.helper;
 
+import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * url帮助
@@ -55,4 +61,28 @@ public class UrlHelper {
         return true;
     }
 
+
+    public String getFormatUrlTitle(String urlString) {
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(urlString).userAgent("Mozilla").timeout(6000).get();
+            if (doc != null) return StringUtils.stripToEmpty(doc.title());
+        } catch (IOException e) {
+            logger.error("解析url标题失败");
+        }
+        return getHost(urlString);
+    }
+
+    private static String getHost(String url) {
+        if (url == null || url.trim().equals("")) {
+            return "";
+        }
+        String host = "";
+        Pattern p = Pattern.compile("(?<=//|)((\\w)+\\.)+\\w+");
+        Matcher matcher = p.matcher(url);
+        if (matcher.find()) {
+            host = matcher.group();
+        }
+        return host;
+    }
 }

@@ -1,14 +1,22 @@
 package com.sera.service.impl;
 
+import com.sera.config.SequenceConfig;
 import com.sera.dao.FavGroupMapper;
 import com.sera.dao.FavListMapper;
 import com.sera.entity.FavGroupEntity;
 import com.sera.entity.FavListEntity;
+import com.sera.helper.IconFinder;
+import com.sera.helper.SequenceHelper;
+import com.sera.helper.UrlHelper;
 import com.sera.service.FavService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 收藏夹操作
@@ -20,35 +28,65 @@ public class FavServiceImpl implements FavService {
     private FavListMapper favListMapper;
     @Resource
     private FavGroupMapper favGroupMapper;
-
+    @Resource
+    private SequenceHelper sequenceHelper;
+    @Resource
+    private UrlHelper urlHelper;
+    @Resource
+    private IconFinder iconFinder;
     @Override
     public boolean addFavGroup(FavGroupEntity favGroupEntity) {
-        return false;
+        favGroupEntity.setGroupId(sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ));
+        return favGroupMapper.insert(favGroupEntity) > 0;
     }
 
     @Override
-    public boolean delFavGroup(long groupId) {
-        return false;
+    public boolean delFavGroup(long userId, long groupId) {
+        FavGroupEntity favGroupEntity = new FavGroupEntity();
+        favGroupEntity.setUserId(userId);
+        favGroupEntity.setGroupId(groupId);
+        return favGroupMapper.delByUserIdAndId(favGroupEntity) > 0;
     }
 
     @Override
     public List<FavGroupEntity> findFavGroup(long userId) {
-        return null;
+        FavGroupEntity favGroupEntity = new FavGroupEntity();
+        favGroupEntity.setUserId(userId);
+        return favGroupMapper.find(favGroupEntity);
     }
 
     @Override
-    public boolean protectFavGroup(long groupId, int type) {
-        return false;
+    public boolean protectFavGroup(long userId, long groupId, int type) {
+        FavGroupEntity favGroupEntity = new FavGroupEntity();
+        favGroupEntity.setUserId(userId);
+        favGroupEntity.setGroupId(groupId);
+        favGroupEntity.setCovert(type);
+        return favGroupMapper.updateForProtect(favGroupEntity) > 0;
     }
 
     @Override
     public boolean addFav(FavListEntity favListEntity) {
-        return false;
+        favListEntity.setFavId(sequenceHelper.getSeq(SequenceConfig.FAV_LIST_SEQ));
+        favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        favListEntity.setFavFocus(1);
+        favListEntity.setFavSort(1);
+        favListEntity.setFavStatus(1);
+        if(StringUtils.isBlank(favListEntity.getGroupName())){
+            favListEntity.setGroupName(favGroupMapper.getByGroupId(favListEntity.getGroupId()).getGroupName());
+        }
+        if(StringUtils.isBlank(favListEntity.getFavTitle())){
+            favListEntity.setFavTitle(urlHelper.getFormatUrlTitle(favListEntity.getFavUrl()));
+        }
+        favListEntity.setFavIco(iconFinder.getIconUrlString(favListEntity.getFavUrl()));
+        return favListMapper.insert(favListEntity) > 0;
     }
 
     @Override
-    public boolean delFav(long favId) {
-        return false;
+    public boolean delFav(long userId, long favId) {
+        FavListEntity favListEntity = new FavListEntity();
+        favListEntity.setUserId(userId);
+        favListEntity.setFavId(favId);
+        return favListMapper.delByUserIdAndId(favListEntity) > 0;
     }
 
     @Override
@@ -57,12 +95,21 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
-    public boolean focusFav(long favId) {
-        return false;
+    public boolean focusFav(long userId, long favId,int type) {
+        FavListEntity favListEntity = new FavListEntity();
+        favListEntity.setUserId(userId);
+        favListEntity.setFavFocus(type);
+        return favListMapper.updateFocus(favListEntity) > 0;
     }
 
     @Override
-    public List<FavListEntity> findByGroup(long groupId, int start, int limit) {
-        return null;
+    public List<FavListEntity> findByGroup(long userId, long groupId,String searchKey, int start, int num) {
+        Map<String,Object> param=new HashMap<>();
+        param.put("userId",userId);
+        param.put("groupId",groupId);
+        param.put("searchKey",searchKey);
+        param.put("start",start);
+        param.put("num",num);
+        return favListMapper.find(param);
     }
 }

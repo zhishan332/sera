@@ -1,6 +1,10 @@
 package com.sera.dao;
 
+import com.sera.entity.FavListEntity;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 收藏列表
@@ -8,4 +12,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FavListMapper {
+
+    public int insert(FavListEntity favListEntity);
+
+    public int delByUserIdAndId(FavListEntity favListEntity);
+
+    public int deleteByGroup(FavListEntity favListEntity);
+
+    public List<FavListEntity> find(Map<String,Object> param);
+
+    public int updateFocus(FavListEntity favListEntity);
 }

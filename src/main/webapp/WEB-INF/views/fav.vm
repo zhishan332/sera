@@ -1,0 +1,130 @@
+<div class="ui padded grid">
+    <div class="purple row">
+        <div class="column">
+            <h2 class="ui inverted header">菜鸟地盘工作台</h2>
+        </div>
+    </div>
+</div>
+<div class="ui padded grid">
+    <div class="row" style="padding-top: 8px;padding-bottom: 3px;">
+        <div class="column">
+            <div class="ui icon input" style="margin-left: 5px">
+                <input type="text" placeholder="搜索...">
+                <i class="search icon"></i>
+            </div>
+            <div class="compact ui purple icon button"><i class="plus icon"></i>新建分组</div>
+            <div class="compact ui green icon button"><i class="download icon"></i>收藏工具</div>
+        </div>
+    </div>
+</div>
+<div class="ui grid" style="margin: 0 10px;width: 95%">
+    #if($!{favData})
+        #foreach($entry in  $favData.entrySet())
+            #set ($key = $entry.key)
+            #set ($favList = $entry.value)
+            #set ($keyArray = $key.split("/"))
+            <div class="eight wide column" style="padding: 10px">
+                <input type="hidden" value="$!{keyArray.get(1)}" id="grid_$!{keyArray.get(1)}">
+                <div class="ui raised segment">
+                    <a class="ui teal ribbon label">$!{keyArray.get(0)}</a>
+                    <div style="float: right">
+                        <div class="compact ui purple   icon button right  floated"
+                             onclick="addFav($!{keyArray.get(1)})"><i class="plus icon"></i>添加收藏
+                        </div>
+                        <div class="compact ui purple   icon button right  floated"
+                             onclick="protectFav($!{keyArray.get(1)})"><i class="lock icon"></i>设置保护
+                        </div>
+                        <div class="compact ui red   icon button right  floated"><i class="remove icon"></i>删除分组</div>
+                    </div>
+
+                    <div class="ui mini divided list">
+                        #foreach($fav in  $favList)
+                            <div class="item">
+                                <div class="right floated">
+                                    <div class="compact ui green empty circular label" title="正常"></div>
+                                    <div class="compact ui purple  icon  button"><i class="empty heart icon"></i></div>
+                                    <div class="compact ui red  icon  button"><i class="remove icon"></i></div>
+                                </div>
+                                #if($!{fav.favIco})
+                                    <img class="ui avatar image" src="$!{fav.favIco}">
+                                #else
+                                    <img class="ui avatar image" src="/statics/img/MetroUI_Internet_Explorer_64px_1121836.png">
+                                #end
+                                <div class="content">
+                                    <a class="header">$!{fav.favTitle}</a>
+                                    <div class="description"><a target="_blank" href="$!{fav.favUrl}">$!{fav.favUrl}</a></div>
+                                </div>
+                            </div>
+                        #end
+                        #if($!{favList.size()}>10)
+                            <div class="item">
+                                <a class="item center">显示所有..</a>
+                            </div>
+                        #end
+                    </div>
+                </div>
+            </div>
+        #end
+    #end
+</div>
+
+
+<div class="ui modal" id="addFavModal">
+    <i class="close icon"></i>
+    <div class="header">
+        添加收藏
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <div class="field">
+                <label>输入网址</label>
+                <input type="hidden" id="addFavInputGroup">
+                <input type="text" id="addFavInputUrl">
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui positive right labeled icon button" id="addFavInputBtn">
+            保存
+            <i class="checkmark icon"></i>
+        </div>
+        <div class="ui black button">
+            取消
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui.accordion').accordion();
+
+        $('#addFavInputBtn').click(function (e) {
+            saveFav();
+        })
+    })
+
+    function addFav(groupID) {
+        $('#addFavInputGroup').val(groupID);
+        $('#addFavModal').modal('show');
+    }
+
+    function saveFav() {
+
+        var param = {};
+        param.groupId=$('#addFavInputGroup').val();
+        param.favUrl=$('#addFavInputUrl').val();
+        var reqUrl = $("#contextPath").val() + "/fav/add";
+        AjaxUtil.post(reqUrl, param, function (resp) {
+            if (resp == undefined || resp == null) {
+                layer.alert("系统异常", {icon: 5});
+            }else {
+                layer.msg('收藏成功');
+            }
+        });
+    }
+
+    function protectFav(groupID) {
+
+    }
+</script>
+

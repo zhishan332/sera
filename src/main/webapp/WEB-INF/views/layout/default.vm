@@ -6,8 +6,11 @@
     <link href="#springUrl('statics/plugin/semantic/semantic.css')" rel="stylesheet" media="screen">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js" type="text/javascript"></script>
     <script src="#springUrl('statics/plugin/semantic/semantic.js')" type="text/javascript"></script>
+    <script src="#springUrl('statics/js/ajax-utils.js')" type="text/javascript"></script>
+    <script src="#springUrl('statics/plugin/layer/layer.js')" type="text/javascript"></script>
 </head>
 <body>
+    <input type="hidden" id="contextPath" value="#springUrl('')"/>
     <div class="ui attached segment pushable">
         #parse("layout/header.vm")
         <div class="pusher" style="transform: translate3d(85px, 0, 0);">
