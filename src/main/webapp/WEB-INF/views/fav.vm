@@ -14,6 +14,7 @@
             </div>
             <div class="compact ui purple icon button"><i class="plus icon"></i>新建分组</div>
             <div class="compact ui green icon button"><i class="download icon"></i>收藏工具</div>
+            <input  type="file" name="_impFile" id="_impFile">
         </div>
     </div>
 </div>
@@ -68,7 +69,6 @@
     #end
 </div>
 
-
 <div class="ui modal" id="addFavModal">
     <i class="close icon"></i>
     <div class="header">
@@ -101,8 +101,41 @@
         $('#addFavInputBtn').click(function (e) {
             saveFav();
         })
+        initImp();
     })
 
+    function initImp() {
+        var uploadSwf = '#springUrl('statics/plugin/uploadify/uploadify.swf')';
+        $("#_impFile").uploadify({
+            formData: {
+                'timestamp': '222',
+                'token': '123',
+                'type': '22'
+            },
+            queueID: '__not_exit_queue',//不存在的ID,删除该配置可显示进度条
+            successTimeout: 120,//2分钟超时
+            fileSizeLimit: '10MB',//B, KB, MB, or GB
+            height: 28,
+            swf: uploadSwf,
+            uploader: $("#contextPath").val() +'/import/bookmark',
+            fileObjName: 'file',
+            width: 120,
+            buttonClass: 'compact ui  button',
+            buttonText: '从浏览器导入',
+            onUploadStart : function(file) {
+                $('#_impFile').uploadify('disable', true);
+            },
+            //上传到服务器，服务器返回相应信息到data里
+            onUploadSuccess: function (file, data, response) {
+                $('#_impFile').uploadify('disable', false);
+                layer.msg('导入完成');
+            },
+            onUploadError : function(file, errorCode, errorMsg, errorString) {
+                $('#_impFile').uploadify('disable', false);
+            }
+
+        });
+    }
     function addFav(groupID) {
         $('#addFavInputGroup').val(groupID);
         $('#addFavModal').modal('show');
@@ -127,4 +160,5 @@
 
     }
 </script>
+<script src="#springUrl('statics/plugin/uploadify/jquery.uploadify.js')" type="text/javascript"></script>
 

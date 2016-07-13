@@ -89,6 +89,11 @@
         <property name="toolboxConfigLocation" value="WEB-INF/velocity/toolsbox.xml" />
 
     </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+
     <!--<mvc:interceptors>-->
         <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
         <!--&lt;!&ndash;&lt;!&ndash; 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* &ndash;&gt;&ndash;&gt;-->

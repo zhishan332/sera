@@ -70,6 +70,7 @@ public class FavController {
     }
 
 
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ModelAndView showIndex2() {
         ModelAndView mav = new ModelAndView("test");
