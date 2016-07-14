@@ -48,7 +48,7 @@ public class FavController {
         if (gid != null && gid > 0) {
             Map<String, List<FavListEntity>> data = new HashMap<>();
             List<FavListEntity> list = favService.findByGroup(userHelper.getUserID(), gid, null, 0, ViewConfig.DEFAULT_PAGE_LIMIT);
-            data.put(gname + "/" + gid + "/" + (list == null ? 0 : list.size()), list);
+            data.put(gname + "/" + gid + "/" + (list == null ? 0 : list.size())+"/"+getGroupColor(gid), list);
             mav.getModel().put("favData", data);
             mav.getModel().put("groupWith", "sixteen");
             mav.getModel().put("titleLen", 80);
@@ -70,7 +70,7 @@ public class FavController {
                 });
                 for (FavGroupEntity group : groupList) {
                     List<FavListEntity> list = favService.findByGroup(userHelper.getUserID(), group.getGroupId(), null, 0, ViewConfig.DEFAULT_PAGE_LIMIT);
-                    data.put(group.getGroupName() + "/" + group.getGroupId() + "/" + (list == null ? 0 : list.size()), list);
+                    data.put(group.getGroupName() + "/" + group.getGroupId() + "/" + (list == null ? 0 : list.size())+"/"+getGroupColor(group.getGroupId()), list);
                 }
                 mav.getModel().put("favData", data);
                 mav.getModel().put("groupWith", "four");
@@ -107,5 +107,14 @@ public class FavController {
         return mav;
     }
 
+
+    private String getGroupColor(long id){
+
+        String[] colorArry=new String[]{"teal","red","purple","pink","orange","green","blue","yellow"};
+
+        long aa=id%colorArry.length;
+
+        return colorArry[(int) aa];
+    }
 
 }
