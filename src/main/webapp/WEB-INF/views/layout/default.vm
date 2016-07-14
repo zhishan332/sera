@@ -14,7 +14,7 @@
     <input type="hidden" id="contextPath" value="#springUrl('')"/>
     <div class="ui attached segment pushable">
         #parse("layout/header.vm")
-        <div class="pusher" style="transform: translate3d(85px, 0, 0);">
+        <div class="pusher">
             $screen_content
         </div>
     #parse("layout/footer.vm")

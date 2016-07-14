@@ -61,18 +61,23 @@ public class IconFinder {
     // 获取Icon地址
     public String getIconUrlString(String urlString) {
 
-        urlString = getFinalUrl(urlString);
-        URL url = null;
         try {
-            url = new URL(urlString);
-        } catch (MalformedURLException e) {
-            logger.error("获取图标异常",e);
-        }
-        String iconUrl = url.getProtocol() + "://" + url.getHost() + "/favicon.ico";// 保证从域名根路径搜索
-        if (hasRootIcon(iconUrl))
-            return iconUrl;
+            urlString = getFinalUrl(urlString);
+            URL url = null;
+            try {
+                url = new URL(urlString);
+            } catch (MalformedURLException e) {
+                logger.error("获取图标异常",e);
+            }
+            String iconUrl = url.getProtocol() + "://" + url.getHost() + "/favicon.ico";// 保证从域名根路径搜索
+            if (hasRootIcon(iconUrl))
+                return iconUrl;
 
-        return getIconUrlByRegex(urlString);
+            return getIconUrlByRegex(urlString);
+        } catch (Exception e) {
+            logger.error("分析icon异常",e);
+        }
+        return null;
     }
 
     // 判断在根目录下是否有Icon

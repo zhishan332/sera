@@ -8,34 +8,57 @@
 <div class="ui padded grid">
     <div class="row" style="padding-top: 8px;padding-bottom: 3px;">
         <div class="column">
-            <div class="ui icon input" style="margin-left: 5px">
+            <div class="ui icon  input" style="margin-left: 5p;float: right">
                 <input type="text" placeholder="搜索...">
                 <i class="search icon"></i>
             </div>
-            <div class="compact ui purple icon button"><i class="plus icon"></i>新建分组</div>
-            <div class="compact ui green icon button"><i class="download icon"></i>收藏工具</div>
-            <input  type="file" name="_impFile" id="_impFile">
+
+            <div class="field" style="margin-left: 5p;float: right">
+                <select class="ui dropdown" id="groupSelect">
+                    <option value="-1">全部</option>
+                    #if($!{groupData})
+                        #foreach($group in  $groupData)
+                            <option value="$!{group.groupId}">$!{group.groupName}</option>
+                        #end
+                    #end
+                </select>
+            </div>
+
+            <div class="compact ui left floated purple icon button"><i class="plus icon"></i>新建分组</div>
+            <div class="compact ui left floated blue icon button"><i class="sort content descending icon"></i>智能排序</div>
+            <div class="compact ui left floated blue icon button"><i class="bug icon"></i>智能检测</div>
+            <div class="compact ui left floated blue icon button"><i class="unlink icon"></i>删除失效</div>
+            <div class="compact ui left floated green icon button"><i class="download icon"></i>收藏工具</div>
+            <input type="file" name="_impFile" id="_impFile">
+            <a style="float: left;margin-top: 6px;margin-left: 4px" href="">浏览他人</a>
         </div>
     </div>
 </div>
-<div class="ui grid" style="margin: 0 10px;width: 95%">
+<div class="ui grid" style="margin: 0 10px;width: 99%">
     #if($!{favData})
         #foreach($entry in  $favData.entrySet())
             #set ($key = $entry.key)
             #set ($favList = $entry.value)
             #set ($keyArray = $key.split("/"))
-            <div class="eight wide column" style="padding: 10px">
+            #set ($title = $!{keyArray.get(0)})
+            #if($title.length()>30)
+                #set($showTitle=$title.substring(0,30))
+            #else
+                #set($showTitle=$title)
+            #end
+
+            <div class="four wide column" style="padding: 10px">
                 <input type="hidden" value="$!{keyArray.get(1)}" id="grid_$!{keyArray.get(1)}">
                 <div class="ui raised segment">
-                    <a class="ui teal ribbon label">$!{keyArray.get(0)}</a>
+                    <a class="ui teal ribbon label">$showTitle</a>
                     <div style="float: right">
                         <div class="compact ui purple   icon button right  floated"
-                             onclick="addFav($!{keyArray.get(1)})"><i class="plus icon"></i>添加收藏
+                             onclick="addFav($!{keyArray.get(1)})"><i class="plus icon"></i>
                         </div>
                         <div class="compact ui purple   icon button right  floated"
-                             onclick="protectFav($!{keyArray.get(1)})"><i class="lock icon"></i>设置保护
+                             onclick="protectFav($!{keyArray.get(1)})"><i class="lock icon"></i>
                         </div>
-                        <div class="compact ui red   icon button right  floated"><i class="remove icon"></i>删除分组</div>
+                        <div class="compact ui red   icon button right  floated"><i class="remove icon"></i></div>
                     </div>
 
                     <div class="ui mini divided list">
@@ -49,17 +72,27 @@
                                 #if($!{fav.favIco})
                                     <img class="ui avatar image" src="$!{fav.favIco}">
                                 #else
-                                    <img class="ui avatar image" src="/statics/img/MetroUI_Internet_Explorer_64px_1121836.png">
+                                    <img class="ui avatar image"
+                                         src="/statics/img/MetroUI_Internet_Explorer_64px_1121836.png">
+                                #end
+                                #set ($favTitle = $!{fav.favTitle})
+                                #if($favTitle.length()>20)
+                                    #set($showFavTitle=$favTitle.substring(0,20))
+                                #else
+                                    #set($showFavTitle=$favTitle)
+                                #end
+
+                                #set ($favUrl = $!{fav.favUrl})
+                                #if($favUrl.length()>30)
+                                    #set($showFavUrl=$favUrl.substring(0,30))
+                                #else
+                                    #set($showFavUrl=$favUrl)
                                 #end
                                 <div class="content">
-                                    <a class="header">$!{fav.favTitle}</a>
-                                    <div class="description"><a target="_blank" href="$!{fav.favUrl}">$!{fav.favUrl}</a></div>
+                                    <a class="header">$!{showFavTitle}</a>
+                                    <div class="description"><a target="_blank" href="$!{fav.favUrl}">$!{showFavUrl}</a>
+                                    </div>
                                 </div>
-                            </div>
-                        #end
-                        #if($!{favList.size()}>10)
-                            <div class="item">
-                                <a class="item center">显示所有..</a>
                             </div>
                         #end
                     </div>
@@ -102,6 +135,14 @@
             saveFav();
         })
         initImp();
+        $('#_impFile-button').css('line-height', '15px');
+        $('select.dropdown').dropdown();
+
+        $('#groupSelect').change(function () {
+            var val = $("#groupSelect").val();
+            var text = $("#groupSelect").find("option:selected").text();
+            window.location.href = "/fav?gid=" + val + "&gname=" + encodeURI(text);
+        });
     })
 
     function initImp() {
@@ -115,14 +156,13 @@
             queueID: '__not_exit_queue',//不存在的ID,删除该配置可显示进度条
             successTimeout: 120,//2分钟超时
             fileSizeLimit: '10MB',//B, KB, MB, or GB
-            height: 28,
+            height: 30,
             swf: uploadSwf,
-            uploader: $("#contextPath").val() +'/import/bookmark',
+            uploader: $("#contextPath").val() + '/import/bookmark',
             fileObjName: 'file',
-            width: 120,
-            buttonClass: 'compact ui  button',
+            buttonClass: 'compact ui green icon button right',
             buttonText: '从浏览器导入',
-            onUploadStart : function(file) {
+            onUploadStart: function (file) {
                 $('#_impFile').uploadify('disable', true);
             },
             //上传到服务器，服务器返回相应信息到data里
@@ -130,7 +170,7 @@
                 $('#_impFile').uploadify('disable', false);
                 layer.msg('导入完成');
             },
-            onUploadError : function(file, errorCode, errorMsg, errorString) {
+            onUploadError: function (file, errorCode, errorMsg, errorString) {
                 $('#_impFile').uploadify('disable', false);
             }
 
@@ -138,19 +178,19 @@
     }
     function addFav(groupID) {
         $('#addFavInputGroup').val(groupID);
-        $('#addFavModal').modal('show');
+        $('#addFavModal').modal('setting', 'duration', 100).modal('show');
     }
 
     function saveFav() {
 
         var param = {};
-        param.groupId=$('#addFavInputGroup').val();
-        param.favUrl=$('#addFavInputUrl').val();
+        param.groupId = $('#addFavInputGroup').val();
+        param.favUrl = $('#addFavInputUrl').val();
         var reqUrl = $("#contextPath").val() + "/fav/add";
         AjaxUtil.post(reqUrl, param, function (resp) {
             if (resp == undefined || resp == null) {
                 layer.alert("系统异常", {icon: 5});
-            }else {
+            } else {
                 layer.msg('收藏成功');
             }
         });

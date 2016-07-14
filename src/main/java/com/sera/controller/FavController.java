@@ -7,6 +7,8 @@ import com.sera.entity.FavGroupEntity;
 import com.sera.entity.FavListEntity;
 import com.sera.helper.UserHelper;
 import com.sera.service.FavService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.*;
 
 /**
  * 首页
@@ -25,13 +27,15 @@ import java.util.Map;
 @Controller
 @RequestMapping("")
 public class FavController {
+    private static final Logger log = LoggerFactory.getLogger(FavController.class);
+
     @Resource
     private UserHelper userHelper;
     @Resource
     private FavService favService;
 
     @RequestMapping(value = {"", "index", "/index", "/fav"}, method = RequestMethod.GET)
-    public ModelAndView showIndex() {
+    public ModelAndView showIndex(Long gid, String gname) {
         ModelAndView mav = new ModelAndView("fav");
         mav.getModel().put("pageName", "首页");
         UserInfoDto dto = new UserInfoDto();
@@ -40,13 +44,33 @@ public class FavController {
         userHelper.setUserSession(dto);
 
         List<FavGroupEntity> groupList = favService.findFavGroup(userHelper.getUserID());
-        if (groupList != null && !groupList.isEmpty()) {
+        mav.getModel().put("groupData", groupList);
+        if (gid != null && gid > 0) {
             Map<String, List<FavListEntity>> data = new HashMap<>();
-            for (FavGroupEntity group : groupList) {
-                data.put(group.getGroupName() + "/" + group.getGroupId(),
-                        favService.findByGroup(userHelper.getUserID(), group.getGroupId(), null, 0, ViewConfig.DEFAULT_PAGE_LIMIT));
-            }
+            List<FavListEntity> list = favService.findByGroup(userHelper.getUserID(), gid, null, 0, ViewConfig.DEFAULT_PAGE_LIMIT);
+            data.put(gname + "/" + gid + "/" + (list == null ? 0 : list.size()), list);
             mav.getModel().put("favData", data);
+        } else {
+            if (groupList != null && !groupList.isEmpty()) {
+                Map<String, List<FavListEntity>> data = new TreeMap<>(new Comparator<String>() {
+
+                    @Override
+                    public int compare(String o1, String o2) {
+                        String[] arr1 = o1.split("/");
+                        Integer num1 = Integer.parseInt(arr1[2]);
+
+                        String[] arr2 = o2.split("/");
+                        Integer num2 = Integer.parseInt(arr2[2]);
+
+                        return num2.compareTo(num1);
+                    }
+                });
+                for (FavGroupEntity group : groupList) {
+                    List<FavListEntity> list = favService.findByGroup(userHelper.getUserID(), group.getGroupId(), null, 0, ViewConfig.DEFAULT_PAGE_LIMIT);
+                    data.put(group.getGroupName() + "/" + group.getGroupId() + "/" + (list == null ? 0 : list.size()), list);
+                }
+                mav.getModel().put("favData", data);
+            }
         }
         return mav;
     }
@@ -68,7 +92,6 @@ public class FavController {
         resp.setStatus(Response.SUCCESS);
         return resp;
     }
-
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

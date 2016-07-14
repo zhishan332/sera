@@ -6,6 +6,6 @@ package com.sera.config;
  */
 public class ViewConfig {
 
-    public static final int DEFAULT_PAGE_LIMIT = 10;//首页默认展示数量
+    public static final int DEFAULT_PAGE_LIMIT = 1000;//首页默认展示数量
 
 }

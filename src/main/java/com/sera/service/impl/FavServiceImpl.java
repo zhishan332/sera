@@ -10,6 +10,7 @@ import com.sera.helper.SequenceHelper;
 import com.sera.helper.UrlHelper;
 import com.sera.service.FavService;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,9 +35,12 @@ public class FavServiceImpl implements FavService {
     private UrlHelper urlHelper;
     @Resource
     private IconFinder iconFinder;
+
     @Override
     public boolean addFavGroup(FavGroupEntity favGroupEntity) {
-        favGroupEntity.setGroupId(sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ));
+        if (favGroupEntity.getGroupId() == null || favGroupEntity.getGroupId() <= 0) {
+            favGroupEntity.setGroupId(sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ));
+        }
         return favGroupMapper.insert(favGroupEntity) > 0;
     }
 
@@ -66,18 +70,26 @@ public class FavServiceImpl implements FavService {
 
     @Override
     public boolean addFav(FavListEntity favListEntity) {
-        favListEntity.setFavId(sequenceHelper.getSeq(SequenceConfig.FAV_LIST_SEQ));
+        if (favListEntity.getFavId() == null || favListEntity.getFavId() <= 0) {
+            favListEntity.setFavId(sequenceHelper.getSeq(SequenceConfig.FAV_LIST_SEQ));
+        }
         favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         favListEntity.setFavFocus(1);
         favListEntity.setFavSort(1);
         favListEntity.setFavStatus(1);
-        if(StringUtils.isBlank(favListEntity.getGroupName())){
+        if (StringUtils.isBlank(favListEntity.getGroupName())) {
             favListEntity.setGroupName(favGroupMapper.getByGroupId(favListEntity.getGroupId()).getGroupName());
         }
-        if(StringUtils.isBlank(favListEntity.getFavTitle())){
+        if (StringUtils.isBlank(favListEntity.getFavTitle())) {
             favListEntity.setFavTitle(urlHelper.getFormatUrlTitle(favListEntity.getFavUrl()));
         }
-        favListEntity.setFavIco(iconFinder.getIconUrlString(favListEntity.getFavUrl()));
+        String icon = iconFinder.getIconUrlString(favListEntity.getFavUrl());
+        if (!StringUtils.isBlank(icon)) {
+            icon = Jsoup.parse(icon).text();
+            icon = icon.replaceAll(" ", "");
+            icon = icon.replaceAll("\"", "");
+        }
+        favListEntity.setFavIco(icon);
         return favListMapper.insert(favListEntity) > 0;
     }
 
@@ -95,7 +107,7 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
-    public boolean focusFav(long userId, long favId,int type) {
+    public boolean focusFav(long userId, long favId, int type) {
         FavListEntity favListEntity = new FavListEntity();
         favListEntity.setUserId(userId);
         favListEntity.setFavFocus(type);
@@ -103,13 +115,13 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
-    public List<FavListEntity> findByGroup(long userId, long groupId,String searchKey, int start, int num) {
-        Map<String,Object> param=new HashMap<>();
-        param.put("userId",userId);
-        param.put("groupId",groupId);
-        param.put("searchKey",searchKey);
-        param.put("start",start);
-        param.put("num",num);
+    public List<FavListEntity> findByGroup(long userId, long groupId, String searchKey, int start, int num) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
+        param.put("groupId", groupId);
+        param.put("searchKey", searchKey);
+        param.put("start", start);
+        param.put("num", num);
         return favListMapper.find(param);
     }
 }
