@@ -50,6 +50,9 @@ public class FavController {
             List<FavListEntity> list = favService.findByGroup(userHelper.getUserID(), gid, null, 0, ViewConfig.DEFAULT_PAGE_LIMIT);
             data.put(gname + "/" + gid + "/" + (list == null ? 0 : list.size()), list);
             mav.getModel().put("favData", data);
+            mav.getModel().put("groupWith", "sixteen");
+            mav.getModel().put("titleLen", 80);
+            mav.getModel().put("urlLen", 100);
         } else {
             if (groupList != null && !groupList.isEmpty()) {
                 Map<String, List<FavListEntity>> data = new TreeMap<>(new Comparator<String>() {
@@ -70,6 +73,9 @@ public class FavController {
                     data.put(group.getGroupName() + "/" + group.getGroupId() + "/" + (list == null ? 0 : list.size()), list);
                 }
                 mav.getModel().put("favData", data);
+                mav.getModel().put("groupWith", "four");
+                mav.getModel().put("titleLen", 20);
+                mav.getModel().put("urlLen", 30);
             }
         }
         return mav;

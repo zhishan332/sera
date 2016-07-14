@@ -71,7 +71,7 @@ public class BookMarkUploadController {
             byte[] bytes = file.getBytes();
             String str = new String(bytes, "UTF-8");
 
-            Document doc = Jsoup.parse(new File("/Users/wangqing/Downloads/bookmarks.html"), "UTF-8");
+            Document doc = Jsoup.parse(str, "UTF-8");
 
             Elements el = doc.select("dt");
 
@@ -120,7 +120,33 @@ public class BookMarkUploadController {
                 } catch (Exception e) {
                     log.error("新增组失败", e);
                 }
-
+            }
+            if(!nodoList.isEmpty()){
+                FavGroupEntity group = new FavGroupEntity();
+                long groupId = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
+                group.setGroupId(groupId);
+                group.setUserId(userHelper.getUserID());
+                group.setUserName(userHelper.getUser().getUserName());
+                group.setGroupName("未分组");
+                favService.addFavGroup(group);
+                for(Element elt:nodoList){
+                    Elements cc = elt.select("a");
+                    for (Element kk : cc) {
+                        try {
+                            String linkHref = kk.attr("href");
+                            String linkText = kk.text();
+                            FavListEntity fav = new FavListEntity();
+                            fav.setFavUrl(linkHref);
+                            fav.setFavTitle(linkText);
+                            fav.setGroupId(group.getGroupId());
+                            fav.setUserId(userHelper.getUserID());
+                            fav.setUserName(userHelper.getUser().getUserName());
+                            favService.addFav(fav);
+                        } catch (Exception e) {
+                            log.error("新增fav失败", e);
+                        }
+                    }
+                }
             }
             resp.setStatus(Response.SUCCESS);
             resp.setData("");

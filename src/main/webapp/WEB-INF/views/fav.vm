@@ -1,7 +1,7 @@
 <div class="ui padded grid">
     <div class="purple row">
         <div class="column">
-            <h2 class="ui inverted header">菜鸟地盘工作台</h2>
+            <a class="ui inverted header" href="/index" style="font-size: 20px">云端收藏夹</a>
         </div>
     </div>
 </div>
@@ -47,7 +47,7 @@
                 #set($showTitle=$title)
             #end
 
-            <div class="four wide column" style="padding: 10px">
+            <div class="$!{groupWith} wide column" style="padding: 10px">
                 <input type="hidden" value="$!{keyArray.get(1)}" id="grid_$!{keyArray.get(1)}">
                 <div class="ui raised segment">
                     <a class="ui teal ribbon label">$showTitle</a>
@@ -63,34 +63,34 @@
 
                     <div class="ui mini divided list">
                         #foreach($fav in  $favList)
-                            <div class="item">
-                                <div class="right floated">
+                            <div class="item" style="padding: 1px 0">
+                                <div class="right floated" style="margin-top: 10px">
                                     <div class="compact ui green empty circular label" title="正常"></div>
-                                    <div class="compact ui purple  icon  button"><i class="empty heart icon"></i></div>
-                                    <div class="compact ui red  icon  button"><i class="remove icon"></i></div>
+                                    <div class="compact ui mini pink  icon  button"><i class="empty heart icon"></i></div>
+                                    <div class="compact ui mini red  icon  button"><i class="minus icon"></i></div>
                                 </div>
                                 #if($!{fav.favIco})
-                                    <img class="ui avatar image" src="$!{fav.favIco}">
+                                    <img class="ui  avatar image" src="$!{fav.favIco}">
                                 #else
-                                    <img class="ui avatar image"
+                                    <img class="ui  avatar image"
                                          src="/statics/img/MetroUI_Internet_Explorer_64px_1121836.png">
                                 #end
                                 #set ($favTitle = $!{fav.favTitle})
-                                #if($favTitle.length()>20)
-                                    #set($showFavTitle=$favTitle.substring(0,20))
+                                #if($favTitle.length()>$!{titleLen})
+                                    #set($showFavTitle=$favTitle.substring(0,$!{titleLen}))
                                 #else
                                     #set($showFavTitle=$favTitle)
                                 #end
 
                                 #set ($favUrl = $!{fav.favUrl})
-                                #if($favUrl.length()>30)
-                                    #set($showFavUrl=$favUrl.substring(0,30))
+                                #if($favUrl.length()>$!{urlLen})
+                                    #set($showFavUrl=$favUrl.substring(0,$!{urlLen}))
                                 #else
                                     #set($showFavUrl=$favUrl)
                                 #end
                                 <div class="content">
-                                    <a class="header">$!{showFavTitle}</a>
-                                    <div class="description"><a target="_blank" href="$!{fav.favUrl}">$!{showFavUrl}</a>
+                                    <a class="header fav">$!{showFavTitle}</a>
+                                    <div class="description fav"><a target="_blank" href="$!{fav.favUrl}">$!{showFavUrl}</a>
                                     </div>
                                 </div>
                             </div>
