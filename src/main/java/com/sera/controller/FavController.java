@@ -74,7 +74,7 @@ public class FavController {
                 }
                 mav.getModel().put("favData", data);
                 mav.getModel().put("groupWith", "four");
-                mav.getModel().put("titleLen", 20);
+                mav.getModel().put("titleLen", 18);
                 mav.getModel().put("urlLen", 30);
             }
         }
@@ -110,7 +110,8 @@ public class FavController {
 
     private String getGroupColor(long id){
 
-        String[] colorArry=new String[]{"teal","red","purple","pink","orange","green","blue","yellow"};
+//        String[] colorArry=new String[]{"teal","red","purple","pink","orange","green","blue","yellow"};
+        String[] colorArry=new String[]{"purple"};
 
         long aa=id%colorArry.length;
 
