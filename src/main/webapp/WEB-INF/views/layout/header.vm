@@ -1,50 +1,68 @@
-##<div class="ui left vertical inverted labeled icon sidebar menu" style="width: 85px">
-##    <a class="item">
-##        <i class="home icon"></i>
-##        主页
-##    </a>
-##    <a class="item">
-##        <i class="map icon"></i>
-##        发现
-##    </a>
-##    <a class="item">
-##        <i class="sort content descending icon"></i>
-##        智能排序
-##    </a>
-##    <a class="item">
-##        <i class="bug icon"></i>
-##        智能检测
-##    </a>
-##    <a class="item">
-##        <i class="unlink icon"></i>
-##        删除失效
-##    </a>
-##    <a class="item">
-##        <i class="payment icon"></i>
-##        捐助
-##    </a>
-##    <a class="item">
-##        <i class="shop icon"></i>
-##        注册
-##    </a>
-##    <a class="item">
-##        <i class="settings icon"></i>
-##        登录
-##    </a>
-##</div>
-
-
+<div class="ui medium menu" style="margin: 0 0 10px 0">
+    <a class="borderless  item" href="/index">
+        <i class="superscript orange icon" style="font-size: 1.4em;"></i>云云收藏
+    </a>
+    <div class="right menu">
+        <a class="item" title="浏览推荐的网站">
+            发现
+        </a>
+        <a class="item" title="关于我们">
+            关于
+        </a>
+        <div class="item">
+            <div class="ui icon input">
+                <input type="text" placeholder="搜索...">
+                <i class="search link icon"></i>
+            </div>
+        </div>
+        <a class="item" style="color: orange"  title="云云收藏稳定运行时间">
+            726天
+        </a>
+        <div class="item">
+            <div class="ui primary button" id="loginBtn">登录</div>
+            <div class="ui primary button" id="registBtn">注册</div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#_showMenuBtn').click(function (e) {
-            _showMenu();
-        })
+        $('#loginBtn').click(function () {
+            showLogin();
+        });
+        $('#registBtn').click(function () {
+            showRegist();
+        });
     })
 
+    function showLogin() {
+        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">登录</h4><div class="required field"><label>手机号</label><input placeholder="请输入手机号" type="text"></div><div class="required field"><label>密码</label><input type="password"></div><div class="ui green submit button">登录</div><div class="ui black  button" id="closeLoginBtn">取消</div></form>';
+        var index = layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            area: ['600px', '260px'],
+            shadeClose: true,
+            content: htmlStr
+        });
+        $('#closeLoginBtn').click(function () {
+            layer.close(index);
+        });
+    }
 
-    function _showMenu() {
-        $('.left.sidebar').sidebar('toggle');
+    function showRegist() {
+        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">新用户注册</h4><div class="required field"><label>手机号</label><input placeholder="请输入手机号" type="text"></div><div class="two fields"><div class="required field"><label>验证码</label><input placeholder="请输入收到的6位验证码" type="text"></div><div class="field" style="margin-top:22px"><div class="ui submit button">获取验证码</div></div></div><div class="required field"><label>密码</label><input type="password"></div><div class="required field"><label>重复输入密码</label><div class="ui icon input"><input type="password"></div></div><div class="ui green submit button">注册</div><div id="closeRegistBtn" class="ui black  button">取消</div></form>';
+        var index = layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            area: ['600px', '400px'],
+            shadeClose: true,
+            content: htmlStr
+        });
+        $('#closeRegistBtn').click(function () {
+            layer.close(index);
+        });
     }
 
 </script>

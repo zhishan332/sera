@@ -54,10 +54,16 @@
 		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
-	<!-- 根据主键批量删除数据  -->
+	<!-- 根据组批量删除数据  -->
 	<delete id="deleteByGroup" parameterType="FavListEntity">
 		delete from fav_list
 		where group_id = #{groupId,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
+	</delete>
+
+	<!-- 根据状态批量删除数据  -->
+	<delete id="deleteByStatus" parameterType="FavListEntity">
+		delete from fav_list
+		where fav_status = #{favStatus,jdbcType=TINYINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
 	<update id="updateFocus" parameterType="FavGroupEntity">

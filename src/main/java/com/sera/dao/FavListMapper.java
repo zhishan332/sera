@@ -19,6 +19,8 @@ public interface FavListMapper {
 
     public int deleteByGroup(FavListEntity favListEntity);
 
+    public int deleteByStatus(FavListEntity favListEntity);
+
     public List<FavListEntity> find(Map<String,Object> param);
 
     public int updateFocus(FavListEntity favListEntity);

@@ -34,14 +34,14 @@
 	<!-- 根据主键删除数据  -->
 	<delete id="delByUserIdAndId" parameterType="FavGroupEntity">
 		delete from fav_group
-		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
+		where group_id = #{groupId,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
 	<!-- 根据主键全量更新  -->
 	<update id="updateForProtect" parameterType="FavGroupEntity">
 		update fav_group
 		set covert=#{covert,jdbcType=TINYINT}
-		where id = #{id,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
+		where group_id = #{groupId,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
 	</update>
 
 	<select id="getByGroupId"  resultMap="favGroupMap">
@@ -61,6 +61,7 @@
 		<where>
 			user_id = #{userId,jdbcType=BIGINT}
 		</where>
+		order by create_time desc
 	</select>
 
 	<select id="findForDiscovery"  resultMap="favGroupMap">

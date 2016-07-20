@@ -12,6 +12,7 @@ import com.sera.service.FavService;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -41,15 +42,22 @@ public class FavServiceImpl implements FavService {
         if (favGroupEntity.getGroupId() == null || favGroupEntity.getGroupId() <= 0) {
             favGroupEntity.setGroupId(sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ));
         }
+        favGroupEntity.setCovert(1);
         return favGroupMapper.insert(favGroupEntity) > 0;
     }
 
     @Override
+    @Transactional(rollbackFor = Throwable.class)
     public boolean delFavGroup(long userId, long groupId) {
         FavGroupEntity favGroupEntity = new FavGroupEntity();
         favGroupEntity.setUserId(userId);
         favGroupEntity.setGroupId(groupId);
-        return favGroupMapper.delByUserIdAndId(favGroupEntity) > 0;
+        favGroupMapper.delByUserIdAndId(favGroupEntity);
+        FavListEntity favListEntity = new FavListEntity();
+        favListEntity.setGroupId(groupId);
+        favListEntity.setUserId(userId);
+        favListMapper.deleteByGroup(favListEntity);
+        return true;
     }
 
     @Override
@@ -104,6 +112,20 @@ public class FavServiceImpl implements FavService {
     @Override
     public boolean checkFav(long userId) {
         return false;
+    }
+
+    @Override
+    public boolean arrange(long userId) {
+        return false;
+    }
+
+    @Override
+    public boolean delExpireFav(long userId) {
+        FavListEntity favListEntity = new FavListEntity();
+        favListEntity.setUserId(userId);
+        favListEntity.setFavStatus(2);
+        favListMapper.deleteByStatus(favListEntity);
+        return true;
     }
 
     @Override

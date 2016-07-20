@@ -8,26 +8,8 @@
 ##        </div>
 ##    </div>
 ##</div>
-<div class="ui medium menu">
-    <a class=" borderless  item" href="/index">
-        <i class="superscript orange icon" style="font-size: 1.4em;"></i>云云收藏
-    </a>
-    <div class="right menu">
-        <a class="item">
-            发现
-        </a>
-        <div class="item">
-            <div class="ui icon input">
-                <input type="text" placeholder="搜索...">
-                <i class="search link icon"></i>
-            </div>
-        </div>
-        <div class="item">
-            <div class="ui primary button">注册</div>
-        </div>
-    </div>
-</div>
-<div class="ui padded grid">
+
+<div class="ui padded grid" style="max-height: 28px;padding-left: 6px;padding-right: 6px">
     <div class="row" style="padding-top: 0;padding-bottom: 0;">
         <div class="column">
             <div class=" field" style="margin-left: 5p;float: right">
@@ -40,10 +22,11 @@
                     #end
                 </select>
             </div>
-            <div class="compact ui left floated basic icon button"><i class="plus icon"></i>新建分组</div>
-            <div class="compact ui left floated basic icon button"><i class="sort content descending icon"></i>智能排序</div>
-            <div class="compact ui left floated basic icon button"><i class="bug icon"></i>智能检测</div>
-            <div class="compact ui left floated basic icon button"><i class="unlink icon"></i>删除失效</div>
+            <div class="compact ui left floated green icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
+            <div class="compact ui left floated green icon button"><i class="sort content descending icon"></i>智能排序
+            </div>
+            <div class="compact ui left floated green icon button"><i class="bug icon"></i>智能检测</div>
+            <div class="compact ui left floated green icon button"><i class="unlink icon"></i>删除失效</div>
             <div class="compact ui left floated green icon button"><i class="download icon"></i>收藏工具</div>
             <input type="file" name="_impFile" id="_impFile">
         </div>
@@ -56,174 +39,284 @@
             #set ($favList = $entry.value)
             #set ($keyArray = $key.split("/"))
             #set ($title = $!{keyArray.get(0)})
+            #set ($groupID = $!{keyArray.get(1)})
             #set ($groupSize = $!{keyArray.get(2)})
             #set ($groupColor = $!{keyArray.get(3)})
+            #set ($covert = $!{keyArray.get(4)})
             #if($title.length()>30)
                 #set($showTitle=$title.substring(0,30))
             #else
                 #set($showTitle=$title)
             #end
 
-            <div class="$!{groupWith} wide column grid-item" style="padding: 0 10px">
-                <input type="hidden" value="$!{keyArray.get(1)}" id="grid_$!{keyArray.get(1)}">
-                <div class="ui raised segment ">
-                    <a class="ui $!{groupColor} ribbon label">$showTitle($!{groupSize})</a>
-                    <div style="float: right">
-                        <div class="compact ui  basic   icon button right  floated"
-                             onclick="addFav($!{keyArray.get(1)})"><i class="plus icon"></i>
-                        </div>
-                        <div class="compact ui  basic   icon button right  floated"
-                             onclick="protectFav($!{keyArray.get(1)})"><i class="lock icon"></i>
-                        </div>
-                        <div class="compact ui  basic   icon button right  floated"><i class="remove icon"></i></div>
+        <div class="$!{groupWith} wide column grid-item" style="padding: 0 10px" id="group_$!{groupID}">
+            <input type="hidden" value="$!{groupID}" id="grid_$!{groupID}">
+            <div class="ui raised segment ">
+                <a class="ui $!{groupColor} ribbon label" title="显示收藏列表" onclick="showFav($!{groupID})">$showTitle
+                    ($!{groupSize})</a>
+                <div style="float: right">
+                    <div class="compact ui  basic   icon button right  floated"
+                         onclick="addFav($!{groupID})"><i class="plus icon"></i>
                     </div>
-
-                    <div class="ui mini divided list">
-                        #foreach($fav in  $favList)
-                            <div class="item" style="padding: 1px 0">
-                                <div class="right floated">
-                                    <div class="compact ui green empty circular label" title="正常"></div>
-                                    <div class="compact ui mini  basic  icon  button"><i class="empty heart icon"></i></div>
-                                    <div class="compact ui mini  basic  icon  button"><i class="move icon"></i></div>
-                                    <div class="compact ui mini  basic  icon  button"><i class="minus icon"></i></div>
-                                </div>
-##                                #if($!{fav.favIco})
-##                                    <img class="ui  mini avatar image" src="$!{fav.favIco}" style="margin-top: 3px">
-##                                #else
-##                                    <img class="ui  mini avatar image"
-##                                         src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
-##                                #end
-                                <img class="ui  mini avatar image"
-                                     src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
-                                #set ($favTitle = $!{fav.favTitle})
-                                #if($favTitle.length()>$!{titleLen})
-                                    #set($showFavTitle=$favTitle.substring(0,$!{titleLen}))
-                                #else
-                                    #set($showFavTitle=$favTitle)
-                                #end
-
-                                #set ($favUrl = $!{fav.favUrl})
-                                #if($favUrl.length()>$!{urlLen})
-                                    #set($showFavUrl=$favUrl.substring(0,$!{urlLen}))
-                                #else
-                                    #set($showFavUrl=$favUrl)
-                                #end
-                                <div class="content" style="margin-top: 3px">
-                                    <a class="header fav" href="$!{fav.favUrl}" title="$!{fav.favUrl}">$!{showFavTitle}</a>
-##                                    <div class="description fav"><a target="_blank" href="$!{fav.favUrl}">$!{showFavUrl}</a>
-##                                    </div>
-                                </div>
-                            </div>
+                    <div class="compact ui  basic   icon button right  floated"
+                         onclick="protectFav($!{groupID},$!{covert})">
+                        #if($covert==2)
+                            <i class="lock icon" title="解锁后变为公开可以被别人看到" id="lockIcon_$!{groupID}"></i>
+                        #else
+                            <i class="unlock icon" title="加锁后变为私有只有自己能访问" id="lockIcon_$!{groupID}"></i>
                         #end
                     </div>
+                    <div class="compact ui  basic   icon button right  floated" title="显示收藏列表"
+                         onclick="showFav($!{groupID})"><i class="unhide icon"></i>
+                    </div>
+                    <div class="compact ui  basic   icon button right  floated" onclick="removeGroup($!{groupID})"><i
+                            class="remove icon"></i></div>
+                </div>
+            ##                    #if($!{gid})
+            ##                        <div class="ui mini divided list" id="group_list_$!{groupID}">
+            ##                    #else
+            ##                        <div class="ui mini divided list" style="display: none" id="group_list_$!{groupID}">
+            ##                    #end
+                <div class="ui mini divided list" id="group_list_$!{groupID}">
+                    #set ($showFlag = 0)
+                    #foreach($fav in  $favList)
+                        #if($showFlag<6 || $!{gid})
+                        <div class="item" style="padding: 1px 0">
+                        #else
+                        <div class="item" style="padding: 1px 0;display: none">
+                        #end
+                        <div class="right floated">
+                            <div class="compact ui green empty circular label" title="正常"></div>
+                            <div class="compact ui mini  basic  icon  button"><i class="empty heart icon"></i>
+                            </div>
+                            <div class="compact ui mini  basic  icon  button"><i class="move icon"></i></div>
+                            <div class="compact ui mini  basic  icon  button"><i class="minus icon"></i></div>
+                        </div>
+                        <img class="ui  mini avatar image"
+                             src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
+                        #set ($favTitle = $!{fav.favTitle})
+                        #if($favTitle.length()>$!{titleLen})
+                            #set($showFavTitle=$favTitle.substring(0,$!{titleLen}))
+                        #else
+                            #set($showFavTitle=$favTitle)
+                        #end
+
+                        #set ($favUrl = $!{fav.favUrl})
+                        #if($favUrl.length()>$!{urlLen})
+                            #set($showFavUrl=$favUrl.substring(0,$!{urlLen}))
+                        #else
+                            #set($showFavUrl=$favUrl)
+                        #end
+                        <div class="content" style="margin-top: 3px">
+                            <a class="header fav" href="$!{fav.favUrl}" title="$!{fav.favUrl}"
+                               target="_blank">$!{showFavTitle}</a>
+                        </div>
+                    </div>
+                        #set ($showFlag = $showFlag+1)
+                    #end
+                </div>
                 </div>
             </div>
         #end
     #end
 </div>
 
-<div class="ui modal" id="addFavModal">
-    <i class="close icon"></i>
-    <div class="header">
-        添加收藏
-    </div>
-    <div class="content">
-        <div class="ui form">
-            <div class="field">
-                <label>输入网址</label>
-                <input type="hidden" id="addFavInputGroup">
-                <input type="text" id="addFavInputUrl">
+    <div class="ui modal" id="addFavModal">
+        <i class="close icon"></i>
+        <div class="header">
+            添加收藏
+        </div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>输入网址</label>
+                    <input type="hidden" id="addFavInputGroup">
+                    <input type="text" id="addFavInputUrl">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button" id="addFavInputBtn">
+                保存
+                <i class="checkmark icon"></i>
+            </div>
+            <div class="ui black button">
+                取消
             </div>
         </div>
     </div>
-    <div class="actions">
-        <div class="ui positive right labeled icon button" id="addFavInputBtn">
-            保存
-            <i class="checkmark icon"></i>
-        </div>
-        <div class="ui black button">
-            取消
-        </div>
-    </div>
-</div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.ui.accordion').accordion();
+    <script type="text/javascript">
+        var $grid =
+        null;
+        $(document).ready(function () {
+            $('.ui.accordion').accordion();
 
-        $('#addFavInputBtn').click(function (e) {
-            saveFav();
+            $('#addFavInputBtn').click(function (e) {
+                saveFav();
+            })
+            initImp();
+            $('#_impFile-button').css('line-height', '15px');
+            $('select.dropdown').dropdown();
+
+            $('#groupSelect').change(function () {
+                var val = $("#groupSelect").val();
+                var text = $("#groupSelect").find("option:selected").text();
+                window.location.href = "/fav?gid=" + val + "&gname=" + encodeURI(text);
+            });
+            $grid
+            = $('#myGrid').masonry({
+                // options
+                itemSelector: '.grid-item',
+            });
+
+            $('#addGroupBtn').click(function (e) {
+                showAddFavGroup();
+            });
+
         })
-        initImp();
-        $('#_impFile-button').css('line-height', '15px');
-        $('select.dropdown').dropdown();
 
-        $('#groupSelect').change(function () {
-            var val = $("#groupSelect").val();
-            var text = $("#groupSelect").find("option:selected").text();
-            window.location.href = "/fav?gid=" + val + "&gname=" + encodeURI(text);
-        });
-        $('#myGrid').masonry({
-            // options
-            itemSelector: '.grid-item',
-        });
-    })
+        function initImp() {
+            var uploadSwf = '#springUrl('statics/plugin/uploadify/uploadify.swf')';
+            $("#_impFile").uploadify({
+                formData: {
+                    'timestamp': '222',
+                    'token': '123',
+                    'type': '22'
+                },
+                queueID: '__not_exit_queue',//不存在的ID,删除该配置可显示进度条
+                successTimeout: 120,//2分钟超时
+                fileSizeLimit: '10MB',//B, KB, MB, or GB
+                height: 30,
+                swf: uploadSwf,
+                uploader: $("#contextPath").val() + '/import/bookmark',
+                fileObjName: 'file',
+                buttonClass: 'compact ui green icon button right',
+                buttonText: '从浏览器导入',
+                onUploadStart: function (file) {
+                    $('#_impFile').uploadify('disable', true);
+                },
+                //上传到服务器，服务器返回相应信息到data里
+                onUploadSuccess: function (file, data, response) {
+                    $('#_impFile').uploadify('disable', false);
+                    layer.msg('导入完成');
+                    location.reload();
+                },
+                onUploadError: function (file, errorCode, errorMsg, errorString) {
+                    $('#_impFile').uploadify('disable', false);
+                }
 
-    function initImp() {
-        var uploadSwf = '#springUrl('statics/plugin/uploadify/uploadify.swf')';
-        $("#_impFile").uploadify({
-            formData: {
-                'timestamp': '222',
-                'token': '123',
-                'type': '22'
-            },
-            queueID: '__not_exit_queue',//不存在的ID,删除该配置可显示进度条
-            successTimeout: 120,//2分钟超时
-            fileSizeLimit: '10MB',//B, KB, MB, or GB
-            height: 30,
-            swf: uploadSwf,
-            uploader: $("#contextPath").val() + '/import/bookmark',
-            fileObjName: 'file',
-            buttonClass: 'compact ui green icon button right',
-            buttonText: '从浏览器导入',
-            onUploadStart: function (file) {
-                $('#_impFile').uploadify('disable', true);
-            },
-            //上传到服务器，服务器返回相应信息到data里
-            onUploadSuccess: function (file, data, response) {
-                $('#_impFile').uploadify('disable', false);
-                layer.msg('导入完成');
-            },
-            onUploadError: function (file, errorCode, errorMsg, errorString) {
-                $('#_impFile').uploadify('disable', false);
+            });
+        }
+        function addFav(groupID) {
+            $('#addFavInputGroup').val(groupID);
+            var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">收藏新网页</h4><div class="field"><label>输入网址</label><input type="text" id="addFavInputUrl"></div><div class="ui green submit button">收藏</div></form>';
+            var index = layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                area: ['700px', '230px'],
+                shadeClose: true,
+                content: htmlStr
+            });
+        }
+
+        function showAddFavGroup() {
+            var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">添加新分组</h4><div class="field"><label>分组名称</label><input type="text" id="addFavGroupInput"></div><div class="ui green submit button" id="saveGroupBtn">保存</div></form>';
+            var index = layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                area: ['700px', '230px'],
+                shadeClose: true,
+                content: htmlStr
+            });
+            $('#saveGroupBtn').click(function (e) {
+                doAddFavGroup(index);
+            });
+        }
+
+        function saveFav() {
+
+            var param = {};
+            param.groupId = $('#addFavInputGroup').val();
+            param.favUrl = $('#addFavInputUrl').val();
+            var reqUrl = $("#contextPath").val() + "/fav/add";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else {
+                    layer.msg('收藏成功');
+                    location.reload();
+                }
+            });
+        }
+
+        function doAddFavGroup(index) {
+            var param = {};
+            param.groupName = $('#addFavGroupInput').val();
+            var reqUrl = $("#contextPath").val() + "/fav/group/add";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else {
+                    layer.msg('保存成功');
+                    location.reload();
+                }
+            });
+        }
+
+        function protectFav(groupID, covert) {
+            if (covert == 1) {
+                covert = 2;
+            } else if (covert == 2) {
+                covert = 1;
             }
+            var param = {};
+            param.groupId = groupID;
+            param.covert = covert;
+            var reqUrl = $("#contextPath").val() + "/fav/group/lock";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else {
+                    location.reload();
+                }
+            });
+        }
 
-        });
-    }
-    function addFav(groupID) {
-        $('#addFavInputGroup').val(groupID);
-        $('#addFavModal').modal('setting', 'duration', 100).modal('show');
-    }
+        function removeGroup(groupID) {
+            layer.confirm('删除分组后该分组所有收藏将被删除,确定删除？', {icon: 3, title: '提示'}, function (index) {
+                var param = {};
+                param.groupId = groupID;
+                var reqUrl = $("#contextPath").val() + "/fav/group/del";
+                AjaxUtil.post(reqUrl, param, function (resp) {
+                    if (resp == undefined || resp == null) {
+                        layer.alert("系统异常", {icon: 5});
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        }
 
-    function saveFav() {
-
-        var param = {};
-        param.groupId = $('#addFavInputGroup').val();
-        param.favUrl = $('#addFavInputUrl').val();
-        var reqUrl = $("#contextPath").val() + "/fav/add";
-        AjaxUtil.post(reqUrl, param, function (resp) {
-            if (resp == undefined || resp == null) {
-                layer.alert("系统异常", {icon: 5});
+        function showFav(groupID) {
+            if ($('#group_list_' + groupID + ' .item').is(':hidden')) {
+                $('#group_list_' + groupID + ' .item').show();
             } else {
-                layer.msg('收藏成功');
+                var i = 0;
+                $('#group_list_' + groupID + ' .item').each(function () {
+                    if (i >= 6) {
+                        $(this).hide();
+                    }
+                    i++;
+                });
+
             }
-        });
-    }
+                $grid.masonry('layout');
+        }
 
-    function protectFav(groupID) {
-
-    }
-</script>
-<script src="#springUrl('statics/plugin/uploadify/jquery.uploadify.js')" type="text/javascript"></script>
-<script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+    </script>
+    <script src="#springUrl('statics/plugin/uploadify/jquery.uploadify.js')" type="text/javascript"></script>
+    <script src="#springUrl('statics/plugin/masonry/masonry.mini.js')"></script>
 
