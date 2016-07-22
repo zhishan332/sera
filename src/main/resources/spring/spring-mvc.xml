@@ -97,6 +97,11 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* -->
+            <mvc:mapping path="/**" />
+            <ref bean="cookieInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* -->
             <mvc:mapping path="/fav/**" />
             <ref bean="userInterceptor" />
         </mvc:interceptor>
@@ -104,5 +109,9 @@
 
     <bean id="userInterceptor"
           class="com.sera.inteceptor.UserInterceptor">
+    </bean>
+
+    <bean id="cookieInterceptor"
+          class="com.sera.inteceptor.CookieInterceptor">
     </bean>
 </beans>

@@ -8,4 +8,6 @@ public class ViewConfig {
 
     public static final int DEFAULT_PAGE_LIMIT = 1000;//首页默认展示数量
 
+    public static final String KEY_USER_COOKIE = "_fav_user_cookie";//首页默认展示数量
+
 }

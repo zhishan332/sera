@@ -1,5 +1,6 @@
 package com.sera.controller;
 
+import com.sera.config.ViewConfig;
 import com.sera.dto.Response;
 import com.sera.entity.UserInfoEntity;
 import com.sera.helper.UserHelper;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -39,7 +43,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Response login(HttpSession httpSession, String username, String password) {
+    public Response login(HttpSession httpSession, String username, String password,HttpServletResponse response) {
         Response resp = new Response();
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
@@ -55,6 +59,12 @@ public class UserController {
                 resp.setMsg("用户名密码错误");
             } else {
                 userHelper.setUserSession(user);
+                //以后考虑加密
+                Cookie cookie = new Cookie(ViewConfig.KEY_USER_COOKIE, username+","+password);
+                cookie.setMaxAge(60 * 60 * 24 * 365);//保存365天
+                cookie.setPath("/");
+                response.addCookie(cookie);
+
                 resp.setStatus(Response.SUCCESS);
             }
         } catch (Exception e) {
@@ -72,11 +82,22 @@ public class UserController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
-    public Response logout(HttpSession httpSession) {
+    public Response logout(HttpSession httpSession,HttpServletRequest request,HttpServletResponse response) {
         Response resp = new Response();
 
         try {
             httpSession.removeAttribute("user");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (ViewConfig.KEY_USER_COOKIE.equals(cookie.getName())) {
+                        cookie.setValue(null);
+                        cookie.setMaxAge(0);
+                        cookie.setPath("/");
+                        response.addCookie(cookie);
+                    }
+                }
+            }
         } catch (Exception e) {
             resp.setStatus(Response.FAILURE);
             resp.setMsg("内部错误,请稍后重试");
@@ -107,6 +128,12 @@ public class UserController {
         if (password.length() > 16 || password.length() < 6) {
             resp.setStatus(Response.FAILURE);
             resp.setMsg("密码长度为8到16位");
+            return resp;
+        }
+
+        if (password.contains(",")) {
+            resp.setStatus(Response.FAILURE);
+            resp.setMsg("密码中不能包含:,");
             return resp;
         }
 
