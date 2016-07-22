@@ -1,6 +1,6 @@
 package com.sera.helper;
 
-import com.sera.dto.UserInfoDto;
+import com.sera.entity.UserInfoEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -15,22 +15,26 @@ import javax.servlet.http.HttpSession;
 @Component
 public class UserHelper {
 
-    public UserInfoDto getUser() {
+    public UserInfoEntity getUser() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         if (session != null) {
-            return (UserInfoDto) session.getAttribute("user");
+            return (UserInfoEntity) session.getAttribute("user");
         }
         return null;
     }
 
     public long getUserID() {
-        UserInfoDto user = this.getUser();
+        UserInfoEntity user = this.getUser();
         if (null != user) return user.getUserId();
         return 0;
     }
 
-    public void setUserSession(UserInfoDto dto) {
+    public boolean isLogin() {
+        return getUserID() > 0;
+    }
+
+    public void setUserSession(UserInfoEntity dto) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         session.setAttribute("user", dto);

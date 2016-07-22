@@ -129,11 +129,30 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
-    public boolean focusFav(long userId, long favId, int type) {
+    public int focusFav(long userId, long favId) {
         FavListEntity favListEntity = new FavListEntity();
         favListEntity.setUserId(userId);
-        favListEntity.setFavFocus(type);
-        return favListMapper.updateFocus(favListEntity) > 0;
+        favListEntity.setFavId(favId);
+        FavListEntity fav = favListMapper.get(favListEntity);
+        if (fav == null) return 0;
+
+        int favFocus = fav.getFavFocus();
+        if (1 == favFocus) {
+            favFocus = 2;
+        } else {
+            favFocus = 1;
+        }
+        favListEntity.setFavFocus(favFocus);
+        favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        int num = favListMapper.updateFocus(favListEntity);
+        if (num > 0) {//修改排序
+            if(favFocus==2){
+                favListMapper.updateHighSort(favListEntity);
+            }else{
+                favListMapper.updateLowSort(favListEntity);
+            }
+        }
+        return favFocus;
     }
 
     @Override
@@ -145,5 +164,16 @@ public class FavServiceImpl implements FavService {
         param.put("start", start);
         param.put("num", num);
         return favListMapper.find(param);
+    }
+
+    @Override
+    public boolean updateFavGroup(long userId, long favId, long groupId) {
+        FavListEntity favListEntity = new FavListEntity();
+        favListEntity.setUserId(userId);
+        favListEntity.setGroupId(groupId);
+        favListEntity.setFavId(favId);
+        favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        favListMapper.updateFavGroup(favListEntity);
+        return true;
     }
 }

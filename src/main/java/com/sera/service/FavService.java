@@ -29,8 +29,10 @@ public interface FavService {
 
     boolean delExpireFav(long userId);
 
-    boolean focusFav(long userId, long favId, int type);
+    int focusFav(long userId, long favId);
 
     List<FavListEntity> findByGroup(long userId, long groupId, String searchKey, int start, int num);
+
+    public boolean updateFavGroup(long userId, long favId,long groupId);
 
 }

@@ -11,16 +11,29 @@
         </a>
         <div class="item">
             <div class="ui icon input">
-                <input type="text" placeholder="搜索...">
-                <i class="search link icon"></i>
+                <input type="text" placeholder="搜索..." id="searchInput">
+                <i class="search link icon" id="searchBtn"></i>
             </div>
         </div>
-        <a class="item" style="color: orange"  title="云云收藏稳定运行时间">
+        <a class="item" style="color: orange" title="云云收藏稳定运行时间">
             726天
         </a>
         <div class="item">
-            <div class="ui primary button" id="loginBtn">登录</div>
-            <div class="ui primary button" id="registBtn">注册</div>
+            #if($!{userID})
+                <input type="hidden" id="userRegTime" value="$!{createTime}">
+                <div class="ui simple dropdown" id="userBox">
+                    $!{username}
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item" value="$!{userID}">用户信息</div>
+                        <div class="divider"></div>
+                        <div class="item" value="$!{userID}">注销</div>
+                    </div>
+                </div>
+            #else
+                <div class="ui primary button" id="loginBtn">登录</div>
+                <div class="ui primary button" id="registBtn">注册</div>
+            #end
         </div>
     </div>
 </div>
@@ -33,10 +46,37 @@
         $('#registBtn').click(function () {
             showRegist();
         });
+        $('#searchBtn').click(function () {
+            var val = $('#searchInput').val();
+            window.location.href = "/index?wd=" + encodeURI(val);
+        });
+        $('#searchInput').keydown(function (e) {
+            if (e.keyCode == 13) {
+                var val = $('#searchInput').val();
+                window.location.href = "/index?wd=" + encodeURI(val);
+            }
+        });
+        $('#userBox').dropdown({
+            onChange: function (value, text, obj) {
+                var idStr = $(obj).attr('value');
+                if (value == '用户信息') {
+                    layer.msg('您的注册时间是:' + $('#userRegTime').val());
+                } else {
+                    var reqUrl = $("#contextPath").val() + "/user/logout";
+                    AjaxUtil.post(reqUrl, {}, function (resp) {
+                        if (resp == undefined || resp == null) {
+                            layer.alert("系统异常", {icon: 5});
+                        } else {
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        });
     })
 
     function showLogin() {
-        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">登录</h4><div class="required field"><label>手机号</label><input placeholder="请输入手机号" type="text"></div><div class="required field"><label>密码</label><input type="password"></div><div class="ui green submit button">登录</div><div class="ui black  button" id="closeLoginBtn">取消</div></form>';
+        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">登录</h4><div class="required field"><label>用户名</label><input placeholder="请输入手机号或注册用户名" type="text" id="usernameInput"></div><div class="required field"><label>密码</label><input type="password" id="passwordInput"></div><div class="ui green submit button" id="doLoginBtn">登录</div><div class="ui black  button" id="closeLoginBtn">取消</div></form>';
         var index = layer.open({
             type: 1,
             title: false,
@@ -48,10 +88,26 @@
         $('#closeLoginBtn').click(function () {
             layer.close(index);
         });
+
+        $('#doLoginBtn').click(function () {
+            var param = {};
+            param.username = $('#usernameInput').val();
+            param.password = $('#passwordInput').val();
+            var reqUrl = $("#contextPath").val() + "/user/login";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    location.reload();
+                } else {
+                    layer.alert(resp.msg, {icon: 5});
+                }
+            });
+        });
     }
 
     function showRegist() {
-        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">新用户注册</h4><div class="required field"><label>手机号</label><input placeholder="请输入手机号" type="text"></div><div class="two fields"><div class="required field"><label>验证码</label><input placeholder="请输入收到的6位验证码" type="text"></div><div class="field" style="margin-top:22px"><div class="ui submit button">获取验证码</div></div></div><div class="required field"><label>密码</label><input type="password"></div><div class="required field"><label>重复输入密码</label><div class="ui icon input"><input type="password"></div></div><div class="ui green submit button">注册</div><div id="closeRegistBtn" class="ui black  button">取消</div></form>';
+        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">新用户注册</h4><div class="required field"><label>手机号</label><input placeholder="请输入手机号" type="text" id="regUserNameInput"></div><div class="two fields"><div class="required field"><label>验证码</label><input placeholder="请输入收到的6位验证码" type="text"></div><div class="field" style="margin-top:22px"><div class="ui submit button">获取验证码</div></div></div><div class="required field"><label>密码</label><input type="password" placeholder="密码长度为6-16位" id="regPasswordInput"></div><div class="required field"><label>重复输入密码</label><div class="ui icon input"><input type="password" placeholder="密码长度为6-16位"  id="regRePasswordInput"></div></div><div class="ui green submit button" id="doRegistBtn">注册</div><div id="closeRegistBtn" class="ui black  button">取消</div></form>';
         var index = layer.open({
             type: 1,
             title: false,
@@ -62,6 +118,28 @@
         });
         $('#closeRegistBtn').click(function () {
             layer.close(index);
+        });
+
+        $('#doRegistBtn').click(function () {
+            var param = {};
+            param.username = $('#regUserNameInput').val();
+            var ps = $('#regPasswordInput').val();
+            var reps = $('#regRePasswordInput').val();
+            param.password = ps;
+            if (ps != reps) {
+                layer.alert("两次输入的密码不相同", {icon: 5});
+                return;
+            }
+            var reqUrl = $("#contextPath").val() + "/user/regist";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    location.reload();
+                } else {
+                    layer.alert(resp.msg, {icon: 5});
+                }
+            });
         });
     }
 

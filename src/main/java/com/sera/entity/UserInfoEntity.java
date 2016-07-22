@@ -15,6 +15,7 @@ public class UserInfoEntity implements Serializable {
 	private Long userId;//(字段：user_id)
 	private String userName;//(字段：user_name)
 	private String userPhone;//(字段：user_phone)
+	private String password;//(字段：password)
 	private Integer sex;//1表示男性2表示女性3表示其他(字段：sex)
 	private Date birthday;//(字段：birthday)
 	private String tinyurl;//(字段：tinyurl)
@@ -32,6 +33,8 @@ public class UserInfoEntity implements Serializable {
 	private String weibo;//(字段：weibo)
 	private String qq;//(字段：qq)
 	private Timestamp createTime;//(字段：create_time)
+
+	private Timestamp updateTime;//(字段：create_time)
 
 	public Long getId() {
 		return id;
@@ -201,4 +204,19 @@ public class UserInfoEntity implements Serializable {
 		this.createTime = createTime;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
 }

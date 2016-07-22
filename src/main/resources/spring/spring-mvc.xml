@@ -94,23 +94,15 @@
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     </bean>
 
-    <!--<mvc:interceptors>-->
-        <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
-        <!--&lt;!&ndash;&lt;!&ndash; 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* &ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;<mvc:mapping path="/api/**" />&ndash;&gt;-->
-        <!--&lt;!&ndash;<ref bean="apiAuthInterceptor" />&ndash;&gt;-->
-        <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* &ndash;&gt;-->
-            <!--<mvc:mapping path="/admin/**" />-->
-            <!--<ref bean="adminAuthInterceptor" />-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* -->
+            <mvc:mapping path="/fav/**" />
+            <ref bean="userInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
-    <!--<bean id="apiAuthInterceptor"-->
-          <!--class="com.yermoon.ocm.interceptor.ApiAuthInterceptor">-->
-    <!--</bean>-->
-    <!--<bean id="adminAuthInterceptor"-->
-          <!--class="com.yermoon.ocm.interceptor.AdminAuthInterceptor">-->
-    <!--</bean>-->
+    <bean id="userInterceptor"
+          class="com.sera.inteceptor.UserInterceptor">
+    </bean>
 </beans>

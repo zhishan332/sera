@@ -15,6 +15,8 @@ public interface FavListMapper {
 
     public int insert(FavListEntity favListEntity);
 
+    public FavListEntity get(FavListEntity favListEntity);
+
     public int delByUserIdAndId(FavListEntity favListEntity);
 
     public int deleteByGroup(FavListEntity favListEntity);
@@ -24,4 +26,10 @@ public interface FavListMapper {
     public List<FavListEntity> find(Map<String,Object> param);
 
     public int updateFocus(FavListEntity favListEntity);
+
+    public int updateHighSort(FavListEntity favListEntity);
+
+    public int updateLowSort(FavListEntity favListEntity);
+
+    public int updateFavGroup(FavListEntity favListEntity);
 }

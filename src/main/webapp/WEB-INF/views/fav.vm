@@ -54,43 +54,59 @@
             <div class="ui raised segment ">
                 <a class="ui $!{groupColor} ribbon label" title="显示收藏列表" onclick="showFav($!{groupID})">$showTitle
                     ($!{groupSize})</a>
-                <div style="float: right">
-                    <div class="compact ui  basic   icon button right  floated"
-                         onclick="addFav($!{groupID})"><i class="plus icon"></i>
+                #if($!{wd})
+                #else
+                    <div style="float: right">
+                        <div class="compact ui  basic   icon button right  floated"
+                             onclick="addFav($!{groupID})"><i class="plus icon"></i>
+                        </div>
+                        <div class="compact ui  basic   icon button right  floated"
+                             onclick="protectFav($!{groupID},$!{covert})">
+                            #if($covert==2)
+                                <i class="lock icon" title="解锁后变为公开可以被别人看到" id="lockIcon_$!{groupID}"></i>
+                            #else
+                                <i class="unlock icon" title="加锁后变为私有只有自己能访问" id="lockIcon_$!{groupID}"></i>
+                            #end
+                        </div>
+                    ##                        <div class="compact ui  basic   icon button right  floated" title="显示收藏列表"
+                    ##                             onclick="showFav($!{groupID})"><i class="unhide icon"></i>
+                    ##                        </div>
+                        <div class="compact ui  basic   icon button right  floated" onclick="removeGroup($!{groupID})">
+                            <i class="remove icon"></i></div>
                     </div>
-                    <div class="compact ui  basic   icon button right  floated"
-                         onclick="protectFav($!{groupID},$!{covert})">
-                        #if($covert==2)
-                            <i class="lock icon" title="解锁后变为公开可以被别人看到" id="lockIcon_$!{groupID}"></i>
-                        #else
-                            <i class="unlock icon" title="加锁后变为私有只有自己能访问" id="lockIcon_$!{groupID}"></i>
-                        #end
-                    </div>
-                    <div class="compact ui  basic   icon button right  floated" title="显示收藏列表"
-                         onclick="showFav($!{groupID})"><i class="unhide icon"></i>
-                    </div>
-                    <div class="compact ui  basic   icon button right  floated" onclick="removeGroup($!{groupID})"><i
-                            class="remove icon"></i></div>
-                </div>
-            ##                    #if($!{gid})
-            ##                        <div class="ui mini divided list" id="group_list_$!{groupID}">
-            ##                    #else
-            ##                        <div class="ui mini divided list" style="display: none" id="group_list_$!{groupID}">
-            ##                    #end
+                #end
                 <div class="ui mini divided list" id="group_list_$!{groupID}">
                     #set ($showFlag = 0)
                     #foreach($fav in  $favList)
                         #if($showFlag<6 || $!{gid})
-                        <div class="item" style="padding: 1px 0">
+                        <div class="item list-item" style="padding: 1px 0" id="favList_$!{fav.favId}">
                         #else
-                        <div class="item" style="padding: 1px 0;display: none">
+                        <div class="item list-item" style="padding: 1px 0;display: none" id="favList_$!{fav.favId}">
                         #end
                         <div class="right floated">
                             <div class="compact ui green empty circular label" title="正常"></div>
-                            <div class="compact ui mini  basic  icon  button"><i class="empty heart icon"></i>
+                            <div class="compact ui mini  basic  icon  button follow-btn"
+                                 id="follow_$!{fav.favId}">
+                                #if($fav.favFocus==2)
+                                    <i class="heart icon"></i>
+                                #else
+                                    <i class="empty heart icon"></i>
+                                #end
                             </div>
-                            <div class="compact ui mini  basic  icon  button"><i class="move icon"></i></div>
-                            <div class="compact ui mini  basic  icon  button"><i class="minus icon"></i></div>
+                        ##                            <div class="compact ui mini  basic  icon  button move-btn" id="moveFav_$!{fav.favId}"><i class="move icon"></i></div>
+                            <div class="compact ui mini left pointing basic dropdown icon button move-btn">
+                                <i class="move icon"></i>
+                                <div class="menu">
+                                    #if($!{groupData})
+                                        #foreach($group in  $groupData)
+                                            <div class="item"
+                                                 value="$!{group.groupId}_$!{fav.favId}">$!{group.groupName}</div>
+                                        #end
+                                    #end
+                                </div>
+                            </div>
+                            <div class="compact ui mini  basic  icon  button delfav-btn" id="delFav_$!{fav.favId}"><i
+                                    class="minus icon"></i></div>
                         </div>
                         <img class="ui  mini avatar image"
                              src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
@@ -121,51 +137,31 @@
     #end
 </div>
 
-    <div class="ui modal" id="addFavModal">
-        <i class="close icon"></i>
-        <div class="header">
-            添加收藏
-        </div>
-        <div class="content">
-            <div class="ui form">
-                <div class="field">
-                    <label>输入网址</label>
-                    <input type="hidden" id="addFavInputGroup">
-                    <input type="text" id="addFavInputUrl">
-                </div>
-            </div>
-        </div>
-        <div class="actions">
-            <div class="ui positive right labeled icon button" id="addFavInputBtn">
-                保存
-                <i class="checkmark icon"></i>
-            </div>
-            <div class="ui black button">
-                取消
-            </div>
-        </div>
-    </div>
-
     <script type="text/javascript">
-        var $grid =
-        null;
+        var gridMon =
+                null;
         $(document).ready(function () {
             $('.ui.accordion').accordion();
 
-            $('#addFavInputBtn').click(function (e) {
-                saveFav();
-            })
             initImp();
             $('#_impFile-button').css('line-height', '15px');
             $('select.dropdown').dropdown();
 
+            $('.move-btn').dropdown({
+                onChange: function (value, text, obj) {
+                    var idStr = $(obj).attr('value');
+                    var gid = idStr.split('_')[0];
+                    var fid = idStr.split('_')[1];
+                    moveFav(gid, fid);
+                }
+            });
+
             $('#groupSelect').change(function () {
                 var val = $("#groupSelect").val();
                 var text = $("#groupSelect").find("option:selected").text();
-                window.location.href = "/fav?gid=" + val + "&gname=" + encodeURI(text);
+                window.location.href = "/index?gid=" + val + "&gname=" + encodeURI(text);
             });
-            $grid
-            = $('#myGrid').masonry({
+            gridMon = $('#myGrid').masonry({
                 // options
                 itemSelector: '.grid-item',
             });
@@ -174,6 +170,23 @@
                 showAddFavGroup();
             });
 
+            $('.follow-btn').click(function (e) {
+                var id = $(this).attr('id');
+                var favID = id.split("_")[1];
+                var focus = id.split("_")[2];
+                followFav(favID, focus);
+            });
+
+            $('.delfav-btn').click(function (e) {
+                var id = $(this).attr('id');
+                var favID = id.split("_")[1];
+                delFav(favID);
+            });
+
+            $('.move-btn').click(function (e) {
+//                var id = $(this).attr('id');
+//                var favID = id.split("_")[1];
+            })
         })
 
         function initImp() {
@@ -209,8 +222,7 @@
             });
         }
         function addFav(groupID) {
-            $('#addFavInputGroup').val(groupID);
-            var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">收藏新网页</h4><div class="field"><label>输入网址</label><input type="text" id="addFavInputUrl"></div><div class="ui green submit button">收藏</div></form>';
+            var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">收藏新网页</h4><div class="field"><label>输入网址</label><input type="text" id="addFavInputUrl"></div><div class="ui green submit button" id="addFavInputBtn">收藏</div></form>';
             var index = layer.open({
                 type: 1,
                 title: false,
@@ -219,6 +231,9 @@
                 shadeClose: true,
                 content: htmlStr
             });
+            $('#addFavInputBtn').click(function (e) {
+                saveFav(groupID);
+            })
         }
 
         function showAddFavGroup() {
@@ -236,18 +251,21 @@
             });
         }
 
-        function saveFav() {
+        function saveFav(groupID) {
 
             var param = {};
-            param.groupId = $('#addFavInputGroup').val();
+            param.groupId = groupID;
             param.favUrl = $('#addFavInputUrl').val();
             var reqUrl = $("#contextPath").val() + "/fav/add";
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
                     layer.alert("系统异常", {icon: 5});
-                } else {
-                    layer.msg('收藏成功');
+                } else if (resp.status == 1) {
+                    layer.msg('保存成功');
                     location.reload();
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
                 }
             });
         }
@@ -259,9 +277,12 @@
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
                     layer.alert("系统异常", {icon: 5});
-                } else {
+                } else if (resp.status == 1) {
                     layer.msg('保存成功');
                     location.reload();
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
                 }
             });
         }
@@ -279,8 +300,11 @@
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
                     layer.alert("系统异常", {icon: 5});
-                } else {
+                } else if (resp.status == 1) {
                     location.reload();
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
                 }
             });
         }
@@ -293,27 +317,86 @@
                 AjaxUtil.post(reqUrl, param, function (resp) {
                     if (resp == undefined || resp == null) {
                         layer.alert("系统异常", {icon: 5});
-                    } else {
+                    } else if (resp.status == 1) {
                         location.reload();
+                    } else {
+                        var obj = eval("(" + resp + ")");
+                        layer.alert(obj.msg, {icon: 5});
                     }
                 });
             });
         }
 
         function showFav(groupID) {
-            if ($('#group_list_' + groupID + ' .item').is(':hidden')) {
-                $('#group_list_' + groupID + ' .item').show();
+            if (groupID <= 0) return;
+
+            if ($('#group_list_' + groupID + ' .list-item').is(':hidden')) {
+                $('#group_list_' + groupID + ' .list-item').show();
             } else {
                 var i = 0;
-                $('#group_list_' + groupID + ' .item').each(function () {
+                $('#group_list_' + groupID + ' .list-item').each(function () {
                     if (i >= 6) {
                         $(this).hide();
                     }
                     i++;
                 });
-
             }
-                $grid.masonry('layout');
+            $(gridMon).masonry('layout');
+        }
+
+        function followFav(favID, favFocus) {
+            var param = {};
+            param.favId = favID;
+            var reqUrl = $("#contextPath").val() + "/fav/follow";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    var st = resp.data;
+
+                    if (st == 2) {
+                        $('#follow_' + favID).children().attr('class', 'heart icon');
+                    } else {
+                        $('#follow_' + favID).children().attr('class', 'empty heart icon');
+                    }
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
+                }
+            });
+        }
+
+        function delFav(favID) {
+            var param = {};
+            param.favId = favID;
+            var reqUrl = $("#contextPath").val() + "/fav/del";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    $('#favList_' + favID).remove();
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
+                }
+            });
+        }
+
+        function moveFav(gid, fid) {
+            var param = {};
+            param.favId = fid;
+            param.groupId = gid;
+            var reqUrl = $("#contextPath").val() + "/fav/move";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    location.reload();
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
+                }
+            });
         }
 
     </script>
