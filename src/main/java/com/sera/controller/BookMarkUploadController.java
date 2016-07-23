@@ -1,6 +1,5 @@
 package com.sera.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.sera.config.SequenceConfig;
 import com.sera.dto.Response;
 import com.sera.entity.FavGroupEntity;
@@ -8,6 +7,7 @@ import com.sera.entity.FavListEntity;
 import com.sera.helper.SequenceHelper;
 import com.sera.helper.UserHelper;
 import com.sera.service.FavService;
+import com.sera.utils.JacksonUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -58,13 +58,13 @@ public class BookMarkUploadController {
         if (file == null || file.isEmpty()) {
             log.warn("上传文件为空，已终止！");
             resp.setMsg("上传文件为空，已终止！");
-            response.getWriter().write(JSON.toJSONString(resp));
+            response.getWriter().write(JacksonUtils.defaultMapper().toJson(resp));
             return;
         }
         if (file.getSize() > 10 * 1024 * 1024) {
             log.warn("上传文件尺寸过大，已终止！最大尺寸是：" + 10 + "MB");
             resp.setMsg("上传文件尺寸过大，已终止！最大尺寸是：" + 10 + "MB");
-            response.getWriter().write(JSON.toJSONString(resp));
+            response.getWriter().write(JacksonUtils.defaultMapper().toJson(resp));
             return;
         }
         try {
@@ -150,11 +150,11 @@ public class BookMarkUploadController {
             }
             resp.setStatus(Response.SUCCESS);
             resp.setData("");
-            response.getWriter().write(JSON.toJSONString(resp));
+            response.getWriter().write(JacksonUtils.defaultMapper().toJson(resp));
         } catch (Exception e) {
             log.error("上传图片处理失败", e);
             resp.setMsg("上传图片内部异常");
-            response.getWriter().write(JSON.toJSONString(resp));
+            response.getWriter().write(JacksonUtils.defaultMapper().toJson(resp));
         }
     }
 

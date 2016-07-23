@@ -32,6 +32,7 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         UserInfoEntity user = (UserInfoEntity) request.getSession().getAttribute("user");
         if (user == null) {
             Cookie[] cookies = request.getCookies();
+            if (cookies == null) return true;
             for (Cookie cookie : cookies) {
                 if (ViewConfig.KEY_USER_COOKIE.equals(cookie.getName())) {
                     String text = cookie.getValue();
