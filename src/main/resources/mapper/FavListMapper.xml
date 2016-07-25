@@ -121,4 +121,17 @@
             and fav_id = #{favId,jdbcType=BIGINT}
         </where>
     </select>
+
+
+    <!-- 根据传入的字段值查询  -->
+    <select id="getByUrl" resultMap="favListMap">
+        select
+        <include refid="sqlColumns"/>
+        from fav_list
+        <where>
+            user_id = #{userId,jdbcType=BIGINT}
+            and fav_url = #{favUrl,jdbcType=VARCHAR}
+        </where>
+        limit 1
+    </select>
 </mapper>

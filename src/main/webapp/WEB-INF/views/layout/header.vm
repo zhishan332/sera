@@ -66,6 +66,8 @@
                     AjaxUtil.post(reqUrl, {}, function (resp) {
                         if (resp == undefined || resp == null) {
                             layer.alert("系统异常", {icon: 5});
+                        } else if (resp.status == 0) {
+                            layer.msg(resp.msg);
                         } else {
                             location.reload();
                         }
@@ -99,6 +101,8 @@
                     layer.alert("系统异常", {icon: 5});
                 } else if (resp.status == 1) {
                     location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     layer.alert(resp.msg, {icon: 5});
                 }
@@ -136,6 +140,8 @@
                     layer.alert("系统异常", {icon: 5});
                 } else if (resp.status == 1) {
                     location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     layer.alert(resp.msg, {icon: 5});
                 }

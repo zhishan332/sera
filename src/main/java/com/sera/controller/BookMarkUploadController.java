@@ -152,8 +152,8 @@ public class BookMarkUploadController {
             resp.setData("");
             response.getWriter().write(JacksonUtils.defaultMapper().toJson(resp));
         } catch (Exception e) {
-            log.error("上传图片处理失败", e);
-            resp.setMsg("上传图片内部异常");
+            log.error("上传处理失败", e);
+            resp.setMsg("上传内部异常");
             response.getWriter().write(JacksonUtils.defaultMapper().toJson(resp));
         }
     }

@@ -115,6 +115,14 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
+    public FavListEntity isDuplicate(long userId, String url) {
+        FavListEntity entity = new FavListEntity();
+        entity.setUserId(userId);
+        entity.setFavUrl(url);
+        return favListMapper.getByUrl(entity);
+    }
+
+    @Override
     public boolean arrange(long userId) {
         return false;
     }
@@ -146,9 +154,9 @@ public class FavServiceImpl implements FavService {
         favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         int num = favListMapper.updateFocus(favListEntity);
         if (num > 0) {//修改排序
-            if(favFocus==2){
+            if (favFocus == 2) {
                 favListMapper.updateHighSort(favListEntity);
-            }else{
+            } else {
                 favListMapper.updateLowSort(favListEntity);
             }
         }

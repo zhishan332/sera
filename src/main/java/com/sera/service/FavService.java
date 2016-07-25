@@ -25,6 +25,8 @@ public interface FavService {
 
     boolean checkFav(long userId);
 
+    FavListEntity isDuplicate(long userId,String url);
+
     boolean arrange(long userId);
 
     boolean delExpireFav(long userId);

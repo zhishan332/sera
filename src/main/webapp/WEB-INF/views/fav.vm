@@ -263,6 +263,8 @@
                 } else if (resp.status == 1) {
                     layer.msg('保存成功');
                     location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     var obj = eval("(" + resp + ")");
                     layer.alert(obj.msg, {icon: 5});
@@ -280,6 +282,8 @@
                 } else if (resp.status == 1) {
                     layer.msg('保存成功');
                     location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     var obj = eval("(" + resp + ")");
                     layer.alert(obj.msg, {icon: 5});
@@ -302,6 +306,8 @@
                     layer.alert("系统异常", {icon: 5});
                 } else if (resp.status == 1) {
                     location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     var obj = eval("(" + resp + ")");
                     layer.alert(obj.msg, {icon: 5});
@@ -319,6 +325,8 @@
                         layer.alert("系统异常", {icon: 5});
                     } else if (resp.status == 1) {
                         location.reload();
+                    } else if (resp.status == 0) {
+                        layer.msg(resp.msg);
                     } else {
                         var obj = eval("(" + resp + ")");
                         layer.alert(obj.msg, {icon: 5});
@@ -359,6 +367,8 @@
                     } else {
                         $('#follow_' + favID).children().attr('class', 'empty heart icon');
                     }
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     var obj = eval("(" + resp + ")");
                     layer.alert(obj.msg, {icon: 5});
@@ -392,6 +402,8 @@
                     layer.alert("系统异常", {icon: 5});
                 } else if (resp.status == 1) {
                     location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
                 } else {
                     var obj = eval("(" + resp + ")");
                     layer.alert(obj.msg, {icon: 5});

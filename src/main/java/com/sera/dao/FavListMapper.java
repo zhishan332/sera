@@ -17,6 +17,8 @@ public interface FavListMapper {
 
     public FavListEntity get(FavListEntity favListEntity);
 
+    public FavListEntity getByUrl(FavListEntity favListEntity);
+
     public int delByUserIdAndId(FavListEntity favListEntity);
 
     public int deleteByGroup(FavListEntity favListEntity);
