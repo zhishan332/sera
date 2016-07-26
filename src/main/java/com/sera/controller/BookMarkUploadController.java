@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +103,11 @@ public class BookMarkUploadController {
                                 if (StringUtils.isBlank(title)) {
                                     nodoList.add(kk);
                                 } else {
+                                    FavListEntity checkObj = favService.isDuplicate(userHelper.getUserID(), linkHref);
+                                    if (null != checkObj) {
+                                        log.warn("当前导入的url重复userID:" + userHelper.getUserID() + ";url:" + linkHref);
+                                        continue;
+                                    }
                                     FavListEntity fav = new FavListEntity();
                                     fav.setFavUrl(linkHref);
                                     fav.setFavTitle(linkText);
@@ -121,7 +125,7 @@ public class BookMarkUploadController {
                     log.error("新增组失败", e);
                 }
             }
-            if(!nodoList.isEmpty()){
+            if (!nodoList.isEmpty()) {
                 FavGroupEntity group = new FavGroupEntity();
                 long groupId = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
                 group.setGroupId(groupId);
@@ -129,12 +133,17 @@ public class BookMarkUploadController {
                 group.setUserName(userHelper.getUser().getUserName());
                 group.setGroupName("未分组");
                 favService.addFavGroup(group);
-                for(Element elt:nodoList){
+                for (Element elt : nodoList) {
                     Elements cc = elt.select("a");
                     for (Element kk : cc) {
                         try {
                             String linkHref = kk.attr("href");
                             String linkText = kk.text();
+                            FavListEntity checkObj = favService.isDuplicate(userHelper.getUserID(), linkHref);
+                            if (null != checkObj) {
+                                log.warn("当前导入的url重复userID:" + userHelper.getUserID() + ";url:" + linkHref);
+                                continue;
+                            }
                             FavListEntity fav = new FavListEntity();
                             fav.setFavUrl(linkHref);
                             fav.setFavTitle(linkText);

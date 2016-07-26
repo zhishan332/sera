@@ -8,10 +8,12 @@ import com.sera.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -34,6 +36,19 @@ public class UserController {
     @Resource
     private UserHelper userHelper;
 
+    @Value("#{config['user.show.id']}")
+    private long showUserId;
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView showUser() {
+        ModelAndView mav = new ModelAndView("user");
+        mav.getModel().put("pageName", "用户中心");
+        mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
+        mav.getModel().put("username", userHelper.getUser().getUserName());
+        mav.getModel().put("userID", userHelper.getUser().getUserId());
+        return mav;
+    }
+
     /**
      * 使用用户名登录
      *
@@ -43,7 +58,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Response login(HttpSession httpSession, String username, String password,HttpServletResponse response) {
+    public Response login(HttpSession httpSession, String username, String password, HttpServletResponse response) {
         Response resp = new Response();
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
@@ -60,7 +75,7 @@ public class UserController {
             } else {
                 userHelper.setUserSession(user);
                 //以后考虑加密
-                Cookie cookie = new Cookie(ViewConfig.KEY_USER_COOKIE, username+","+password);
+                Cookie cookie = new Cookie(ViewConfig.KEY_USER_COOKIE, username + "," + password);
                 cookie.setMaxAge(60 * 60 * 24 * 365);//保存365天
                 cookie.setPath("/");
                 response.addCookie(cookie);
@@ -82,7 +97,7 @@ public class UserController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
-    public Response logout(HttpSession httpSession,HttpServletRequest request,HttpServletResponse response) {
+    public Response logout(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
         Response resp = new Response();
 
         try {

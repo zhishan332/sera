@@ -60,7 +60,8 @@
             onChange: function (value, text, obj) {
                 var idStr = $(obj).attr('value');
                 if (value == '用户信息') {
-                    layer.msg('您的注册时间是:' + $('#userRegTime').val());
+//                    layer.msg('您的注册时间是:' + $('#userRegTime').val());
+                     window.location.href="/user";
                 } else {
                     var reqUrl = $("#contextPath").val() + "/user/logout";
                     AjaxUtil.post(reqUrl, {}, function (resp) {

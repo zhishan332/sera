@@ -27,6 +27,10 @@ public interface FavListMapper {
 
     public List<FavListEntity> find(Map<String,Object> param);
 
+    public List<FavListEntity> findSimple(Map<String,Object> param);
+
+    public long findTotal(Map<String,Object> param);
+
     public int updateFocus(FavListEntity favListEntity);
 
     public int updateHighSort(FavListEntity favListEntity);
@@ -34,4 +38,6 @@ public interface FavListMapper {
     public int updateLowSort(FavListEntity favListEntity);
 
     public int updateFavGroup(FavListEntity favListEntity);
+
+    public int updateStatus(FavListEntity favListEntity);
 }

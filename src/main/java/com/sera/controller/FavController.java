@@ -239,7 +239,10 @@ public class FavController {
     public Response doCheck() {
         Response resp = new Response();
         try {
-            favService.checkFav(userHelper.getUserID());
+            boolean isOK = favService.addCheckFavTask(userHelper.getUserID());
+            if (!isOK) {
+                log.warn("URL检查任务已经存在:" + userHelper.getUserID());
+            }
             resp.setStatus(Response.SUCCESS);
             return resp;
         } catch (Exception e) {

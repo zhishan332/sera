@@ -66,6 +66,12 @@
 		where fav_status = #{favStatus,jdbcType=TINYINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
+    <update id="updateStatus" parameterType="FavListEntity">
+        update fav_list
+        set fav_status=#{favStatus,jdbcType=INTEGER} ,update_time=#{updateTime,jdbcType=TIMESTAMP}
+        where fav_id = #{favId,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
+    </update>
+
     <update id="updateFocus" parameterType="FavListEntity">
 		update fav_list
 		set fav_focus=#{favFocus,jdbcType=TINYINT} ,update_time=#{updateTime,jdbcType=TIMESTAMP}
@@ -108,6 +114,26 @@
         </where>
         order by fav_sort desc , update_time desc
         limit #{start,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+    </select>
+
+    <select id="findSimple" resultMap="favListMap">
+        select
+        fav_id,fav_url
+        from fav_list
+        <where>
+            user_id = #{userId,jdbcType=BIGINT}
+        </where>
+        order by  update_time desc
+        limit #{start,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+    </select>
+
+    <select id="findTotal" resultType="long">
+        select
+        count(*)
+        from fav_list
+        <where>
+            user_id = #{userId,jdbcType=BIGINT}
+        </where>
     </select>
 
     <!-- 根据传入的字段值查询  -->

@@ -1,16 +1,21 @@
 package com.sera.service.impl;
 
 import com.sera.config.SequenceConfig;
+import com.sera.controller.FavController;
 import com.sera.dao.FavGroupMapper;
 import com.sera.dao.FavListMapper;
 import com.sera.entity.FavGroupEntity;
 import com.sera.entity.FavListEntity;
+import com.sera.entity.WorkTaskEntity;
 import com.sera.helper.IconFinder;
 import com.sera.helper.SequenceHelper;
 import com.sera.helper.UrlHelper;
 import com.sera.service.FavService;
+import com.sera.task.TaskHelper;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +31,8 @@ import java.util.Map;
  */
 @Service
 public class FavServiceImpl implements FavService {
+    private static final Logger log = LoggerFactory.getLogger(FavServiceImpl.class);
+
     @Resource
     private FavListMapper favListMapper;
     @Resource
@@ -36,6 +43,8 @@ public class FavServiceImpl implements FavService {
     private UrlHelper urlHelper;
     @Resource
     private IconFinder iconFinder;
+    @Resource
+    private TaskHelper taskHelper;
 
     @Override
     public boolean addFavGroup(FavGroupEntity favGroupEntity) {
@@ -110,8 +119,41 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
+    public boolean addCheckFavTask(long userId) {
+        WorkTaskEntity taskCheck = taskHelper.getTaskByRefId(String.valueOf(userId) + "_100");
+        if (null == taskCheck || taskCheck.getStatus() != 1) {
+            taskHelper.createTask(String.valueOf(userId) + "_100", 100, String.valueOf(userId));
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean checkFav(long userId) {
-        return false;
+        Map<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
+
+        long total = favListMapper.findTotal(param);
+        if (total >= 0) return true;
+        int limit = 200;
+        for (int i = 0; i <= total; i = i + limit) {
+            param.put("start", i);
+            param.put("num", limit);
+            List<FavListEntity> list = favListMapper.findSimple(param);
+            for (FavListEntity entity : list) {
+                boolean isOK = urlHelper.isValid(entity.getFavUrl());
+                if (entity.getFavStatus() == 1 && !isOK) {
+                    entity.setFavStatus(2);
+                    log.info("URL检查发现无效:"+entity.getFavUrl());
+                    favListMapper.updateStatus(entity);
+                } else if (entity.getFavStatus() == 2 && isOK) {
+                    entity.setFavStatus(1);
+                    favListMapper.updateStatus(entity);
+                }
+            }
+        }
+        return true;
     }
 
     @Override

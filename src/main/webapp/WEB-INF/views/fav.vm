@@ -23,8 +23,7 @@
                 </select>
             </div>
             <div class="compact ui left floated green icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
-            <div class="compact ui left floated green icon button"><i class="sort content descending icon"></i>智能排序
-            </div>
+##            <div class="compact ui left floated green icon button"><i class="sort content descending icon"></i>智能排序</div>
             <div class="compact ui left floated green icon button"><i class="bug icon"></i>智能检测</div>
             <div class="compact ui left floated green icon button"><i class="unlink icon"></i>删除失效</div>
             <div class="compact ui left floated green icon button"><i class="download icon"></i>收藏工具</div>
@@ -138,8 +137,7 @@
 </div>
 
     <script type="text/javascript">
-        var gridMon =
-                null;
+        var gridMon = null;
         $(document).ready(function () {
             $('.ui.accordion').accordion();
 
