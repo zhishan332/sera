@@ -1,5 +1,6 @@
 package com.sera.helper;
 
+import com.sera.utils.WebContent;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -64,13 +64,24 @@ public class UrlHelper {
 
     public String getFormatUrlTitle(String urlString) {
         Document doc = null;
+        String resTitle = null;
         try {
             doc = Jsoup.connect(urlString).userAgent("Mozilla").timeout(6000).get();
-            if (doc != null) return StringUtils.stripToEmpty(doc.title());
-        } catch (IOException e) {
-            logger.error("解析url标题失败");
+
+            if (doc != null) {
+                resTitle = StringUtils.stripToEmpty(doc.title());
+//                if (StringUtils.isBlank(resTitle)) {
+//                    WebContent webContent = new WebContent();
+//                    resTitle = webContent.getTitle(doc.html());
+//                }
+            }
+
+        } catch (Exception e) {
+            logger.error("解析url标题失败", e);
         }
-        return getHost(urlString);
+        if (StringUtils.isBlank(resTitle)) {
+            return getHost(urlString);
+        } else return resTitle;
     }
 
     private static String getHost(String url) {

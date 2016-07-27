@@ -24,9 +24,9 @@
             </div>
             <div class="compact ui left floated green icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
 ##            <div class="compact ui left floated green icon button"><i class="sort content descending icon"></i>智能排序</div>
-            <div class="compact ui left floated green icon button"><i class="bug icon"></i>智能检测</div>
-            <div class="compact ui left floated green icon button"><i class="unlink icon"></i>删除失效</div>
-            <div class="compact ui left floated green icon button"><i class="download icon"></i>收藏工具</div>
+            <div class="compact ui left floated green icon button" id="checkBtn"><i class="bug icon"></i>智能检测</div>
+            <div class="compact ui left floated green icon button" id="delExpireBtn"><i class="unlink icon"></i>删除失效</div>
+            <div class="compact ui left floated green icon button" id="toolsBtn"><i class="download icon"></i>收藏工具</div>
             <input type="file" name="_impFile" id="_impFile">
         </div>
     </div>
@@ -83,7 +83,12 @@
                         <div class="item list-item" style="padding: 1px 0;display: none" id="favList_$!{fav.favId}">
                         #end
                         <div class="right floated">
-                            <div class="compact ui green empty circular label" title="正常"></div>
+                            #if($fav.favStatus==2)
+                                <div class="compact ui red empty circular label" title="已失效"></div>
+                            #else
+                                <div class="compact ui green empty circular label" title="正常"></div>
+                            #end
+
                             <div class="compact ui mini  basic  icon  button follow-btn"
                                  id="follow_$!{fav.favId}">
                                 #if($fav.favFocus==2)
@@ -181,9 +186,17 @@
                 delFav(favID);
             });
 
-            $('.move-btn').click(function (e) {
-//                var id = $(this).attr('id');
-//                var favID = id.split("_")[1];
+
+            $('#checkBtn').click(function () {
+                sendCheck();
+            })
+
+            $('#delExpireBtn').click(function () {
+                delExpire();
+            })
+
+            $('#toolsBtn').click(function () {
+                window.location.href = "/open/tools";
             })
         })
 
@@ -406,6 +419,44 @@
                     var obj = eval("(" + resp + ")");
                     layer.alert(obj.msg, {icon: 5});
                 }
+            });
+        }
+
+        function sendCheck() {
+            layer.confirm('您的所有收藏的链接都会被检测是否有效,确定继续吗？', {icon: 3, title: '提示'}, function (index) {
+                var param = {};
+                var reqUrl = $("#contextPath").val() + "/fav/check";
+                AjaxUtil.post(reqUrl, param, function (resp) {
+                    if (resp == undefined || resp == null) {
+                        layer.alert("系统异常", {icon: 5});
+                    } else if (resp.status == 1) {
+                        layer.msg('已发起检测,请过段时间后查看标题后的红色或绿色的标记');
+                    } else if (resp.status == 0) {
+                        layer.msg(resp.msg);
+                    } else {
+                        var obj = eval("(" + resp + ")");
+                        layer.alert(obj.msg, {icon: 5});
+                    }
+                });
+            });
+        }
+
+        function delExpire() {
+            layer.confirm('您确定要删除所有已经失效的链接吗？', {icon: 3, title: '提示'}, function (index) {
+                var param = {};
+                var reqUrl = $("#contextPath").val() + "/fav/expire/del";
+                AjaxUtil.post(reqUrl, param, function (resp) {
+                    if (resp == undefined || resp == null) {
+                        layer.alert("系统异常", {icon: 5});
+                    } else if (resp.status == 1) {
+                        location.reload();
+                    } else if (resp.status == 0) {
+                        layer.msg(resp.msg);
+                    } else {
+                        var obj = eval("(" + resp + ")");
+                        layer.alert(obj.msg, {icon: 5});
+                    }
+                });
             });
         }
 

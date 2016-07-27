@@ -74,6 +74,7 @@ AjaxUtil.ajaxPre = function(type,url,param,successFunction){
         timeout:20000,
         data: param,
         cache: false,
+        async: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         beforeSend: function(jqXHR, settings){
 

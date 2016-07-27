@@ -165,6 +165,23 @@ public class FavController {
         }
     }
 
+    @RequestMapping(value = "/fav/group", method = RequestMethod.GET)
+    @ResponseBody
+    public Response findFavGroup() {
+        Response resp = new Response();
+        try {
+            List<FavGroupEntity> data = favService.findFavGroup(userHelper.getUserID());
+            resp.setStatus(Response.SUCCESS);
+            resp.setData(data);
+            return resp;
+        } catch (Exception e) {
+            log.error("addFavGroup error!", e);
+            resp.setStatus(Response.FAILURE);
+            resp.setMsg("系统错误,请稍后重试");
+            return resp;
+        }
+    }
+
 
     @RequestMapping(value = "/fav/group/add", method = RequestMethod.POST)
     @ResponseBody

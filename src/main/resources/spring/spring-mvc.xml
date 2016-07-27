@@ -103,8 +103,11 @@
         <mvc:interceptor>
             <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/api/* -->
             <mvc:mapping path="/fav/**" />
+            <mvc:mapping path="/user" />
+            <mvc:mapping path="/user/**" />
             <ref bean="userInterceptor" />
         </mvc:interceptor>
+
     </mvc:interceptors>
 
     <bean id="userInterceptor"

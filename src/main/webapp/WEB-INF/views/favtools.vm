@@ -1,0 +1,26 @@
+<div class="ui page  grid">
+    <div class="sixteen wide column">
+        <div class="ui breadcrumb">
+            <a class="section" href="/index">首页</a>
+            <div class="divider"> /</div>
+            <div class="active section">收藏工具</div>
+        </div>
+    </div>
+
+    <div class="sixteen wide column">
+        <h2>安装书签栏收藏工具</h2>
+        <div class="ui segment">
+            <span style="position: relative; float: right; margin-right: 30px;">
+                <a title="♥it.me" style="cursor: move;"  alt="♥it.me"
+                    href="javascript:void((function(){var%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://localhost:8080/statics/js/favtools.js?v=' + (new Date()).valueOf());document.body.appendChild(e)})());"><img
+                    title="♥it.me" src="#springUrl('/statics/img/help_topit.png')" onclick="alert('请将按钮拖放到书签工具栏');return false;"
+                    alt="♥it.me"></a>
+
+                <img style="position: absolute; right: 0pt; top: 0pt;"
+                                          src="#springUrl('/statics/img/help_handandarrow.png')"
+                                          alt="Help_handandarrow">
+            </span>
+            <h3 id="bookmark_bio">把这个拖到你的浏览器书签栏</h3>
+        </div>
+    </div>
+</div>

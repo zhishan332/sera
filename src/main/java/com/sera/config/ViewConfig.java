@@ -10,4 +10,6 @@ public class ViewConfig {
 
     public static final String KEY_USER_COOKIE = "_fav_user_cookie";//首页默认展示数量
 
+    public static final String KEY_SITE_GROUP_NAME = "来自网页收藏";//首页默认展示数量
+
 }

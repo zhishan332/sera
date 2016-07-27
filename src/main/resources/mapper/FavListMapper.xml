@@ -118,7 +118,7 @@
 
     <select id="findSimple" resultMap="favListMap">
         select
-        fav_id,fav_url
+        fav_id,user_id,fav_url,fav_status
         from fav_list
         <where>
             user_id = #{userId,jdbcType=BIGINT}

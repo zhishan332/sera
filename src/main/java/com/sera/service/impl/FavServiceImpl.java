@@ -1,7 +1,7 @@
 package com.sera.service.impl;
 
 import com.sera.config.SequenceConfig;
-import com.sera.controller.FavController;
+import com.sera.config.ViewConfig;
 import com.sera.dao.FavGroupMapper;
 import com.sera.dao.FavListMapper;
 import com.sera.entity.FavGroupEntity;
@@ -87,6 +87,28 @@ public class FavServiceImpl implements FavService {
 
     @Override
     public boolean addFav(FavListEntity favListEntity) {
+        //如果没有分组,自动生成分组
+        if (favListEntity.getGroupId() == null || favListEntity.getGroupId() <= 0) {
+            FavGroupEntity favGroupEntity = new FavGroupEntity();
+            favGroupEntity.setUserId(favListEntity.getUserId());
+            favGroupEntity.setGroupName(ViewConfig.KEY_SITE_GROUP_NAME);
+            List<FavGroupEntity> list = favGroupMapper.find(favGroupEntity);
+            if (null != list && !list.isEmpty()) {
+                favListEntity.setGroupId(list.get(0).getGroupId());
+            } else {
+                long gid = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
+                FavGroupEntity favG = new FavGroupEntity();
+                favG.setGroupId(gid);
+                favG.setGroupName(ViewConfig.KEY_SITE_GROUP_NAME);
+                favG.setUserId(favListEntity.getUserId());
+                favG.setUserName(favGroupEntity.getUserName());
+                int isIn = favGroupMapper.insert(favG);
+                if (isIn <= 0) return false;
+                favListEntity.setGroupId(gid);
+                favListEntity.setGroupName(ViewConfig.KEY_SITE_GROUP_NAME);
+            }
+        }
+
         if (favListEntity.getFavId() == null || favListEntity.getFavId() <= 0) {
             favListEntity.setFavId(sequenceHelper.getSeq(SequenceConfig.FAV_LIST_SEQ));
         }
@@ -135,7 +157,7 @@ public class FavServiceImpl implements FavService {
         param.put("userId", userId);
 
         long total = favListMapper.findTotal(param);
-        if (total >= 0) return true;
+        if (total <= 0) return true;
         int limit = 200;
         for (int i = 0; i <= total; i = i + limit) {
             param.put("start", i);
@@ -143,12 +165,14 @@ public class FavServiceImpl implements FavService {
             List<FavListEntity> list = favListMapper.findSimple(param);
             for (FavListEntity entity : list) {
                 boolean isOK = urlHelper.isValid(entity.getFavUrl());
-                if (entity.getFavStatus() == 1 && !isOK) {
+                if ((entity.getFavStatus() == null || entity.getFavStatus() == 1) && !isOK) {
                     entity.setFavStatus(2);
-                    log.info("URL检查发现无效:"+entity.getFavUrl());
+                    entity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+                    log.info("URL检查发现无效:" + entity.getFavUrl());
                     favListMapper.updateStatus(entity);
                 } else if (entity.getFavStatus() == 2 && isOK) {
                     entity.setFavStatus(1);
+                    entity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
                     favListMapper.updateStatus(entity);
                 }
             }

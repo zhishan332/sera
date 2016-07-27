@@ -33,7 +33,7 @@ public class CheckUrlTaskTimer extends AbstractTimer {
         try {
             List<WorkTaskEntity> taskList = taskHelper.selectTask(sqlCondition);
 
-            if (taskList != null) {
+            if (taskList != null && !taskList.isEmpty()) {
                 WorkTaskEntity task = taskList.get(0);
                 taskID = task.getId();
                 String data = task.getTaskData();
