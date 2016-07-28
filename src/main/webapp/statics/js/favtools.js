@@ -29,7 +29,7 @@ var curUrl = window.location.href;
 $.ajax({
     type: "get",
     async: false,
-    url:fav_host + '/open/fav/add?u='+curUrl,
+    url:fav_host + '/op/fav/add?u='+curUrl,
     // url:fav_host + '/open/get',
     dataType: "jsonp",
     jsonp: "callback", //服务端用于接收callback调用的function名的参数

@@ -8,7 +8,6 @@ import com.sera.service.FavService;
 import com.sera.utils.MagicUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,7 +51,9 @@ public class DiscoverController {
                 Map<String, List<FavListEntity>> data = new HashMap<>();
                 for (FavGroupEntity group : groupList) {
                     List<FavListEntity> list = favService.findByGroup(group.getUserId(), group.getGroupId(), null, 0, ViewConfig.DEFAULT_PAGE_LIMIT);
-                    data.put(group.getGroupName() + "/" + group.getGroupId() + "/" + (list == null ? 0 : list.size()) + "/" + getGroupColor(group.getGroupId()) + "/" + group.getCovert(), list);
+                    if (list != null && !list.isEmpty()) {
+                        data.put(group.getGroupName() + "/" + group.getGroupId() + "/" + (list.size()) + "/" + getGroupColor(group.getGroupId()) + "/" + group.getCovert(), list);
+                    }
                 }
                 mav.getModel().put("favData", data);
                 mav.getModel().put("groupWith", "four");

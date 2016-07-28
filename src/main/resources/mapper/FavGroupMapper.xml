@@ -76,6 +76,7 @@
         from fav_group
         <where>
             covert = #{covert,jdbcType=TINYINT}
+            and group_id in (select group_id from fav_list group by group_id  having COUNT(*)>0 )
         </where>
         order by rand()
         limit #{start,jdbcType=INTEGER},#{num,jdbcType=INTEGER}

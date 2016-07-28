@@ -33,30 +33,34 @@ public class OpenController {
     @Resource
     private FavService favService;
 
-    @RequestMapping(value = "/open/tools", method = RequestMethod.GET)
+    @RequestMapping(value = "/op/tools", method = RequestMethod.GET)
     public ModelAndView showUser() {
         ModelAndView mav = new ModelAndView("favtools");
         mav.getModel().put("runTime", MagicUtils.getRunDay());
         mav.getModel().put("pageName", "收藏工具");
-        mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
-        mav.getModel().put("username", userHelper.getUser().getUserName());
-        mav.getModel().put("userID", userHelper.getUser().getUserId());
+        if(userHelper.isLogin()){
+            mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
+            mav.getModel().put("username", userHelper.getUser().getUserName());
+            mav.getModel().put("userID", userHelper.getUser().getUserId());
+        }
         return mav;
     }
 
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    @RequestMapping(value = "/op/about", method = RequestMethod.GET)
     public ModelAndView showAbout() {
         ModelAndView mav = new ModelAndView("about");
         mav.getModel().put("runTime", MagicUtils.getRunDay());
         mav.getModel().put("pageName", "关于我们");
-        mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
-        mav.getModel().put("username", userHelper.getUser().getUserName());
-        mav.getModel().put("userID", userHelper.getUser().getUserId());
+        if(userHelper.isLogin()){
+            mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
+            mav.getModel().put("username", userHelper.getUser().getUserName());
+            mav.getModel().put("userID", userHelper.getUser().getUserId());
+        }
         return mav;
     }
 
 
-    @RequestMapping(value = "/open/fav/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/op/fav/add", method = RequestMethod.GET)
     public String addFav(@RequestParam("u") String url, HttpServletRequest request, HttpServletResponse response) {
         String callback = request.getParameter("callback");
         Response resp = new Response();

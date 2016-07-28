@@ -9,7 +9,7 @@
         <a class="item" title="浏览共享的收藏"  href="/dis">
             发现
         </a>
-        <a class="item" title="关于我们" href="/about">
+        <a class="item" title="关于我们" href="/op/about">
             关于
         </a>
         <div class="item">

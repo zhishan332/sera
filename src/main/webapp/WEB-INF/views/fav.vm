@@ -196,7 +196,7 @@
             })
 
             $('#toolsBtn').click(function () {
-                window.location.href = "/open/tools";
+                window.location.href = "/op/tools";
             })
         })
 

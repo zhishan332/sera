@@ -15,75 +15,75 @@
             </div>
         </div>
     </div>
-    <div class="sixteen wide column">
-        <h2>我的收藏指数</h2>
-        <div class="ui statistics">
-            <div class="yellow huge statistic">
-                <div class="value">
-                    27
-                </div>
-                <div class="label">
-                    我的收藏总数
-                </div>
-            </div>
-            <div class="green huge statistic">
-                <div class="value">
-                    8
-                </div>
-                <div class="label">
-                    最大分组
-                </div>
-            </div>
-            <div class="blue huge statistic">
-                <div class="value">
-                    28
-                </div>
-                <div class="label">
-                    最长的手长
-                </div>
-            </div>
-            <div class="orange statistic">
-                <div class="value">
-                    14
-                </div>
-                <div class="label">
-                    橙色的吉娃娃
-                </div>
-            </div>
-            <div class="purple statistic">
-                <div class="value">
-                    82
-                </div>
-                <div class="label">
-                    紫色的拉布拉多贵宾狗
-                </div>
-            </div>
-            <div class="pink statistic">
-                <div class="value">
-                    1
-                </div>
-                <div class="label">
-                    粉红色的拉布拉多
-                </div>
-            </div>
-            <div class="red statistic">
-                <div class="value">
-                    22
-                </div>
-                <div class="label">
-                    红色的獒
-                </div>
-            </div>
-            <div class="teal statistic">
-                <div class="value">
-                    15
-                </div>
-                <div class="label">
-                    青色的可卡犬
-                </div>
-            </div>
-        </div>
-    </div>
+##    <div class="sixteen wide column">
+##        <h2>我的收藏指数</h2>
+##        <div class="ui statistics">
+##            <div class="yellow huge statistic">
+##                <div class="value">
+##                    27
+##                </div>
+##                <div class="label">
+##                    我的收藏总数
+##                </div>
+##            </div>
+##            <div class="green huge statistic">
+##                <div class="value">
+##                    8
+##                </div>
+##                <div class="label">
+##                    最大分组
+##                </div>
+##            </div>
+##            <div class="blue huge statistic">
+##                <div class="value">
+##                    28
+##                </div>
+##                <div class="label">
+##                    最长的手长
+##                </div>
+##            </div>
+##            <div class="orange statistic">
+##                <div class="value">
+##                    14
+##                </div>
+##                <div class="label">
+##                    橙色的吉娃娃
+##                </div>
+##            </div>
+##            <div class="purple statistic">
+##                <div class="value">
+##                    82
+##                </div>
+##                <div class="label">
+##                    紫色的拉布拉多贵宾狗
+##                </div>
+##            </div>
+##            <div class="pink statistic">
+##                <div class="value">
+##                    1
+##                </div>
+##                <div class="label">
+##                    粉红色的拉布拉多
+##                </div>
+##            </div>
+##            <div class="red statistic">
+##                <div class="value">
+##                    22
+##                </div>
+##                <div class="label">
+##                    红色的獒
+##                </div>
+##            </div>
+##            <div class="teal statistic">
+##                <div class="value">
+##                    15
+##                </div>
+##                <div class="label">
+##                    青色的可卡犬
+##                </div>
+##            </div>
+##        </div>
+##    </div>
 
 ##    <div class="sixteen wide column">
 ##        <h2>我的大数据</h2>
