@@ -3,10 +3,13 @@
         <i class="superscript orange icon" style="font-size: 1.4em;"></i>云云收藏
     </a>
     <div class="right menu">
-        <a class="item" title="浏览推荐的网站">
+        <a class="item" title="浏览推荐的网站"  href="/recom">
+            推荐
+        </a>
+        <a class="item" title="浏览共享的收藏"  href="/dis">
             发现
         </a>
-        <a class="item" title="关于我们">
+        <a class="item" title="关于我们" href="/about">
             关于
         </a>
         <div class="item">
@@ -15,8 +18,8 @@
                 <i class="search link icon" id="searchBtn"></i>
             </div>
         </div>
-        <a class="item" style="color: orange" title="云云收藏稳定运行时间">
-            726天
+        <a class="item" style="color: orange" title="云云收藏稳定运行时间" id="showRunDay">
+            $!{runTime}天
         </a>
         <div class="item">
             #if($!{userID})
@@ -56,6 +59,9 @@
                 window.location.href = "/index?wd=" + encodeURI(val);
             }
         });
+        $('#showRunDay').click(function (e) {
+            layer.msg('稳定运行天数:'+$(this).text());
+        });
         $('#userBox').dropdown({
             onChange: function (value, text, obj) {
                 var idStr = $(obj).attr('value');
@@ -63,7 +69,7 @@
 //                    layer.msg('您的注册时间是:' + $('#userRegTime').val());
                      window.location.href="/user";
                 } else {
-                    var reqUrl = $("#contextPath").val() + "/user/logout";
+                    var reqUrl = $("#contextPath").val() + "/logout";
                     AjaxUtil.post(reqUrl, {}, function (resp) {
                         if (resp == undefined || resp == null) {
                             layer.alert("系统异常", {icon: 5});
@@ -96,7 +102,7 @@
             var param = {};
             param.username = $('#usernameInput').val();
             param.password = $('#passwordInput').val();
-            var reqUrl = $("#contextPath").val() + "/user/login";
+            var reqUrl = $("#contextPath").val() + "/login";
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
                     layer.alert("系统异常", {icon: 5});
@@ -135,7 +141,7 @@
                 layer.alert("两次输入的密码不相同", {icon: 5});
                 return;
             }
-            var reqUrl = $("#contextPath").val() + "/user/regist";
+            var reqUrl = $("#contextPath").val() + "/regist";
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
                     layer.alert("系统异常", {icon: 5});

@@ -6,6 +6,7 @@ import com.sera.entity.FavGroupEntity;
 import com.sera.entity.FavListEntity;
 import com.sera.helper.UserHelper;
 import com.sera.service.FavService;
+import com.sera.utils.MagicUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ public class FavController {
     public ModelAndView showIndex(Long gid, String gname, String wd) {
         ModelAndView mav = new ModelAndView("fav");
         mav.getModel().put("pageName", "首页");
+        mav.getModel().put("runTime", MagicUtils.getRunDay());
         try {
             long userId = 0;
 
@@ -52,7 +54,7 @@ public class FavController {
                 mav.getModel().put("username", userHelper.getUser().getUserName());
                 mav.getModel().put("userID", userHelper.getUser().getUserId());
             }
-            List<FavGroupEntity> groupList = favService.findFavGroup(userId);
+            List<FavGroupEntity> groupList = favService.findFavGroup(userId,0);
             mav.getModel().put("groupData", groupList);
             if (gid != null && gid > 0) {
                 Map<String, List<FavListEntity>> data = new HashMap<>();
@@ -170,7 +172,7 @@ public class FavController {
     public Response findFavGroup() {
         Response resp = new Response();
         try {
-            List<FavGroupEntity> data = favService.findFavGroup(userHelper.getUserID());
+            List<FavGroupEntity> data = favService.findFavGroup(userHelper.getUserID(),0);
             resp.setStatus(Response.SUCCESS);
             resp.setData(data);
             return resp;

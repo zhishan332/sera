@@ -1,0 +1,97 @@
+<div class="ui grid" style="margin: 0 10px;width: 99%" id="myGrid">
+    #if($!{favData})
+        #foreach($entry in  $favData.entrySet())
+            #set ($key = $entry.key)
+            #set ($favList = $entry.value)
+            #set ($keyArray = $key.split("/"))
+            #set ($title = $!{keyArray.get(0)})
+            #set ($groupID = $!{keyArray.get(1)})
+            #set ($groupSize = $!{keyArray.get(2)})
+            #set ($groupColor = $!{keyArray.get(3)})
+            #set ($covert = $!{keyArray.get(4)})
+            #if($title.length()>30)
+                #set($showTitle=$title.substring(0,30))
+            #else
+                #set($showTitle=$title)
+            #end
+
+        <div class="$!{groupWith} wide column grid-item" style="padding: 0 10px" id="group_$!{groupID}">
+            <input type="hidden" value="$!{groupID}" id="grid_$!{groupID}">
+            <div class="ui raised segment ">
+                <a class="ui $!{groupColor} ribbon label" title="显示收藏列表" onclick="showFav($!{groupID})">$showTitle
+                    ($!{groupSize})</a>
+                <div class="ui mini divided list" id="group_list_$!{groupID}">
+                    #set ($showFlag = 0)
+                    #foreach($fav in  $favList)
+                        #if($showFlag<6 || $!{gid})
+                        <div class="item list-item" style="padding: 1px 0" id="favList_$!{fav.favId}">
+                        #else
+                        <div class="item list-item" style="padding: 1px 0;display: none" id="favList_$!{fav.favId}">
+                        #end
+                        <div class="right floated">
+                            #if($fav.favStatus==2)
+                                <div class="compact ui red empty circular label" title="已失效"></div>
+                            #else
+                                <div class="compact ui green empty circular label" title="正常"></div>
+                            #end
+                        </div>
+                        <img class="ui  mini avatar image"
+                             src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
+                        #set ($favTitle = $!{fav.favTitle})
+                        #if($favTitle.length()>$!{titleLen})
+                            #set($showFavTitle=$favTitle.substring(0,$!{titleLen}))
+                        #else
+                            #set($showFavTitle=$favTitle)
+                        #end
+
+                        #set ($favUrl = $!{fav.favUrl})
+                        #if($favUrl.length()>$!{urlLen})
+                            #set($showFavUrl=$favUrl.substring(0,$!{urlLen}))
+                        #else
+                            #set($showFavUrl=$favUrl)
+                        #end
+                        <div class="content" style="margin-top: 3px">
+                            <a class="header fav" href="$!{fav.favUrl}" title="$!{fav.favUrl}"
+                               target="_blank">$!{showFavTitle}</a>
+                        </div>
+                    </div>
+                        #set ($showFlag = $showFlag+1)
+                    #end
+                </div>
+                </div>
+            </div>
+        #end
+    #end
+</div>
+
+    <script type="text/javascript">
+        var gridMon = null;
+        $(document).ready(function () {
+            $('.ui.accordion').accordion();
+
+            gridMon = $('#myGrid').masonry({
+                // options
+                itemSelector: '.grid-item',
+            });
+
+        })
+
+        function showFav(groupID) {
+            if (groupID <= 0) return;
+
+            if ($('#group_list_' + groupID + ' .list-item').is(':hidden')) {
+                $('#group_list_' + groupID + ' .list-item').show();
+            } else {
+                var i = 0;
+                $('#group_list_' + groupID + ' .list-item').each(function () {
+                    if (i >= 6) {
+                        $(this).hide();
+                    }
+                    i++;
+                });
+            }
+            $(gridMon).masonry('layout');
+        }
+
+    </script>
+    <script src="#springUrl('statics/plugin/masonry/masonry.mini.js')"></script>

@@ -15,7 +15,9 @@ public interface FavService {
 
     boolean delFavGroup(long userId, long groupId);
 
-    List<FavGroupEntity> findFavGroup(long userId);
+    List<FavGroupEntity> findFavGroup(long userId,int cover);
+
+    List<FavGroupEntity> findForDiscovery();
 
     boolean protectFavGroup(long userId, long groupId, int type);
 

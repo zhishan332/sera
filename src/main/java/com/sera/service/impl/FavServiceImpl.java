@@ -70,10 +70,22 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
-    public List<FavGroupEntity> findFavGroup(long userId) {
+    public List<FavGroupEntity> findFavGroup(long userId, int cover) {
         FavGroupEntity favGroupEntity = new FavGroupEntity();
         favGroupEntity.setUserId(userId);
+        if (cover > 0) {
+            favGroupEntity.setCovert(cover);
+        }
         return favGroupMapper.find(favGroupEntity);
+    }
+
+    @Override
+    public List<FavGroupEntity> findForDiscovery() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("covert", 1);
+        param.put("start", 0);
+        param.put("num", 20);
+        return favGroupMapper.findForDiscovery(param);
     }
 
     @Override

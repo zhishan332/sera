@@ -4,6 +4,7 @@ import com.sera.entity.FavGroupEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 收藏组
@@ -22,5 +23,5 @@ public interface FavGroupMapper {
 
     public List<FavGroupEntity> find(FavGroupEntity entity);
 
-    public List<FavGroupEntity> findForDiscovery(FavGroupEntity entity);
+    public List<FavGroupEntity> findForDiscovery(Map<String,Object> param);
 }

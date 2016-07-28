@@ -1,0 +1,50 @@
+<div class="feature alternate ui stripe vertical segment">
+    <div class="ui three column equal height center aligned divided relaxed stackable page grid">
+        <div class="row">
+            <div class="column">
+                <h2 class="ui icon header">
+                    <img class="ui icon image" src="/statics/img/paint.png">
+                    简单快乐
+                </h2>
+                <p>随心所欲找到收藏的网站: <em>简单才是重点.</em>.</p>
+            </div>
+            <div class="column">
+                <h2 class="ui icon header">
+                    <img class="ui icon image" src="/statics/img/rocket.png">
+                    随时随地
+                </h2>
+                <p>电脑不在身边,频繁更换上网地点,只要记住一个网站</p>
+            </div>
+            <div class="column">
+                <h2 class="ui icon header">
+                    <img class="ui icon image" src="/statics/img/lab.png">
+                    分享发现
+                </h2>
+                <p>
+                    将自己的收藏展示给朋友,让更多人享受互联的乐趣
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui stripe community vertical segment">
+    <div class="ui two column equal height center aligned  very relaxed stackable page grid">
+
+        <div class="column">
+            <h2 class="ui icon header">
+                <img class="ui icon image" src="/statics/img/heart.png">
+                收藏你的所爱
+            </h2>
+            <p>您可以使用收藏工具,或者将需要收藏的网页复制到这里,就完成了一次收藏.对于第一次使用的您,可以在浏览器导出书签,然后使用导入功能将已有书签导入到这里</p>
+        </div>
+
+        <div class="column">
+            <h2 class="ui icon header">
+                <img class="ui icon image" src="/statics/img/book.png">
+                问题与建议
+            </h2>
+            <p>如果在使用上您遇到了任何问题或者有其他的建议和想法请发邮件到 <b>zhishan99@163.com</b> 我们收到邮件后会尽快给您答复。</p>
+        </div>
+    </div>
+</div>
