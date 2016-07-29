@@ -52,6 +52,8 @@ public class RecomController {
                 mav.getModel().put("username", userHelper.getUser().getUserName());
                 mav.getModel().put("userID", userHelper.getUser().getUserId());
                 mav.getModel().put("pageName", "发现");
+                List<FavGroupEntity> groupList = favService.findFavGroup(userHelper.getUser().getUserId(), 0);
+                mav.getModel().put("myGroupData", groupList);
             }
             List<FavGroupEntity> groupList = favService.findFavGroup(userId, 1);
             mav.getModel().put("groupData", groupList);
@@ -63,7 +65,7 @@ public class RecomController {
                 }
                 mav.getModel().put("favData", data);
                 mav.getModel().put("groupWith", "four");
-                mav.getModel().put("titleLen", 18);
+                mav.getModel().put("titleLen", 24);
                 mav.getModel().put("urlLen", 30);
             }
         } catch (Exception e) {

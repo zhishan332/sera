@@ -38,7 +38,7 @@ public class OpenController {
         ModelAndView mav = new ModelAndView("favtools");
         mav.getModel().put("runTime", MagicUtils.getRunDay());
         mav.getModel().put("pageName", "收藏工具");
-        if(userHelper.isLogin()){
+        if (userHelper.isLogin()) {
             mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
             mav.getModel().put("username", userHelper.getUser().getUserName());
             mav.getModel().put("userID", userHelper.getUser().getUserId());
@@ -51,7 +51,7 @@ public class OpenController {
         ModelAndView mav = new ModelAndView("about");
         mav.getModel().put("runTime", MagicUtils.getRunDay());
         mav.getModel().put("pageName", "关于我们");
-        if(userHelper.isLogin()){
+        if (userHelper.isLogin()) {
             mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
             mav.getModel().put("username", userHelper.getUser().getUserName());
             mav.getModel().put("userID", userHelper.getUser().getUserId());
@@ -74,6 +74,14 @@ public class OpenController {
             if (StringUtils.isBlank(url)) {
                 resp.setStatus(Response.FAILURE);
                 resp.setMsg("收藏的网址不能为空");
+                String json = JacksonUtils.defaultMapper().toJson(resp);
+                out.print(callback + "(" + json + ")");
+                return null;
+            }
+
+            if (!userHelper.isLogin()) {
+                resp.setStatus(Response.FAILURE);
+                resp.setMsg("您尚未登录");
                 String json = JacksonUtils.defaultMapper().toJson(resp);
                 out.print(callback + "(" + json + ")");
                 return null;

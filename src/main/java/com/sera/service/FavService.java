@@ -41,4 +41,6 @@ public interface FavService {
 
     public boolean updateFavGroup(long userId, long favId,long groupId);
 
+    public boolean updateTitle(long userId, long favId,String title);
+
 }

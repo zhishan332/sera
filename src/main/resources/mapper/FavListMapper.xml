@@ -66,6 +66,12 @@
 		where fav_status = #{favStatus,jdbcType=TINYINT} and user_id=#{userId,jdbcType=BIGINT}
 	</delete>
 
+    <update id="updateTitle" parameterType="FavListEntity">
+        update fav_list
+        set fav_title=#{favTitle,jdbcType=VARCHAR} ,update_time=#{updateTime,jdbcType=TIMESTAMP}
+        where fav_id = #{favId,jdbcType=BIGINT} and user_id=#{userId,jdbcType=BIGINT}
+    </update>
+
     <update id="updateStatus" parameterType="FavListEntity">
         update fav_list
         set fav_status=#{favStatus,jdbcType=INTEGER} ,update_time=#{updateTime,jdbcType=TIMESTAMP}

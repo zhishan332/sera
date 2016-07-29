@@ -54,7 +54,7 @@ public class FavController {
                 mav.getModel().put("username", userHelper.getUser().getUserName());
                 mav.getModel().put("userID", userHelper.getUser().getUserId());
             }
-            List<FavGroupEntity> groupList = favService.findFavGroup(userId,0);
+            List<FavGroupEntity> groupList = favService.findFavGroup(userId, 0);
             mav.getModel().put("groupData", groupList);
             if (gid != null && gid > 0) {
                 Map<String, List<FavListEntity>> data = new HashMap<>();
@@ -86,7 +86,7 @@ public class FavController {
                     }
                     mav.getModel().put("favData", data);
                     mav.getModel().put("groupWith", "four");
-                    mav.getModel().put("titleLen", 18);
+                    mav.getModel().put("titleLen", 17);
                     mav.getModel().put("urlLen", 30);
                 }
             }
@@ -151,6 +151,27 @@ public class FavController {
         }
     }
 
+    @RequestMapping(value = "/fav/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public Response delEdit(FavListEntity entity) {
+        Response resp = new Response();
+        try {
+            if (StringUtils.isBlank(entity.getFavTitle())) {
+                resp.setStatus(Response.FAILURE);
+                resp.setMsg("标题不能为空");
+                return resp;
+            }
+            favService.updateTitle(userHelper.getUserID(), entity.getFavId(), entity.getFavTitle());
+            resp.setStatus(Response.SUCCESS);
+            return resp;
+        } catch (Exception e) {
+            log.error("delFav error!", e);
+            resp.setStatus(Response.FAILURE);
+            resp.setMsg("系统错误,请稍后重试");
+            return resp;
+        }
+    }
+
     @RequestMapping(value = "/fav/move", method = RequestMethod.POST)
     @ResponseBody
     public Response moveFav(FavListEntity entity) {
@@ -172,7 +193,7 @@ public class FavController {
     public Response findFavGroup() {
         Response resp = new Response();
         try {
-            List<FavGroupEntity> data = favService.findFavGroup(userHelper.getUserID(),0);
+            List<FavGroupEntity> data = favService.findFavGroup(userHelper.getUserID(), 0);
             resp.setStatus(Response.SUCCESS);
             resp.setData(data);
             return resp;

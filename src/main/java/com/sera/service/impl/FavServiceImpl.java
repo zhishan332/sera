@@ -262,4 +262,15 @@ public class FavServiceImpl implements FavService {
         favListMapper.updateFavGroup(favListEntity);
         return true;
     }
+
+    @Override
+    public boolean updateTitle(long userId, long favId, String title) {
+        FavListEntity favListEntity = new FavListEntity();
+        favListEntity.setUserId(userId);
+        favListEntity.setFavId(favId);
+        favListEntity.setFavTitle(title);
+        favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        favListMapper.updateTitle(favListEntity);
+        return true;
+    }
 }

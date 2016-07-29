@@ -109,8 +109,12 @@
                                     #end
                                 </div>
                             </div>
-                            <div class="compact ui mini  basic  icon  button delfav-btn" id="delFav_$!{fav.favId}"><i
-                                    class="minus icon"></i></div>
+                            <div class="compact ui mini  basic  icon  button editfav-btn" id="editFav_$!{fav.favId}">
+                                <i class="write icon"></i>
+                            </div>
+                            <div class="compact ui mini  basic  icon  button delfav-btn" id="delFav_$!{fav.favId}">
+                                <i class="minus icon"></i>
+                            </div>
                         </div>
                         <img class="ui  mini avatar image"
                              src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
@@ -128,7 +132,7 @@
                             #set($showFavUrl=$favUrl)
                         #end
                         <div class="content" style="margin-top: 3px">
-                            <a class="header fav" href="$!{fav.favUrl}" title="$!{fav.favUrl}"
+                            <a id="favUrl_$!{fav.favId}" class="header fav" ftext="$!{favTitle}" href="$!{fav.favUrl}" title="$!{fav.favUrl}"
                                target="_blank">$!{showFavTitle}</a>
                         </div>
                     </div>
@@ -197,6 +201,12 @@
 
             $('#toolsBtn').click(function () {
                 window.location.href = "/op/tools";
+            });
+
+            $('.editfav-btn').click(function () {
+                var id = $(this).attr('id');
+                var favID = id.split("_")[1];
+                showEdit(favID);
             })
         })
 
@@ -262,6 +272,23 @@
             });
         }
 
+        function showEdit(fid){
+            var oldTitle=$('#favUrl_'+fid).attr('ftext');
+            var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">修改名称</h4><div class="field"><label>新的名称</label><input type="text" id="editTitleInput" value="'+oldTitle+'"></div><div class="ui green submit button" id="saveEditTitleBtn">保存</div></form>';
+            var index = layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 1,
+                area: ['700px', '230px'],
+                shadeClose: true,
+                content: htmlStr
+            });
+            //editTitleInput\saveEditTitleBtn
+            $('#saveEditTitleBtn').click(function (e) {
+                doEditFavTitle(index,fid);
+            });
+        }
+
         function saveFav(groupID) {
 
             var param = {};
@@ -287,6 +314,26 @@
             var param = {};
             param.groupName = $('#addFavGroupInput').val();
             var reqUrl = $("#contextPath").val() + "/fav/group/add";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    layer.msg('保存成功');
+                    location.reload();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
+                }
+            });
+        }
+
+        function doEditFavTitle(index,fid) {
+            var param = {};
+            param.favTitle = $('#editTitleInput').val();
+            param.favId =fid;
+            var reqUrl = $("#contextPath").val() + "/fav/edit";
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
                     layer.alert("系统异常", {icon: 5});

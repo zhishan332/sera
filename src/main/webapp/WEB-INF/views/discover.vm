@@ -34,6 +34,17 @@
                             #else
                                 <div class="compact ui green empty circular label" title="正常"></div>
                             #end
+                            <div id="collectFav_$!{fav.favId}" class="compact ui mini left pointing basic dropdown icon button collectfav-btn" title="采集到我的收藏">
+                                <i class="empty star icon"></i>
+                                <div class="menu">
+                                    #if($!{myGroupData})
+                                        #foreach($group in  $myGroupData)
+                                            <div class="item"
+                                                 value="$!{group.groupId}_$!{fav.favId}">$!{group.groupName}</div>
+                                        #end
+                                    #end
+                                </div>
+                            </div>
                         </div>
                         <img class="ui  mini avatar image"
                              src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
@@ -51,7 +62,7 @@
                             #set($showFavUrl=$favUrl)
                         #end
                         <div class="content" style="margin-top: 3px">
-                            <a class="header fav" href="$!{fav.favUrl}" title="$!{fav.favUrl}"
+                            <a id="favUrl_$!{fav.favId}" class="header fav" ftext="$!{favTitle}" href="$!{fav.favUrl}" title="$!{fav.favUrl}"
                                target="_blank">$!{showFavTitle}</a>
                         </div>
                     </div>
@@ -73,7 +84,14 @@
                 // options
                 itemSelector: '.grid-item',
             });
-
+            $('.collectfav-btn').dropdown({
+                onChange: function (value, text, obj) {
+                    var idStr = $(obj).attr('value');
+                    var gid = idStr.split('_')[0];
+                    var fid = idStr.split('_')[1];
+                    collectFav(gid, fid);
+                }
+            });
         })
 
         function showFav(groupID) {
@@ -91,6 +109,29 @@
                 });
             }
             $(gridMon).masonry('layout');
+        }
+
+        function collectFav(gid, fid) {
+            var title = $('#favUrl_' + fid).attr('ftext');
+            var url = $('#favUrl_' + fid).attr('href');
+            var param = {};
+            param.groupId = gid;
+            param.favTitle = title;
+            param.favUrl = url;
+            var reqUrl = $("#contextPath").val() + "/fav/add";
+            AjaxUtil.post(reqUrl, param, function (resp) {
+                if (resp == undefined || resp == null) {
+                    layer.alert("系统异常", {icon: 5});
+                } else if (resp.status == 1) {
+                    layer.msg('采集成功');
+                    $('#favList_' + fid).remove();
+                } else if (resp.status == 0) {
+                    layer.msg(resp.msg);
+                } else {
+                    var obj = eval("(" + resp + ")");
+                    layer.alert(obj.msg, {icon: 5});
+                }
+            });
         }
 
     </script>

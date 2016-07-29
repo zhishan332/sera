@@ -40,4 +40,6 @@ public interface FavListMapper {
     public int updateFavGroup(FavListEntity favListEntity);
 
     public int updateStatus(FavListEntity favListEntity);
+
+    public int updateTitle(FavListEntity favListEntity);
 }

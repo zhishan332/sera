@@ -15,6 +15,9 @@
             font-size: 13px !important;
             line-height: 1.7 !important;
         }
+        .grid-item{
+            min-width: 410px;
+        }
     </style>
 </head>
 <body>
