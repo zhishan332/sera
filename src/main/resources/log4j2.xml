@@ -31,16 +31,16 @@
         </RollingFile>
     </appenders>
     <Loggers>
-        <logger name="java.sql" level="DEBUG" additivity="false"/>
-        <logger name="java.sql.ResultSet" level="DEBUG" additivity="false"/>
-        <logger name="com.ibatis" level="DEBUG" additivity="false"/>
+        <logger name="java.sql" level="INFO" additivity="false"/>
+        <logger name="java.sql.ResultSet" level="INFO" additivity="false"/>
+        <logger name="com.ibatis" level="INFO" additivity="false"/>
         <logger name="org.apache" level="ERROR" additivity="false"/>
-        <logger name="org.apache.ibatis" level="DEBUG" additivity="false"/>
-        <logger name="org.springframework" level="ERROR" additivity="false"/>
+        <logger name="org.apache.ibatis" level="INFO" additivity="false"/>
+        <logger name="org.springframework" level="INFO" additivity="false"/>
         <logger name="com.mchange" level="ERROR" additivity="false"/>
         <logger name="org.apache.commons" level="ERROR" additivity="false"/>
 
-        <root level="DEBUG">
+        <root level="INFO">
             <appenderRef ref="AllLog"/>
             <appenderRef ref="Console"/>
         </root>

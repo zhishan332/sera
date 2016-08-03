@@ -18,7 +18,7 @@
                 <i class="search link icon" id="searchBtn"></i>
             </div>
         </div>
-        <a class="item" style="color: orange" title="云云收藏稳定运行时间" id="showRunDay">
+        <a class="item" style="color: #d9534f" title="云云收藏稳定运行时间" id="showRunDay">
             $!{runTime}天
         </a>
         <div class="item">

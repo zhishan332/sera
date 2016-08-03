@@ -22,12 +22,12 @@
                     #end
                 </select>
             </div>
-            <div class="compact ui left floated green icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
+            <div class="compact ui left floated myblue icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
 ##            <div class="compact ui left floated green icon button"><i class="sort content descending icon"></i>智能排序</div>
-            <div class="compact ui left floated green icon button" id="checkBtn"><i class="bug icon"></i>智能检测</div>
-            <div class="compact ui left floated green icon button" id="delExpireBtn"><i class="unlink icon"></i>删除失效</div>
-            <div class="compact ui left floated green icon button" id="toolsBtn"><i class="download icon"></i>收藏工具</div>
-            <input type="file" name="_impFile" id="_impFile">
+            <div class="compact ui left floated myblue icon button" id="checkBtn"><i class="bug icon"></i>智能检测</div>
+            <div class="compact ui left floated myblue icon button" id="delExpireBtn"><i class="unlink icon"></i>删除失效</div>
+            <div class="compact ui left floated myblue icon button" id="toolsBtn"><i class="download icon"></i>收藏工具</div>
+            <input type="file" name="_impFile" id="_impFile" title="先从chrome或者firefox等导出书签">
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
         <div class="$!{groupWith} wide column grid-item" style="padding: 0 10px" id="group_$!{groupID}">
             <input type="hidden" value="$!{groupID}" id="grid_$!{groupID}">
             <div class="ui raised segment ">
-                <a class="ui $!{groupColor} ribbon label" title="显示收藏列表" onclick="showFav($!{groupID})">$showTitle
+                <a class="ui myred ribbon label" title="显示收藏列表" onclick="showFav($!{groupID})">$showTitle
                     ($!{groupSize})</a>
                 #if($!{wd})
                 #else
@@ -67,9 +67,6 @@
                                 <i class="unlock icon" title="加锁后变为私有只有自己能访问" id="lockIcon_$!{groupID}"></i>
                             #end
                         </div>
-                    ##                        <div class="compact ui  basic   icon button right  floated" title="显示收藏列表"
-                    ##                             onclick="showFav($!{groupID})"><i class="unhide icon"></i>
-                    ##                        </div>
                         <div class="compact ui  basic   icon button right  floated" onclick="removeGroup($!{groupID})">
                             <i class="remove icon"></i></div>
                     </div>
@@ -77,7 +74,7 @@
                 <div class="ui mini divided list" id="group_list_$!{groupID}">
                     #set ($showFlag = 0)
                     #foreach($fav in  $favList)
-                        #if($showFlag<6 || $!{gid})
+                        #if($showFlag<3 || $!{gid})
                         <div class="item list-item" style="padding: 1px 0" id="favList_$!{fav.favId}">
                         #else
                         <div class="item list-item" style="padding: 1px 0;display: none" id="favList_$!{fav.favId}">
@@ -97,7 +94,6 @@
                                     <i class="empty heart icon"></i>
                                 #end
                             </div>
-                        ##                            <div class="compact ui mini  basic  icon  button move-btn" id="moveFav_$!{fav.favId}"><i class="move icon"></i></div>
                             <div class="compact ui mini left pointing basic dropdown icon button move-btn">
                                 <i class="move icon"></i>
                                 <div class="menu">
@@ -116,8 +112,8 @@
                                 <i class="minus icon"></i>
                             </div>
                         </div>
-                        <img class="ui  mini avatar image"
-                             src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
+                        <img class="ui  mini avatar image" src="/statics/img/inte2.png" style="margin-top: 3px">
+
                         #set ($favTitle = $!{fav.favTitle})
                         #if($favTitle.length()>$!{titleLen})
                             #set($showFavTitle=$favTitle.substring(0,$!{titleLen}))
@@ -139,8 +135,8 @@
                         #set ($showFlag = $showFlag+1)
                     #end
                 </div>
-                </div>
             </div>
+        </div>
         #end
     #end
 </div>
@@ -212,6 +208,7 @@
 
         function initImp() {
             var uploadSwf = '#springUrl('statics/plugin/uploadify/uploadify.swf')';
+            var impIndex=null;
             $("#_impFile").uploadify({
                 formData: {
                     'timestamp': '222',
@@ -225,16 +222,22 @@
                 swf: uploadSwf,
                 uploader: $("#contextPath").val() + '/import/bookmark',
                 fileObjName: 'file',
-                buttonClass: 'compact ui green icon button right',
+                buttonClass: 'compact ui myblue icon button right',
                 buttonText: '从浏览器导入',
                 onUploadStart: function (file) {
                     $('#_impFile').uploadify('disable', true);
+                    impIndex = layer.msg('导入中,请稍候', {
+                        icon: 16,
+                        time: 20000000 //2秒关闭（如果不配置，默认是3秒）
+                    });
                 },
                 //上传到服务器，服务器返回相应信息到data里
                 onUploadSuccess: function (file, data, response) {
                     $('#_impFile').uploadify('disable', false);
-                    layer.msg('导入完成');
-                    location.reload();
+                    if(null!=impIndex){
+                        layer.close(impIndex);
+                    }
+                    layer.msg('已开始导入,请稍后刷新页面');
                 },
                 onUploadError: function (file, errorCode, errorMsg, errorString) {
                     $('#_impFile').uploadify('disable', false);
@@ -401,7 +404,7 @@
             } else {
                 var i = 0;
                 $('#group_list_' + groupID + ' .list-item').each(function () {
-                    if (i >= 6) {
+                    if (i >= 3) {
                         $(this).hide();
                     }
                     i++;

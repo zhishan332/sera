@@ -35,4 +35,15 @@
         <property name="sqlCondition" value="task_type=100 and status=1 and task_exe_count &lt; 2 limit 1"/>
     </bean>
 
+
+    <bean class="com.sera.task.UploadTaskTimer" init-method="start" destroy-method="stop">
+        <!--配置定时器是否启用，1：启动，0：不启用-->
+        <property name="valid" value="1"/>
+        <!--首次执行的延迟时间 默认1最小值为1（单位秒）-->
+        <property name="initialDelay" value="10"/>
+        <!--一次执行终止和下一次执行开始之间的延迟 默认5分钟最小值1秒（单位秒）-->
+        <property name="delay" value="10"/>
+        <!-- 数据抓取条件 -->
+        <property name="sqlCondition" value="task_type=200 and status=1 and task_exe_count &lt; 2 limit 1"/>
+    </bean>
 </beans>

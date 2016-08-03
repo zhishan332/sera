@@ -1,6 +1,7 @@
 package com.sera.service.impl;
 
 import com.sera.config.SequenceConfig;
+import com.sera.config.TaskConfig;
 import com.sera.config.ViewConfig;
 import com.sera.dao.FavGroupMapper;
 import com.sera.dao.FavListMapper;
@@ -16,10 +17,17 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -45,11 +53,19 @@ public class FavServiceImpl implements FavService {
     private IconFinder iconFinder;
     @Resource
     private TaskHelper taskHelper;
+    @Value("#{config['icon.path']}")
+    private String iconPath;
 
     @Override
     public boolean addFavGroup(FavGroupEntity favGroupEntity) {
         if (favGroupEntity.getGroupId() == null || favGroupEntity.getGroupId() <= 0) {
             favGroupEntity.setGroupId(sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ));
+        }
+        if (StringUtils.isBlank(favGroupEntity.getGroupName())) {
+            favGroupEntity.setGroupName("未命名");
+        }
+        if (favGroupEntity.getGroupName().length() > 20) {
+            favGroupEntity.setGroupName(favGroupEntity.getGroupName().substring(0, 20));
         }
         favGroupEntity.setCovert(1);
         return favGroupMapper.insert(favGroupEntity) > 0;
@@ -80,8 +96,9 @@ public class FavServiceImpl implements FavService {
     }
 
     @Override
-    public List<FavGroupEntity> findForDiscovery() {
+    public List<FavGroupEntity> findForDiscovery(long userId) {
         Map<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
         param.put("covert", 1);
         param.put("start", 0);
         param.put("num", 20);
@@ -134,13 +151,18 @@ public class FavServiceImpl implements FavService {
         if (StringUtils.isBlank(favListEntity.getFavTitle())) {
             favListEntity.setFavTitle(urlHelper.getFormatUrlTitle(favListEntity.getFavUrl()));
         }
-        String icon = iconFinder.getIconUrlString(favListEntity.getFavUrl());
-        if (!StringUtils.isBlank(icon)) {
-            icon = Jsoup.parse(icon).text();
-            icon = icon.replaceAll(" ", "");
-            icon = icon.replaceAll("\"", "");
-        }
-        favListEntity.setFavIco(icon);
+//        String icon = iconFinder.getIconUrlString(favListEntity.getFavUrl());
+//        if (!StringUtils.isBlank(icon)) {
+//            icon = Jsoup.parse(icon).text();
+//            icon = icon.replaceAll(" ", "");
+//            icon = icon.replaceAll("\"", "");
+//            // 输出的文件流
+//            String fileName = System.nanoTime() + ".ico";
+//            boolean isDown = downloadIcon(icon, fileName);
+//            if (isDown) {
+//                favListEntity.setFavIco(fileName);
+//            }
+//        }
         return favListMapper.insert(favListEntity) > 0;
     }
 
@@ -154,9 +176,9 @@ public class FavServiceImpl implements FavService {
 
     @Override
     public boolean addCheckFavTask(long userId) {
-        WorkTaskEntity taskCheck = taskHelper.getTaskByRefId(String.valueOf(userId) + "_100");
+        WorkTaskEntity taskCheck = taskHelper.getTaskByRefId(String.valueOf(userId) + "_" + TaskConfig.CHECK_URL_TASK_TYPE);
         if (null == taskCheck || taskCheck.getStatus() != 1) {
-            taskHelper.createTask(String.valueOf(userId) + "_100", 100, String.valueOf(userId));
+            taskHelper.createTask(String.valueOf(userId) + "_" + TaskConfig.CHECK_URL_TASK_TYPE, TaskConfig.CHECK_URL_TASK_TYPE, String.valueOf(userId));
         } else {
             return false;
         }
@@ -272,5 +294,46 @@ public class FavServiceImpl implements FavService {
         favListEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
         favListMapper.updateTitle(favListEntity);
         return true;
+    }
+
+    private boolean downloadIcon(String urlStr, String fileName) {
+        try {
+            String path = iconPath;
+            if (StringUtils.isBlank(path)) {
+                return false;
+            }
+            File ff = new File(path);
+            if (!ff.exists()) {
+                boolean ismk = ff.mkdir();
+                if (!ismk) return false;
+            }
+            // 构造URL
+            URL url = new URL(urlStr);
+            // 打开连接
+            URLConnection con = url.openConnection();
+            //：设置连接主机超时（单位：毫秒）
+            con.setConnectTimeout(200);
+            //设置从主机读取数据超时（单位：毫秒）
+            con.setReadTimeout(500);
+            // 输入流
+            InputStream is = con.getInputStream();
+            // 1K的数据缓冲
+            byte[] bs = new byte[1024];
+            // 读取到的数据长度
+            int len;
+
+            OutputStream os = new FileOutputStream(ff + File.separator + fileName);
+            // 开始读取
+            while ((len = is.read(bs)) != -1) {
+                os.write(bs, 0, len);
+            }
+            // 完毕，关闭所有链接
+            os.close();
+            is.close();
+            return true;
+        } catch (Exception e) {
+            log.error("下载icon失败:", e.getMessage());
+            return false;
+        }
     }
 }

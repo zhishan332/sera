@@ -38,6 +38,10 @@ public class IconFinder {
         HttpURLConnection connection = null;
         try {
             connection = getConnection(urlString);
+            //：设置连接主机超时（单位：毫秒）
+            connection.setConnectTimeout(200);
+            //设置从主机读取数据超时（单位：毫秒）
+            connection.setReadTimeout(500);
             connection.connect();
 
             // 是否跳转，若跳转则跟踪到跳转页面
@@ -50,7 +54,7 @@ public class IconFinder {
                 return location;
             }
         } catch (Exception e) {
-            logger.error("获取跳转链接超时，返回原链接" + urlString);
+            logger.error("获取跳转链接超时，返回原链接" + urlString,e.getMessage());
         } finally {
             if (connection != null)
                 connection.disconnect();
@@ -75,7 +79,7 @@ public class IconFinder {
 
             return getIconUrlByRegex(urlString);
         } catch (Exception e) {
-            logger.error("分析icon异常",e);
+            logger.error("分析icon异常",e.getMessage());
         }
         return null;
     }
@@ -86,10 +90,14 @@ public class IconFinder {
 
         try {
             connection = getConnection(urlString);
+            //：设置连接主机超时（单位：毫秒）
+            connection.setConnectTimeout(200);
+            //设置从主机读取数据超时（单位：毫秒）
+            connection.setReadTimeout(500);
             connection.connect();
             return HttpURLConnection.HTTP_OK == connection.getResponseCode() && connection.getContentLength() > 0;
         } catch (Exception e) {
-            logger.error("判断在根目录下是否有Icon异常",e);
+            logger.error("判断在根目录下是否有Icon异常",e.getMessage());
             return false;
         } finally {
             if (connection != null)
@@ -121,7 +129,7 @@ public class IconFinder {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("从html中获取Icon地址异常",e.getMessage());
         }
         return null;
     }
@@ -134,6 +142,10 @@ public class IconFinder {
 
         try {
             connection = getConnection(urlString);
+            //：设置连接主机超时（单位：毫秒）
+            connection.setConnectTimeout(200);
+            //设置从主机读取数据超时（单位：毫秒）
+            connection.setReadTimeout(500);
             connection.connect();
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -148,7 +160,7 @@ public class IconFinder {
 
             return headBuilder.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取截止到head尾标签的文本异常",e.getMessage());
             return null;
         } finally {
             try {
@@ -167,8 +179,8 @@ public class IconFinder {
         URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setInstanceFollowRedirects(false);
-        connection.setConnectTimeout(3000);
-        connection.setReadTimeout(3000);
+        connection.setConnectTimeout(300);
+        connection.setReadTimeout(500);
         connection
                 .setRequestProperty("User-Agent",
                         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36");

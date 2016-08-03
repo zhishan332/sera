@@ -38,17 +38,20 @@ public class DiscoverController {
         mav.getModel().put("pageName", "发现");
         mav.getModel().put("runTime", MagicUtils.getRunDay());
         try {
-
+            List<FavGroupEntity> groupList =null;
             if (userHelper.isLogin()) {
                 mav.getModel().put("createTime", userHelper.getUser().getCreateTime());
                 mav.getModel().put("username", userHelper.getUser().getUserName());
                 mav.getModel().put("userID", userHelper.getUser().getUserId());
                 mav.getModel().put("pageName", "发现");
-                List<FavGroupEntity> groupList = favService.findFavGroup(userHelper.getUser().getUserId(), 0);
-                mav.getModel().put("myGroupData", groupList);
+                List<FavGroupEntity> myGroupList = favService.findFavGroup(userHelper.getUser().getUserId(), 0);
+                mav.getModel().put("myGroupData", myGroupList);
+                groupList = favService.findForDiscovery(userHelper.getUser().getUserId());
+                mav.getModel().put("groupData", groupList);
+            }else {
+                groupList = favService.findForDiscovery(0);
+                mav.getModel().put("groupData", groupList);
             }
-            List<FavGroupEntity> groupList = favService.findForDiscovery();
-            mav.getModel().put("groupData", groupList);
             if (groupList != null && !groupList.isEmpty()) {
                 Map<String, List<FavListEntity>> data = new HashMap<>();
                 for (FavGroupEntity group : groupList) {

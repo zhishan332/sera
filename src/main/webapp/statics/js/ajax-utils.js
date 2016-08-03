@@ -39,6 +39,7 @@ AjaxUtil.ajax = function(type,url,param,successFunction){
     if(param == null){
         param = {};
     }
+    var impIndex=null;
     jQuery.ajax({
         type: type,
         url:  url,
@@ -47,16 +48,24 @@ AjaxUtil.ajax = function(type,url,param,successFunction){
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         beforeSend: function(jqXHR, settings){
-            //$.blockUI({ message:"<img class='wait' src='"+waitimg+"'><span>正在处理,请稍后...</span>"});
+            impIndex = layer.msg('请稍候', {
+                icon: 16,
+                time: 20000000 //2秒关闭（如果不配置，默认是3秒）
+            });
         },
         success: successFunction,
         error: function(jqXHR, textStatus, errorThrown){
+            if(null!=impIndex){
+                layer.close(impIndex);
+            }
             if(jqXHR.status > 0){
                 layer.alert("Error:status["+jqXHR.status+"],statusText["+ jqXHR.statusText +"]", {icon: 5});
             }
         },
         complete: function(jqXHR, textStatus){
-            //$.unblockUI();
+            if(null!=impIndex){
+                layer.close(impIndex);
+            }
             if(textStatus=='timeout'){
                 layer.alert("请求超时，请重试", {icon: 5});
             }

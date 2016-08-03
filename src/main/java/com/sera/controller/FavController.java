@@ -104,7 +104,6 @@ public class FavController {
         return favService.findByGroup(userHelper.getUserID(), 0L, keyword, 0, Integer.MAX_VALUE);
     }
 
-
     @RequestMapping(value = "/fav/add", method = RequestMethod.POST)
     @ResponseBody
     public Response addFav(FavListEntity entity) {
@@ -322,7 +321,7 @@ public class FavController {
     private String getGroupColor(long id) {
 
 //        String[] colorArry=new String[]{"teal","red","purple","pink","orange","green","blue","yellow"};
-        String[] colorArry = new String[]{"orange"};
+        String[] colorArry = new String[]{"blue"};
 
         long aa = id % colorArry.length;
 

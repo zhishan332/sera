@@ -36,7 +36,7 @@
                             #end
                         </div>
                         <img class="ui  mini avatar image"
-                             src="/statics/img/internet_explorer_64px.png" style="margin-top: 3px">
+                             src="/statics/img/inte2.png" style="margin-top: 3px">
                         #set ($favTitle = $!{fav.favTitle})
                         #if($favTitle.length()>$!{titleLen})
                             #set($showFavTitle=$favTitle.substring(0,$!{titleLen}))
