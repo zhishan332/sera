@@ -5,6 +5,7 @@ import com.sera.dto.Response;
 import com.sera.entity.UserInfoEntity;
 import com.sera.helper.UserHelper;
 import com.sera.service.UserService;
+import com.sera.utils.CommonUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,7 +122,7 @@ public class LoginRegistController {
      */
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     @ResponseBody
-    public Response regist(HttpSession httpSession, String username, String password) {
+    public Response regist(HttpSession httpSession, String username, String password, String code) {
         Response resp = new Response();
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
@@ -130,6 +131,36 @@ public class LoginRegistController {
             return resp;
         }
 
+        String token = String.valueOf(httpSession.getAttribute("captchaToken"));
+
+        if (StringUtils.isBlank(code)) {
+            resp.setStatus(Response.FAILURE);
+            resp.setMsg("验证码不能为空");
+            return resp;
+        }
+
+
+        if (!code.equalsIgnoreCase(token)) {
+            resp.setStatus(Response.FAILURE);
+            resp.setMsg("验证码不正确");
+            return resp;
+        }
+
+        boolean isMobileNo = false;
+        boolean isEmail = false;
+        if (CommonUtils.isMobileNo(username)) {
+            isMobileNo = true;
+        }
+
+        if (CommonUtils.isEmail(username)) {
+            isEmail = true;
+        }
+
+        if (!isEmail && !isMobileNo) {
+            resp.setStatus(Response.FAILURE);
+            resp.setMsg("用户名必须为手机号或者邮箱");
+            return resp;
+        }
         if (password.length() > 16 || password.length() < 6) {
             resp.setStatus(Response.FAILURE);
             resp.setMsg("密码长度为8到16位");
@@ -142,13 +173,18 @@ public class LoginRegistController {
             return resp;
         }
 
+
         try {
 
             UserInfoEntity userReg = new UserInfoEntity();
-            userReg.setUserName(username);
-            userReg.setUserPhone(username);
-            userReg.setPassword(password);
 
+            if (isMobileNo) {
+                userReg.setUserName(username);
+                userReg.setUserPhone(username);
+            } else {
+                userReg.setUserName(username);
+            }
+            userReg.setPassword(password);
             UserInfoEntity user = userService.regist(userReg);
             userHelper.setUserSession(user);
 

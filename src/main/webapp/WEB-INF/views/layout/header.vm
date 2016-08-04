@@ -3,10 +3,10 @@
         <i class="superscript orange icon" style="font-size: 1.4em;"></i>云云收藏
     </a>
     <div class="right menu">
-        <a class="item" title="浏览推荐的网站"  href="/recom">
+        <a class="item" title="浏览推荐的网站" href="/recom">
             推荐
         </a>
-        <a class="item" title="浏览共享的收藏"  href="/dis">
+        <a class="item" title="浏览共享的收藏" href="/dis">
             发现
         </a>
         <a class="item" title="关于我们" href="/op/about">
@@ -60,14 +60,14 @@
             }
         });
         $('#showRunDay').click(function (e) {
-            layer.msg('稳定运行天数:'+$(this).text());
+            layer.msg('稳定运行天数:' + $(this).text());
         });
         $('#userBox').dropdown({
             onChange: function (value, text, obj) {
                 var idStr = $(obj).attr('value');
                 if (value == '用户信息') {
 //                    layer.msg('您的注册时间是:' + $('#userRegTime').val());
-                     window.location.href="/user";
+                    window.location.href = "/user";
                 } else {
                     var reqUrl = $("#contextPath").val() + "/logout";
                     AjaxUtil.post(reqUrl, {}, function (resp) {
@@ -76,7 +76,7 @@
                         } else if (resp.status == 0) {
                             layer.msg(resp.msg);
                         } else {
-                            location.reload();
+                            window.location.href = "/index";
                         }
                     });
                 }
@@ -118,12 +118,32 @@
     }
 
     function showRegist() {
-        var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">新用户注册</h4><div class="required field"><label>手机号</label><input placeholder="请输入手机号" type="text" id="regUserNameInput"></div><div class="two fields"><div class="required field"><label>验证码</label><input placeholder="请输入收到的6位验证码" type="text"></div><div class="field" style="margin-top:22px"><div class="ui submit button">获取验证码</div></div></div><div class="required field"><label>密码</label><input type="password" placeholder="密码长度为6-16位" id="regPasswordInput"></div><div class="required field"><label>重复输入密码</label><div class="ui icon input"><input type="password" placeholder="密码长度为6-16位"  id="regRePasswordInput"></div></div><div class="ui green submit button" id="doRegistBtn">注册</div><div id="closeRegistBtn" class="ui black  button">取消</div></form>';
+        var htmlStr = '<form class="ui form" style="margin: 20px">' +
+                '<h4 class="ui dividing header">新用户注册</h4>' +
+                '<div class="required field">' +
+                '<label>手机号或者邮箱</label>' +
+                '<input placeholder="请输入手机号或者邮箱" type="text" id="regUserNameInput">' +
+                '</div><div class="two fields"><div class="required field">' +
+                '<label>验证码</label>' +
+                '<input placeholder="请输入验证码" type="text" id="regCode">' +
+                '</div><div class="field">' +
+                '<div>' +
+                '<img id="_validationCode" alt="点击换一张" title="点击换一张" src="/verify/code" onclick="refreshCode(this)" />' +
+                '</div>' +
+                '</div></div><div class="required field">' +
+                '<label>密码</label>' +
+                '<input type="password" placeholder="密码长度为6-16位" id="regPasswordInput">' +
+                '</div><div class="required field">' +
+                '<label>重复输入密码</label>' +
+                '<div class="ui icon input">' +
+                '<input type="password" placeholder="密码长度为6-16位"  id="regRePasswordInput">' +
+                '</div></div><div class="ui green submit button" id="doRegistBtn">注册</div>' +
+                '<div id="closeRegistBtn" class="ui black  button">取消</div></form>';
         var index = layer.open({
             type: 1,
             title: false,
             closeBtn: 1,
-            area: ['600px', '400px'],
+            area: ['600px', '420px'],
             shadeClose: true,
             content: htmlStr
         });
@@ -134,6 +154,12 @@
         $('#doRegistBtn').click(function () {
             var param = {};
             param.username = $('#regUserNameInput').val();
+            var code = $('#regCode').val();
+            if (code == null || code == '') {
+                layer.alert("验证码不能为空", {icon: 5});
+                return;
+            }
+            param.code = code;
             var ps = $('#regPasswordInput').val();
             var reps = $('#regRePasswordInput').val();
             param.password = ps;
@@ -141,6 +167,7 @@
                 layer.alert("两次输入的密码不相同", {icon: 5});
                 return;
             }
+
             var reqUrl = $("#contextPath").val() + "/regist";
             AjaxUtil.post(reqUrl, param, function (resp) {
                 if (resp == undefined || resp == null) {
@@ -154,6 +181,35 @@
                 }
             });
         });
+    }
+
+    /**
+
+     * 刷新验证码
+
+     * @param imgObj 验证码Img元素
+
+     */
+
+    function refreshCode(imgObj) {
+
+        if (!imgObj) {
+            imgObj = document.getElementById("_validationCode");
+        }
+        var index = imgObj.src.indexOf("?");
+
+        if (index != -1) {
+
+            var url = imgObj.src.substring(0, index + 1);
+
+            imgObj.src = url + Math.random();
+
+        } else {
+
+            imgObj.src = imgObj.src + "?" + Math.random();
+
+        }
+
     }
 
 </script>
