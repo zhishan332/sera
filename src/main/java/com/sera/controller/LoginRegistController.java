@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -195,5 +196,12 @@ public class LoginRegistController {
             log.error("登录异常", e);
         }
         return resp;
+    }
+
+
+    @RequestMapping(value = "/dipan", method = RequestMethod.GET)
+    public ModelAndView infoImgUpload() {
+        ModelAndView mav = new ModelAndView("dipan");
+        return mav;
     }
 }

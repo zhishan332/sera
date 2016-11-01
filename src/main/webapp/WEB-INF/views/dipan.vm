@@ -1,0 +1,169 @@
+#set($layout = "/layout/empty.vm")
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="statics/plugin/leaflet/leaflet.css"/>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js" type="text/javascript"></script>
+    <script src="statics/plugin/leaflet/leaflet.js"></script>
+    <title>地盘UI测试</title>
+    <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            overflow:hidden;
+        }
+
+        #mapbox {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            background: #fff repeat;
+            z-index: 0;
+            overflow:hidden; word-break:break-all;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="mapbox">
+
+</div>
+
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        initMap();
+        testMarker();
+    })
+
+    var cityDict;   //城市字典
+    var mapObj;
+    var countyTileLayer;
+    var townTileLayer;
+    var villageTileLayer;
+    var commonstyle;    //通用样式
+    var addrMarker;
+    var xyMarker;
+    var geohashRect;
+    var geohashMarker;
+    var buildingTable;//表格对象
+    /**
+     * 初始化地图窗体
+     */
+    function initMap(){
+        var	basemap_normal=L.tileLayer('http://webrd03.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}');
+        var	basemap_gray=L.tileLayer('http://t.mapabc.com/maptile?t=2&x={x}&y={y}&z={z}');
+        var	basemap_black=L.tileLayer('http://t.mapabc.com/maptile?t=3&x={x}&y={y}&z={z}');
+        var	basemap_satelite=L.tileLayer('http://webst04.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}');
+        //---初始化地图控件---
+        mapObj = L.map('mapbox', {
+            center: [39.903578,116.473565],
+            zoom: 15,
+            minZoom:9,
+            maxZoom:18,
+            maxBounds:[[-6.66,67.5],[59.4,140.8]],
+            zoomControl:false,	//不加载默认zoomControl,
+            layers: [basemap_normal]
+        });
+        //---初始化地图组件---
+        L.control.scale({imperial:false}).addTo(mapObj);//去除英制单位
+        //瓦片格网图层
+//        var canvasTiles = L.tileLayer.canvas();
+//        canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+//            var ctx = canvas.getContext('2d');
+//            var title=tilePoint.x+"_"+tilePoint.y+"_"+zoom;
+//            ctx.font = 'bold 18px arial';
+//            ctx.fillStyle = 'black';
+//            ctx.fillText(title, 100,120);
+//            ctx.strokeStyle = 'black';
+//            ctx.strokeRect(0, 0, 256, 256);
+//        }
+        //LayerControl
+        var baseMaps = {
+            "彩色底图": basemap_normal,
+            "灰色底图": basemap_gray,
+            "黑色底图": basemap_black,
+            "卫星底图": basemap_satelite
+        };
+//        var overlayMaps = {
+//            "瓦片格网": canvasTiles,
+//            "区县(15q3)":countyTileLayer,
+//            "乡镇(15q3)":townTileLayer,
+//            "村级(15q3)":villageTileLayer
+//        };
+//
+//        L.control.layers(baseMaps,overlayMaps).addTo(mapObj);
+
+
+        var zoomControl = L.control.zoom({
+            position: 'topleft',
+            zoomInTitle:'放大',
+            zoomOutTitle:'缩小'
+        }).addTo(mapObj);
+        //L.Control.measureControl().addTo(mapObj);//距离量算组件
+
+        //---初始化地图事件---
+        //mapObj.scrollWheelZoom.disable();//禁用鼠标滚动缩放
+        mapObj.doubleClickZoom.disable();//禁用地图双击缩放
+//        viewMapOption();
+//        mapObj.on('move', viewMapOption);//地图移动事件
+//        mapObj.on('mousemove', viewCoordinate);//鼠标移动事件
+    }
+
+    function locationByXY(){
+        if(xyMarker!=null)mapObj.removeLayer(xyMarker);
+        var latlng = L.latLng($("#m_y").val(), $("#m_x").val());
+        xyMarker=L.marker(latlng,{icon: commonstyle['xyIcon']}).addTo(mapObj);
+        mapObj.setView(latlng,13);
+    }
+    function locationByGeohash(){
+        var latlon = geohash.decode($("#m_geohash").val());
+        var boxs=geohash.decode_bbox($("#m_geohash").val());
+        var southWest = L.latLng(boxs[0],boxs[1]),
+                northEast = L.latLng(boxs[2],boxs[3]),
+                bounds = L.latLngBounds(southWest, northEast);
+        var cenPT = L.latLng(latlon.latitude,latlon.longitude);
+        // create an orange rectangle
+        if(geohashRect!=null)mapObj.removeLayer(geohashRect);
+        geohashRect=L.rectangle(bounds, {color: 'red', fillColor: '#f03',fillOpacity: 0.3}).addTo(mapObj);
+        if(geohashMarker!=null)mapObj.removeLayer(geohashMarker);
+        geohashMarker=L.marker(cenPT,{icon: commonstyle['geohashIcon']}).addTo(mapObj);
+        mapObj.fitBounds(bounds);
+        console.log("pt:"+latlon.longitude+","+latlon.latitude);
+        console.log("boxs:"+boxs);
+        //mapObj.setView(latlng,11);
+    }
+    /**
+     * 显示地图状态信息
+     */
+    function viewMapOption(){
+        var bounds=mapObj.getBounds();
+        $("#i_map").text("级别="+mapObj.getZoom()+"，中心("+bounds.getCenter().lng.toFixed(6)+","+bounds.getCenter().lat.toFixed(6)+")，边界["+bounds.getSouthWest().lng.toFixed(6)+","+bounds.getNorthEast().lng.toFixed(6)+","+bounds.getSouthWest().lat.toFixed(6)+","+bounds.getNorthEast().lat.toFixed(6)+"]");
+    }
+    /**
+     * 显示当前鼠标坐标
+     */
+    function viewCoordinate(evt){
+        if(evt!=null)$("#i_coordinate").text("当前鼠标："+evt.latlng.lng.toFixed(7)+","+evt.latlng.lat.toFixed(7));
+    }
+
+
+    function testMarker() {
+        var marker = L.marker([39.903578,116.473565]).addTo(mapObj);
+        marker.bindPopup("<b>国家广告产业园</b>").openPopup();
+        marker.bindTooltip("my tooltip text").openTooltip();
+    }
+
+    function testGetPoi() {
+
+    }
+</script>
+
+</html>

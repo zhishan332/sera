@@ -22,12 +22,18 @@
                     #end
                 </select>
             </div>
-            <div class="compact ui left floated myblue icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
+            <div class="compact ui left floated purple icon button" id="addGroupBtn"><i class="plus icon"></i>新建分组</div>
 ##            <div class="compact ui left floated green icon button"><i class="sort content descending icon"></i>智能排序</div>
-            <div class="compact ui left floated myblue icon button" id="checkBtn"><i class="bug icon"></i>智能检测</div>
-            <div class="compact ui left floated myblue icon button" id="delExpireBtn"><i class="unlink icon"></i>删除失效</div>
-            <div class="compact ui left floated myblue icon button" id="toolsBtn"><i class="download icon"></i>收藏工具</div>
-            <input type="file" name="_impFile" id="_impFile" title="先从chrome或者firefox等导出书签">
+            <div class="compact ui left floated purple icon button" id="checkBtn"><i class="bug icon"></i>智能检测</div>
+            <div class="compact ui left floated purple icon button" id="delExpireBtn"><i class="unlink icon"></i>删除失效</div>
+            <div class="compact ui left floated purple icon button" id="toolsBtn"><i class="download icon"></i>收藏工具</div>
+            <form id="_upload_form" enctype="multipart/form-data" method="post">
+                <a href="javascript:;" class="file compact ui left floated purple icon button">导入书签
+                    <i class="upload icon" style="float:left"></i>
+                    <input   type="file" name="file" id="_imp_file" onchange="fileSelected();" title="先从chrome或者firefox等导出书签"/>
+                </a>
+            </form>
+##            <input type="file" name="_impFile" id="_impFile" title="先从chrome或者firefox等导出书签">
         </div>
     </div>
 </div>
@@ -143,10 +149,11 @@
 
     <script type="text/javascript">
         var gridMon = null;
+        var impIndex = null;
         $(document).ready(function () {
             $('.ui.accordion').accordion();
 
-            initImp();
+//            initImp();
             $('#_impFile-button').css('line-height', '15px');
             $('select.dropdown').dropdown();
 
@@ -206,45 +213,45 @@
             })
         })
 
-        function initImp() {
-            var uploadSwf = '#springUrl('statics/plugin/uploadify/uploadify.swf')';
-            var impIndex=null;
-            $("#_impFile").uploadify({
-                formData: {
-                    'timestamp': '222',
-                    'token': '123',
-                    'type': '22'
-                },
-                queueID: '__not_exit_queue',//不存在的ID,删除该配置可显示进度条
-                successTimeout: 120,//2分钟超时
-                fileSizeLimit: '10MB',//B, KB, MB, or GB
-                height: 30,
-                swf: uploadSwf,
-                uploader: $("#contextPath").val() + '/import/bookmark',
-                fileObjName: 'file',
-                buttonClass: 'compact ui myblue icon button right',
-                buttonText: '从浏览器导入',
-                onUploadStart: function (file) {
-                    $('#_impFile').uploadify('disable', true);
-                    impIndex = layer.msg('导入中,请稍候', {
-                        icon: 16,
-                        time: 20000000 //2秒关闭（如果不配置，默认是3秒）
-                    });
-                },
-                //上传到服务器，服务器返回相应信息到data里
-                onUploadSuccess: function (file, data, response) {
-                    $('#_impFile').uploadify('disable', false);
-                    if(null!=impIndex){
-                        layer.close(impIndex);
-                    }
-                    layer.msg('已开始导入,请稍后刷新页面');
-                },
-                onUploadError: function (file, errorCode, errorMsg, errorString) {
-                    $('#_impFile').uploadify('disable', false);
-                }
-
-            });
-        }
+##        function initImp() {
+##            var uploadSwf = '#springUrl('statics/plugin/uploadify/uploadify.swf')';
+##            var impIndex=null;
+##            $("#_impFile").uploadify({
+##                formData: {
+##                    'timestamp': '222',
+##                    'token': '123',
+##                    'type': '22'
+##                },
+##                queueID: '__not_exit_queue',//不存在的ID,删除该配置可显示进度条
+##                successTimeout: 120,//2分钟超时
+##                fileSizeLimit: '10MB',//B, KB, MB, or GB
+##                height: 30,
+##                swf: uploadSwf,
+##                uploader: $("#contextPath").val() + '/import/bookmark',
+##                fileObjName: 'file',
+##                buttonClass: 'compact ui myblue icon button right',
+##                buttonText: '从浏览器导入',
+##                onUploadStart: function (file) {
+##                    $('#_impFile').uploadify('disable', true);
+##                    impIndex = layer.msg('导入中,请稍候', {
+##                        icon: 16,
+##                        time: 20000000 //2秒关闭（如果不配置，默认是3秒）
+##                    });
+##                },
+##                //上传到服务器，服务器返回相应信息到data里
+##                onUploadSuccess: function (file, data, response) {
+##                    $('#_impFile').uploadify('disable', false);
+##                    if(null!=impIndex){
+##                        layer.close(impIndex);
+##                    }
+##                    layer.msg('已开始导入,请稍后刷新页面');
+##                },
+##                onUploadError: function (file, errorCode, errorMsg, errorString) {
+##                    $('#_impFile').uploadify('disable', false);
+##                }
+##
+##            });
+##        }
         function addFav(groupID) {
             var htmlStr = '<form class="ui form" style="margin: 20px"><h4 class="ui dividing header">收藏新网页</h4><div class="field"><label>输入网址</label><input type="text" id="addFavInputUrl"></div><div class="ui green submit button" id="addFavInputBtn">收藏</div></form>';
             var index = layer.open({
@@ -510,7 +517,73 @@
             });
         }
 
+        function fileSelected() {
+
+            var oFile = document.getElementById('_imp_file').files[0];
+
+            var oReader = new FileReader();
+
+            oReader.readAsDataURL(oFile);
+
+            startUploading();
+        }
+
+        function startUploading() {
+            iPreviousBytesLoaded = 0;
+
+            var vFD = new FormData(document.getElementById('_upload_form'));
+
+            var uploadUrl = $("#contextPath").val() + '/import/bookmark';
+            vFD.append("type", '22');
+            var timestamp = '310DCBBF4CCE62F762A2AAA148D556BD';
+            var token = '1BCA34F5D32E48554964CEBE69E7CCD0';
+            vFD.append("timestamp", timestamp);
+            vFD.append("token", token);
+            var oXHR = new XMLHttpRequest();
+            oXHR.upload.addEventListener('progress', uploadProgress, false);
+            oXHR.addEventListener('load', uploadFinish, false);
+            oXHR.addEventListener('error', uploadError, false);
+            oXHR.addEventListener('abort', uploadAbort, false);
+            oXHR.open('POST', uploadUrl);
+            oXHR.send(vFD);
+        }
+
+
+        function uploadProgress(e) { // upload process in progress
+            if (e.lengthComputable) {
+                iBytesUploaded = e.loaded;
+                iBytesTotal = e.total;
+                var iPercentComplete = Math.round(e.loaded * 100 / e.total);
+                if (iPercentComplete == 100) {
+                    impIndex = layer.msg('导入中,请稍候', {
+                        icon: 16,
+                        time: 20000000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                }
+            } else {
+                impIndex = layer.msg('获取导入进度失败,请稍候', {
+                    icon: 16,
+                    time: 20000000 //2秒关闭（如果不配置，默认是3秒）
+                });
+            }
+        }
+
+        function uploadFinish(e) { // upload successfully finished
+            var resp = e.target.responseText;
+            if(null!=impIndex){
+                layer.close(impIndex);
+            }
+            layer.msg('上传已完成,后台正在处理,请稍后刷新页面');
+        }
+
+        function uploadError(e) {
+
+        }
+
+        function uploadAbort(e) {
+
+        }
     </script>
-    <script src="#springUrl('statics/plugin/uploadify/jquery.uploadify.js')" type="text/javascript"></script>
+##    <script src="#springUrl('statics/plugin/uploadify/jquery.uploadify.js')" type="text/javascript"></script>
     <script src="#springUrl('statics/plugin/masonry/masonry.mini.js')"></script>
 

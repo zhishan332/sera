@@ -1,0 +1,23 @@
+.www-aliyun-lego-common-tel .module-wrap .tel-box {
+  position: relative;
+  display: none;
+}
+.www-aliyun-lego-common-tel .module-wrap .tel-box .white {
+  display: inline-block;
+}
+.www-aliyun-lego-common-tel .module-wrap .tel-box .blue {
+  display: none;
+}
+.www-aliyun-lego-common-tel .module-wrap .tel-box:hover .white {
+  display: none;
+}
+.www-aliyun-lego-common-tel .module-wrap .tel-box:hover .blue {
+  display: inline-block;
+}
+.www-aliyun-lego-common-tel .module-wrap .tel-box:hover .showTel {
+  display: inline-block !important;
+}
+.www-aliyun-lego-common-tel .module-wrap .tel-box .showTel {
+  position: absolute;
+  top: -8px;
+}

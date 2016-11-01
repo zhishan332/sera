@@ -1,0 +1,1 @@
+KISSY.add("ali-mod/aliyun-product-assets-footer/0.0.12/index",["node"],function(n,t){function i(){this.init.apply(this,arguments)}var o=t("node");return i.prototype={init:function(n,t){var i=this;i._node=o.one(n),t?i.loadData(t):i.bindEvent()},loadData:function(n){},bindEvent:function(){}},i});

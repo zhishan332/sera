@@ -1,0 +1,2306 @@
+#set($layout = "/layout/empty.vm")
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://www.aliyun.com/product/slb/?spm=5176.8142029.418687.10.WLOm77 -->
+<html class="ks-webkit537 ks-webkit ks-chrome52 ks-chrome">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" async="" src="#springUrl('statics/yun')/index.js"></script>
+    <script type="text/javascript" async="" src="#springUrl('statics/yun')/agp_heat.min.js"></script>
+    <script charset="utf-8" src="#springUrl('statics/yun')/saved_resource" async=""></script>
+    <script async="" src="#springUrl('statics/yun')/analytics.js"></script>
+    <script charset="utf-8" src="#springUrl('statics/yun')/saved_resource(1)" async=""></script>
+    <script charset="utf-8" src="#springUrl('statics/yun')/saved_resource(2)" async=""></script>
+    <script charset="utf-8" src="#springUrl('statics/yun')/saved_resource(3)" async=""></script>
+    <title>地址云-地盘_流量分发_避免单点故障_容灾-菜鸟物流云</title>
+    <meta name="spm-id" content="5176">
+    <meta name="description"
+          content="地址云-地盘（Pre Sorting Service）基于专业地理信息技术及大数据自学习的分单服务，可快速
+准确将订单分配到合适的配送站点。依托路网矢量数据和空间
+网络分析算法，根据送货站点、时间要求、仓库位置等因素，
+智能计算最优配送路线，降低物流成本。
+">
+    <meta name="keyword" content="地址云-地盘,流量分发,避免单点故障,容灾">
+    <!-- header block start -->
+    <script src="#springUrl('statics/yun')/aliyun_assets"></script>
+    <script>(function () {
+        if (!window.AILYUN_SPM_ID_ALREADY_EXIST) {
+            var head = document.getElementsByTagName('head').item(0);
+            var meta = document.createElement('meta');
+            meta.name = 'spm-id';
+            meta.content = '5176';
+            head.appendChild(meta);
+        }
+    })()</script>
+    <meta name="spm-id" content="5176">
+    <link type="text/css" rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(4)">
+    <script type="text/javascript" src="#springUrl('statics/yun')/seed-min.js" charset="utf-8"
+            data-config="{combine:true}"></script>
+    <link type="text/css" rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(5)">
+    <script type="text/javascript" src="#springUrl('statics/yun')/saved_resource(6)"></script>
+    <link rel="icon" href="https://img.alicdn.com/tps/TB1HwXxLpXXXXchapXXXXXXXXXX-32-32.ico" type="image/x-icon">
+    <!--[if lt IE 8]>
+    <script type="text/javascript" src="//g.alicdn.com/??aliyun/www-dpl/0.5.52/knight/js/iconfont-ie7.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <link type="text/css" rel="stylesheet"
+          href="//g.alicdn.com/??aliyun/www-dpl/0.5.52/knight/css/widget/header-ie.css"/>
+    <script type="text/javascript" src="//g.alicdn.com/??aliyun/www-dpl/0.5.52/knight/js/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="#springUrl('statics/yun')/saved_resource(7)"></script>
+    <style>body, button, input, select, textarea {
+        font: 12px/1.5 "\5FAE\8F6F\96C5\9ED1", "Microsoft Yahei", "Hiragino Sans GB", tahoma, arial, "\5B8B\4F53" !important;
+    }</style>
+    <!-- header block end -->
+    <!-- styles start -->
+    <link rel="stylesheet" href="#springUrl('statics/yun')/index-min.css">
+    <!-- stlyes end -->
+    <!-- page export styles -->
+    <link rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(8)">
+    <!-- page export styles end -->
+    <!-- grid style start -->
+    <link rel="stylesheet" href="#springUrl('statics/yun')/layout-hangye-pc.css">
+    <!-- grid style end -->
+    <!--scripts start -->
+    <script src="#springUrl('statics/yun')/saved_resource(9)"></script>
+    <!-- scripts end -->
+    <script type="text/javascript" async="" id="tb-beacon-aplus"
+            exparams="category=&amp;userid=&amp;aplus&amp;yunid=&amp;yunpk="
+            src="#springUrl('statics/yun')/aplus_v2.js"></script>
+    <script type="text/javascript" src="#springUrl('statics/yun')/cloud_helper_config.js"></script>
+    <link href="#springUrl('statics/yun')/index.css" rel="Stylesheet" type="text/css">
+</head>
+
+<body data-spm="7921785">
+<script id="tb-beacon-aplus" src="#springUrl('statics/yun')/aplus_v2(1).js"
+        exparams="category=&amp;userid=&amp;aplus&amp;yunid=&amp;&amp;asid=AQAAAADLQ6xXIxjYOQAAAAAk6FBgy2wOrQ=="></script>
+<script type="text/javascript">(function (d) {
+    var t = d.createElement("script");
+    t.type = "text/javascript";
+    t.async = true;
+    t.id = "tb-beacon-aplus";
+    t.setAttribute("exparams", "category=&userid=&aplus&yunid=&yunpk=");
+    t.src = ("https:" == d.location.protocol ? "https://s" : "http://a") + ".tbcdn.cn/s/aplus_v2.js";
+    d.getElementsByTagName("head")[0].appendChild(t);
+})(document);</script>
+<script>with (document) with (body) with (insertBefore(createElement("script"), firstChild)) setAttribute("exparams", "category=&userid=&aplus&yunid=&&asid=AQAAAADLQ6xXIxjYOQAAAAAk6FBgy2wOrQ==", id = "tb-beacon-aplus", src = (location > "https" ? "//g" : "//g") + ".alicdn.com/alilog/mlog/aplus_v2.js")</script>
+<!-- nav block start -->
+<!-- exported styles -->
+<link rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(10)">
+<!--region -->
+<div data-spm="167279" data-moduleid="63097" data-name="www-common-topbar-nav" data-guid="167279" id="guid-167279"
+     data-scene-id="188638" data-scene-version="0" data-hidden="" data-gitgroup="ali-mod"
+     class="www-common-topbar-nav J_Module" tms="www-common-topbar-nav/0.0.1" tms-datakey="188638">
+    <div class="module-wrap J_tb_lazyload">
+        <script src="#springUrl('statics/yun')/index(1).js"></script>
+        <!-- exported styles -->
+        <link rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(11)">
+        <!--region -->
+        <div data-spm="416540" data-moduleid="143396" data-name="aliyun-common-topbar-2016" data-guid="416540"
+             id="guid-416540" data-scene-id="429638" data-scene-version="4" data-hidden="" data-gitgroup="ali-mod"
+             data-ext="" class="aliyun-common-topbar-2016 J_Module" tms="aliyun-common-topbar-2016/0.0.110"
+             tms-datakey="429638">
+            <div class="module-wrap J_tb_lazyload dbl_tms_module_wrap www-aliyun-common-menu">
+                <div style="clear:both"></div>
+            </div>
+        </div>
+        <!--region -->
+        <!-- exported scripts -->
+        <script src="#springUrl('statics/yun')/saved_resource(12)"></script>
+        <script src="#springUrl('statics/yun')/aliyun_header"></script>
+        <script>window.console || (console = {
+            log: function (o) {
+                return !1
+            }
+        })</script>
+    </div>
+</div>
+<!--region -->
+<!-- exported scripts -->
+<script src="#springUrl('statics/yun')/saved_resource(13)"></script>
+<!-- nav block end -->
+<!-- body start -->
+<div class="page-layout page-main-content" data-page-id="54003"
+     style="background-image: url(&quot;https://img.alicdn.com/tps/TB1hnFTMXXXXXa7XVXXXXXXXXXX-2800-1100.jpg&quot;); background-size: 1400px; background-position: 50% 0%; background-repeat: no-repeat;">
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="201232" data-moduleid="83921" data-name="aliyun-product-2003" data-guid="201232"
+                         id="guid-201232" data-scene-id="221632" data-scene-version="0" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2003 J_Module"
+                         tms="aliyun-product-2003/0.0.11" tms-datakey="221632">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="product-bd">
+                                <script>window.product ? "" : window.product = {},
+                                        window.product.bgImg = "https://img.alicdn.com/tps/TB1hnFTMXXXXXa7XVXXXXXXXXXX-2800-1100.jpg",
+                                        window.product.java_code = "slb"</script>
+                                <!-- product -->
+                                <div class="introduce y-row">
+                                    <h1 class="title">
+                                        <i class="product-icons-64 product-icons-slb"></i>地址云-地盘</h1>
+                                    <div class="intro">地址云-地盘（Pre Sorting Service）基于专业地理信息技术及大数据自学习的分单服务，可快速
+                                        准确将订单分配到合适的配送站点。依托路网矢量数据和空间
+                                        网络分析算法，根据送货站点、时间要求、仓库位置等因素，
+                                        智能计算最优配送路线，降低物流成本。
+                                    </div>
+                                    <div class="actions y-clear">
+                                        <span class="actions-apply" style="display: none"></span>
+                                        <span class="actions-applying" style="display: none"></span>
+                        <span class="actions-normal">
+                          <a class="action y-btn-blue" href="https://common-buy.aliyun.com/?commodityCode=slb#/buy"
+                             target="_blank">立即购买</a>
+                          <a class="action y-btn-white" href="https://promotion.aliyun.com/ntms/act/slb-feature.html"
+                             target="_blank">试用新功能</a>
+                          <span class="action-link-wrap">
+                            <a href="https://www.aliyun.com/price/product#/slb/detail" target="_blank">产品价格&gt;&gt;</a></span>
+                          <span class="action-link-wrap">
+                            <a href="https://promotion.aliyun.com/ntms/act/slblearn.html?spm=5176.7960203.223922.5"
+                               target="_blank">
+                              <i class="icon icon-giving"></i>地址云-地盘大学堂</a>
+                          </span>
+                        </span>
+                        <span class="actions-service" style="display: none">
+                          <a class="action y-btn-blue" href="https://buy.aliyun.com/slb" target="_blank">立即购买</a>
+                          <a class="action y-btn-white" href="https://promotion.aliyun.com/ntms/act/slb-feature.html"
+                             target="_blank">试用新功能</a>
+                          <span class="action-link-wrap">
+                            <a href="https://www.aliyun.com/price/product#/slb/detail" target="_blank">产品价格&gt;&gt;</a></span>
+                          <span class="action-link-wrap">
+                            <a href="https://promotion.aliyun.com/ntms/act/slblearn.html?spm=5176.7960203.223922.5"
+                               target="_blank">
+                              <i class="icon icon-giving"></i>地址云-地盘大学堂</a>
+                          </span>
+                        </span>
+                                    </div>
+                                    <ul class="events">
+                                        <li class="space" style="color:#666">
+                                            <span style="color:red">推出重磅新功能：</span>多重新功能来袭，让应用部署更加安全、灵活、高可用，点击按钮了解试用
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="201233" data-moduleid="101598" data-name="aliyun-product-2002" data-guid="201233"
+                         id="guid-201233" data-scene-id="221631" data-scene-version="1" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2002 J_Module"
+                         tms="aliyun-product-2002/0.0.22" tms-datakey="221631">
+                        <div class="module-wrap J_tb_lazyload">
+                            <script>window.product ? "" : window.product = {},
+                                    window.product.code = "slb"</script>
+                            <div class="float-box y-row">
+                                <div>
+                                    <ul class="menu-box y-clear">
+                                        <li class="y-left" href="javascript:;" data-spm-click="gostr=/aliyun;locaid=">
+                                            产品概述
+                                        </li>
+                                        <li class="y-left" href="javascript:;" data-spm-click="gostr=/aliyun;locaid=">
+                                            产品功能
+                                        </li>
+                                        <li class="y-left" href="javascript:;" data-spm-click="gostr=/aliyun;locaid=">
+                                            应用场景
+                                        </li>
+                                        <li class="y-left" href="javascript:;" data-spm-click="gostr=/aliyun;locaid=">
+                                            帮助与文档
+                                        </li>
+                                        <li class="y-left" href="javascript:;" data-spm-click="gostr=/aliyun;locaid=">
+                                            开发者资源
+                                        </li>
+                                    </ul>
+                                    <a href="https://common-buy.aliyun.com/?commodityCode=slb#/buy" target="_blank"
+                                       id="product-btn" class="y-btn-blue" style="display: none;">立即购买</a></div>
+                            </div>
+                            <div style="height: 10px"></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="206695" data-moduleid="74698" data-name="aliyun-product-2000" data-guid="206695"
+                         id="guid-206695" data-scene-id="226913" data-scene-version="0" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2000 J_Module"
+                         tms="aliyun-product-2000/0.0.2" tms-datakey="226913">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row aliyun-product-title">
+                                <h4>地址云-地盘 概述</h4></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205053" data-moduleid="103887" data-name="aliyun-product-outline-2000"
+                         data-guid="205053" id="guid-205053" data-scene-id="225332" data-scene-version="1"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext="" class="aliyun-product-outline-2000 J_Module"
+                         tms="aliyun-product-outline-2000/0.0.21" tms-datakey="225332">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row aliyun-product-outline-video">
+                                <ul class="y-clear">
+                                    <li class="y-left video"
+                                        swf="//vodcdn.video.taobao.com/player/ugc/tb_ugc_pieces_core_player_loader.swf?version=1.0.20150330&amp;vid=31707881&amp;uid=1044067926&amp;p=1&amp;t=1&amp;rid=&amp;random=6666"
+                                        href="javascript:;" data-spm-click="gostr=/aliyun;locaid=">
+                                        <i class="icon-play"></i>
+                                        <img style="width: 175px;height: 98px"
+                                             src="#springUrl('statics/yun')/TB1lyD7KXXXXXcEXFXXXXXXXXXX-175-98.png">
+                                        <p>了解地址云-地盘</p>
+                                    </li>
+                                    <a class="y-left" href="https://docs.aliyun.com/#/pub/get-started/slb/get-started"
+                                       target="_blank">
+                                        <img style="width: 175px;height: 98px"
+                                             src="#springUrl('statics/yun')/TB1jL_QKXXXXXczXFXXXXXXXXXX-175-98.png">
+                                        <p>地址云-地盘使用入门</p>
+                                    </a>
+                                </ul>
+                            </div>
+                            <div class="y-row" style="font-size: 14px">
+                                <div style="line-height:30px">
+                                    地址云-地盘可以实现对多台云服务器自动进行流量分发，从而可让您获得更高水平的容错性能。同时，您可以根据业务需求实时添加或删减云服务器，从而实现无缝的业务伸缩。
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                    <img style="margin: auto;width:445px;display: block"
+                                         src="#springUrl('statics/yun')/TB1vYv_KXXXXXbjXXXXXXXXXXXX-900-466.png"></div>
+                                <br></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205054" data-moduleid="80489" data-name="aliyun-product-outline-2001"
+                         data-guid="205054" id="guid-205054" data-scene-id="225336" data-scene-version="1"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext="" class="aliyun-product-outline-2001 J_Module"
+                         tms="aliyun-product-outline-2001/0.0.20" tms-datakey="225336">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <h4>对比于传统硬件地址云-地盘器，菜鸟物流云的地址云-地盘有着如下优势</h4>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 200px"></th>
+                                        <th>
+                                            <i class="icon-slb-big margin-right"></i>地址云-地盘
+                                        </th>
+                                        <th>传统硬件地址云-地盘器</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="width: 200px">
+                                            <h3>
+                                                <img src="#springUrl(
+                                                    'statics/yun')/TB1jz0_KXXXXXX8XXXXXXXXXXXX-32-32.png">扩展性</h3></td>
+                                        <td>支持删除和添加后端云服务器，实现无缝伸缩
+                                            <br>伸缩过程不用更换任何设备，对相关调用和访问者零影响
+                                        </td>
+                                        <td>当目前硬件设备达到相应瓶颈时，需要重新购买更高性能硬件设备重新安装，业务中断，步骤繁杂</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 200px">
+                                            <h3>
+                                                <img src="#springUrl(
+                                                    'statics/yun')/TB1oGFWKXXXXXbxXpXXXXXXXXXX-32-32.png">安全</h3></td>
+                                        <td>免费提供5Gbps以下的四层DDoS攻击防护
+                                            <br>支持应用防火墙和CC防护，提供防护统计页面，实时抵御网络攻击
+                                        </td>
+                                        <td>需要额外购买安全防护模块，部署困难，成本较高</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 200px">
+                                            <h3>
+                                                <img src="#springUrl(
+                                                    'statics/yun')/TB1dOXJKXXXXXXvXVXXXXXXXXXX-32-32.png">成本</h3></td>
+                                        <td>无需购买硬件设备，终身免运维，提供按流量和按带宽两种付费方式，可根据业务灵活选取，私网实例费用全免</td>
+                                        <td>需要购买昂贵的硬件设备，部署困难
+                                            <br>需要专业的运维人员，硬件成本和人力成本剧增
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205055" data-moduleid="72074" data-name="aliyun-product-outline-2002"
+                         data-guid="205055" id="guid-205055" data-scene-id="225339" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext="" class="aliyun-product-outline-2002 J_Module"
+                         tms="aliyun-product-outline-2002/0.0.3" tms-datakey="225339">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <h4>众多客户信任并使用菜鸟物流云的地址云-地盘:</h4>
+                                <div class="aliyun-product-partner">
+                                    <ul class="partner-list clearfix">
+                                        <li class="active partnerIntro" style="width: 730px;">
+                                            <a href="javascript:;" target="_blank">
+                                                <div class="partner-logo pull-left">
+                                                    <img src="#springUrl(
+                                                        'statics/yun')/TB1wi6JKXXXXXaDXFXXXXXXXXXX-140-140.png"></div>
+                                                <div class="partner-intro" style="width: 646px;">
+                                                    <h5 class="partner-name">12306</h5>
+                                                    <p class="partner-text">
+                                                        使用菜鸟物流云让我们轻松实现弹性扩容，成本降低，地址云-地盘服务帮助我们分发流量、应对海量访问，让应用系统的高可用变得更简单</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li style="width: 70px;">
+                                            <a href="javascript:;" target="_blank">
+                                                <div class="partner-logo pull-left">
+                                                    <img src="#springUrl(
+                                                        'statics/yun')/TB1NGDIKXXXXXawXFXXXXXXXXXX-140-140.png"></div>
+                                                <div class="partner-intro" style="width: 646px;">
+                                                    <h5 class="partner-name">联想集团</h5>
+                                                    <p class="partner-text">
+                                                        使用菜鸟物流云之后再也不用购买昂贵的硬件设备，节省了一定的硬件成本，菜鸟物流云统一运维，节省运维费用，保证网络畅通无阻</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li style="width: 70px;">
+                                            <a href="javascript:;" target="_blank">
+                                                <div class="partner-logo pull-left">
+                                                    <img src="#springUrl(
+                                                        'statics/yun')/TB1oe6PKXXXXXb6XpXXXXXXXXXX-140-140.png"></div>
+                                                <div class="partner-intro" style="width: 646px;">
+                                                    <h5 class="partner-name">快的打车</h5>
+                                                    <p class="partner-text">
+                                                        菜鸟物流云是性能与稳定性的功臣，菜鸟物流云地址云-地盘服务能够有效并低成本地解决单点故障问题</p></div>
+                                            </a>
+                                        </li>
+                                        <li style="width: 70px;">
+                                            <a href="javascript:;" target="_blank">
+                                                <div class="partner-logo pull-left">
+                                                    <img src="#springUrl(
+                                                        'statics/yun')/TB1mv6ZKXXXXXb7XXXXXXXXXXXX-140-140.png"></div>
+                                                <div class="partner-intro" style="width: 646px;">
+                                                    <h5 class="partner-name">天弘基金</h5>
+                                                    <p class="partner-text">
+                                                        阿里金融云在杭州和青岛的“两地三中心”部署能够保证系统平稳可靠，用户可用性大大提高</p></div>
+                                            </a>
+                                        </li>
+                                        <li style="width: 70px;">
+                                            <a href="javascript:;" target="_blank">
+                                                <div class="partner-logo pull-left">
+                                                    <img src="#springUrl(
+                                                        'statics/yun')/TB1qjfSKXXXXXa1XpXXXXXXXXXX-140-140.png"></div>
+                                                <div class="partner-intro" style="width: 646px;">
+                                                    <h5 class="partner-name">大掌门</h5>
+                                                    <p class="partner-text">
+                                                        随着访问量的猛增，网站已经不堪重负，自从使用菜鸟物流云地址云-地盘服务之后，网站再也没有出现访问量大而卡壳的现象，用户粘性大大增强</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="206696" data-moduleid="74698" data-name="aliyun-product-2000" data-guid="206696"
+                         id="guid-206696" data-scene-id="226914" data-scene-version="0" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2000 J_Module"
+                         tms="aliyun-product-2000/0.0.2" tms-datakey="226914">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row aliyun-product-title">
+                                <h4>地址云-地盘 功能</h4></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205056" data-moduleid="76524" data-name="aliyun-product-function-2001"
+                         data-guid="205056" id="guid-205056" data-scene-id="225338" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2001 J_Module" tms="aliyun-product-function-2001/0.0.8"
+                         tms-datakey="225338">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <table class="func-table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="func-title">多样性</td>
+                                        <td class="func-bd">
+                                            <div class="func-module">
+                                                <h3>丰富的协议支持，满足您的多样化应用场景</h3>
+                                                <p class="func-desc">
+                                                    地址云-地盘支持包含TCP协议和UDP协议的四层地址云-地盘，也支持包含HTTP协议和HTTPS协议的七层地址云-地盘，并针对HTTPS协议提供集中化的证书管理系统，满足用户的可靠传输、快速传输与安全传输等多样化需求。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc">
+                                                    <a href="https://help.aliyun.com/document_detail/32287.html?spm=5176.doc27557.6.272.gKCp5v"
+                                                       target="_blank">如何根据不同的协议进行监听配置？&gt;&gt;</a>
+                                                    <a href="https://help.aliyun.com/document_detail/32332.html?spm=5176.doc32287.6.276.6fcCnm"
+                                                       target="_blank">如何进行证书申请和证书管理？&gt;&gt;</a></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205102" data-moduleid="76524" data-name="aliyun-product-function-2001"
+                         data-guid="205102" id="guid-205102" data-scene-id="225381" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2001 J_Module" tms="aliyun-product-function-2001/0.0.8"
+                         tms-datakey="225381">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <table class="func-table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="func-title">高可用性</td>
+                                        <td class="func-bd">
+                                            <div class="func-module">
+                                                <h3>支持云服务器健康检查，保证应用可用性</h3>
+                                                <p class="func-desc">
+                                                    地址云-地盘会定时检测后端云服务器是否正常运行，健康检查频率可自定义；一旦检测到云服务器异常，则不会将流量再分配到这些异常实例，保证应用可用性。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc">
+                                                    <a href="https://help.aliyun.com/document_detail/27541.html?spm=5176.doc32460.6.95.VzxKqt"
+                                                       target="_blank">如何配置不同协议监听的健康检查？&gt;&gt;</a></p>
+                                            </div>
+                                            <div class="func-module">
+                                                <h3>集群部署，多可用区支持，多层次容灾保障</h3>
+                                                <p class="func-desc">
+                                                    地址云-地盘采用集群部署，各机器之间会话同步，从而支持热升级，机器故障和集群维护对用户完全透明；某些地域采用多可用区部署，轻松实现同城容灾；结合DNS使用还可支持全局地址云-地盘，实现跨地域容灾。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc"></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205103" data-moduleid="76524" data-name="aliyun-product-function-2001"
+                         data-guid="205103" id="guid-205103" data-scene-id="225382" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2001 J_Module" tms="aliyun-product-function-2001/0.0.8"
+                         tms-datakey="225382">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <table class="func-table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="func-title">灵活性</td>
+                                        <td class="func-bd">
+                                            <div class="func-module">
+                                                <h3>支持多种流量调度算法，使得流量分配更均匀</h3>
+                                                <p class="func-desc">
+                                                    地址云-地盘支持加权轮询和最小连接数这两种调度算法，可根据自身需求选择相应的算法来分配用户访问流量，并支持设置后端服务器权重，使得流量调度更均匀，提升地址云-地盘能力。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc">
+                                                    <a href="https://help.aliyun.com/document_detail/27541.html?spm=5176.doc32460.6.95.VzxKqt"
+                                                       target="_blank">地址云-地盘转发规则解释&gt;&gt;</a>
+                                                    <a href="https://help.aliyun.com/document_detail/slb/faq/ecs-weight.html"
+                                                       target="_blank">后端ECS权重作用是什么？&gt;&gt;</a></p>
+                                            </div>
+                                            <div class="func-module">
+                                                <h3>支持会话保持，满足用户个性化需求</h3>
+                                                <p class="func-desc">
+                                                    四层地址云-地盘通过IP地址实现会话保持，七层地址云-地盘通过cookie支持会话保持，可将一定时间内来自同一用户的访问请求转发到同一个后端服务器上进行处理，实现用户访问连续性。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc">
+                                                    <a href="https://help.aliyun.com/document_detail/slb/faq/session-sticky.html"
+                                                       target="_blank">如何配置不同协议监听的会话保持？&gt;&gt;</a></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205104" data-moduleid="76524" data-name="aliyun-product-function-2001"
+                         data-guid="205104" id="guid-205104" data-scene-id="225383" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2001 J_Module" tms="aliyun-product-function-2001/0.0.8"
+                         tms-datakey="225383">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <table class="func-table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="func-title">易用性</td>
+                                        <td class="func-bd">
+                                            <div class="func-module">
+                                                <h3>提供多种实例类型与付费方式，可根据业务特征灵活选择</h3>
+                                                <p class="func-desc">用户可根据具体业务特征选择经典网络下的公网和私网地址云-地盘实例，或VPC网络下的私网地址云-地盘
+                                                    实例。地址云-地盘经典网络公网实例提供按流量计费与按带宽计费两种计费方式，用户可选择适合自己的计费方式。两种计费方式的实例都支持后付费形式，不需要该实例后可随时释放，真正满足用户的弹性需求。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc">
+                                                    <a href="https://help.aliyun.com/document_detail/slb/buy-guide/slb-price.html"
+                                                       target="_blank">地址云-地盘计量计费详细文档&gt;&gt;</a>
+                                                    <a href="https://buy.aliyun.com/calculator#/slb" target="_blank">公网按流量计费与按带宽计费价格计算器&gt;&gt;</a>
+                                                </p>
+                                            </div>
+                                            <div class="func-module">
+                                                <h3>提供多种用户管理途径，轻松操纵您的地址云-地盘</h3>
+                                                <p class="func-desc">用户可通过地址云-地盘管理控制台轻松实现地址云-地盘器的配置、释放等功能，也能够基于地址云-地盘
+                                                    OpenAPI与地址云-地盘 SDK等方式进行二次开发来实现单一地址云-地盘器的创建、配置与管理。</p>
+                                                <ul class="func-list"></ul>
+                                                <p class="func-desc">
+                                                    <a href="https://help.aliyun.com/document_detail/32280.html?spm=5176.doc27692.6.268.WhitZIl"
+                                                       target="_blank">详细了解地址云-地盘管理控制台使用&gt;&gt;</a>
+                                                    <a href="https://help.aliyun.com/document_detail/slb/api-reference/brief-introduction.html"
+                                                       target="_blank">地址云-地盘OpenAPI使用须知&gt;&gt;</a></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="206698" data-moduleid="74698" data-name="aliyun-product-2000" data-guid="206698"
+                         id="guid-206698" data-scene-id="226916" data-scene-version="0" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2000 J_Module"
+                         tms="aliyun-product-2000/0.0.2" tms-datakey="226916">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row aliyun-product-title">
+                                <h4>地址云-地盘 常见应用场景</h4></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205057" data-moduleid="82071" data-name="aliyun-product-function-2002"
+                         data-guid="205057" id="guid-205057" data-scene-id="225335" data-scene-version="1"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2002 J_Module" tms="aliyun-product-function-2002/0.0.13"
+                         tms-datakey="225335">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <h4>以下为地址云-地盘常见的应用场景，您还可以在解决方案频道了解更多的方案建议</h4>
+                                <div class="usercase-tab-wrap clearfix" style="height: 485px;">
+                                    <ul class="usercase-tab pull-left" style="width:px">
+                                        <li data-index="0" class="current">无明显时间属性的大流量网站</li>
+                                        <li data-index="1">访问有明显高峰期的业务</li>
+                                        <li data-index="2">有高可用和低延迟要求的应用</li>
+                                        <li data-index="3">对安全性要求较高的系统</li>
+                                    </ul>
+                                    <ul class="usercase-tab-bd" style="margin-left:px">
+                                        <li class="usercase-tab-bd-item" style="display: list-item;">
+                                            <p class="desc">
+                                                对外网用户开放的中小型网站，用户访问数量较多，但是进入只做日常的访问浏览，其访问量没有明显的时间属性，网站带宽较为平滑，没有明显的访问高峰现象。</p>
+                                            <div class="configs-hd">
+                                                <span class="configs-hd-title">建议配置 ：</span>
+                            <span class="configs-hd-product">地址云-地盘+
+                              <a href="https://www.aliyun.com/product/ecs/" target="_blank">云服务器ECS</a></span>
+                                                <br>
+                                                <br>
+                                                <div class="text-center">
+                                                    <img style="margin: auto;width:293px;display: block"
+                                                         src="#springUrl(
+                                                             'statics/yun')/TB1pRj1KXXXXXbhXpXXXXXXXXXX-586-440.png">
+                                                </div>
+                                                <ul class="configs-bd" style="display:">
+                                                    <li>
+                                                        架构解读：有外网用户访问应用，带宽利用率较高，建议选用公网按带宽计费地址云-地盘实例；根据网站规模发展，随时调整ECS的配置和数量，无需担心服务器的配置引起的资源瓶颈。
+                                                        <br>
+                                                        <a href="https://www.aliyun.com/customer/detail/xd/"
+                                                           target="_blank">参考客户案例&gt;&gt;</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="usercase-tab-bd-item" style="display: none;">
+                                            <p class="desc">需要对外提供服务，带宽曲线有明显的波峰波谷出现，部署重点是能够在适当控制成本的基础上抵御高峰期的访问流量。</p>
+                                            <div class="configs-hd">
+                                                <span class="configs-hd-title">建议配置 ：</span>
+                            <span class="configs-hd-product">地址云-地盘+
+                              <a href="https://www.aliyun.com/product/ecs/" target="_blank">云服务器ECS</a>+
+                              <a href="https://www.aliyun.com/product/ess/" target="_blank">弹性伸缩</a></span>
+                                                <br>
+                                                <br>
+                                                <div class="text-center">
+                                                    <img style="margin: auto;width:293px;display: block"
+                                                         src="#springUrl(
+                                                             'statics/yun')/TB1V56YKXXXXXcpXpXXXXXXXXXX-586-483.png">
+                                                </div>
+                                                <ul class="configs-bd" style="display:">
+                                                    <li>
+                                                        架构解读：用户分布地域、运营商线路各不相同，使用云解析DNS服务企业版，轻松将各用户引流到最合适地域的地址云-地盘上，并可实现跨地域容灾；地址云-地盘和ECS结合可实现同城多可用区容灾，地址云-地盘健康检查可保证消除单点。
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="usercase-tab-bd-item" style="display: none;">
+                                            <p class="desc">
+                                                用户分布地域广，业务实时性和可用性要求高，部署重点是能够达到多层面上的容灾需求，并且各地的用户访问应用都需要低延时。</p>
+                                            <div class="configs-hd">
+                                                <span class="configs-hd-title">建议配置 ：</span>
+                            <span class="configs-hd-product">地址云-地盘+
+                              <a href="https://www.aliyun.com/product/ecs/" target="_blank">云服务器ECS</a>+
+                              <a href="https://www.aliyun.com/product/dns/" target="_blank">DNS</a></span>
+                                                <br>
+                                                <br>
+                                                <div class="text-center">
+                                                    <img style="margin: auto;width:544px;display: block"
+                                                         src="#springUrl(
+                                                             'statics/yun')/TB1Eoj6KXXXXXcsXXXXXXXXXXXX-1088-483.png">
+                                                </div>
+                                                <ul class="configs-bd" style="display:">
+                                                    <li>
+                                                        架构解读：用户分布地域、运营商线路各不相同，使用云解析DNS服务企业版，轻松将各用户引流到最合适地域的地址云-地盘上，并可实现跨地域容灾；地址云-地盘和ECS结合可实现同城多可用区容灾，地址云-地盘健康检查可保证消除单点。
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="usercase-tab-bd-item" style="display: none;">
+                                            <p class="desc">
+                                                为保证系统安全，系统中的所有应用都通过一个出口接入外网，而其他应用不面向互联网，只允许内部访问。并且，系统内部ECS数量较多，希望对其进行分组管理。</p>
+                                            <div class="configs-hd">
+                                                <span class="configs-hd-title">建议配置 ：</span>
+                            <span class="configs-hd-product">地址云-地盘+
+                              <a href="https://www.aliyun.com/product/ecs/" target="_blank">云服务器ECS</a>+
+                              <a href="https://www.aliyun.com/product/vpc/" target="_blank">专有网络 VPC</a></span>
+                                                <br>
+                                                <br>
+                                                <div class="text-center">
+                                                    <img style="margin: auto;width:293px;display: block"
+                                                         src="#springUrl(
+                                                             'statics/yun')/TB1u_HZKXXXXXbNXpXXXXXXXXXX-586-483.png">
+                                                </div>
+                                                <ul class="configs-bd" style="display:">
+                                                    <li>
+                                                        架构解读：建立一个VPC网络，创建VPC类型的私网地址云-地盘实例，结合VPC类型的ECS实例可实现对内的分组管理；创建经典网络下的公网地址云-地盘，作为VPC网络的唯一出口，支持外部用户访问系统。
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="206729" data-moduleid="74698" data-name="aliyun-product-2000" data-guid="206729"
+                         id="guid-206729" data-scene-id="226946" data-scene-version="0" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2000 J_Module"
+                         tms="aliyun-product-2000/0.0.2" tms-datakey="226946">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row aliyun-product-title">
+                                <h4>地址云-地盘 文档与帮助</h4></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205058" data-moduleid="83925" data-name="aliyun-product-function-2003"
+                         data-guid="205058" id="guid-205058" data-scene-id="225334" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2003 J_Module" tms="aliyun-product-function-2003/0.0.7"
+                         tms-datakey="225334">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <ul class="docs-list clearfix">
+                                    <li>
+                                        <div class="li-inner current">
+                                            <h5 class="usercase-tab">产品文档</h5>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/document_detail/27547.html?spm=5176.doc32280.6.101.8MDPCh">如何快速使用地址云-地盘服务？</a>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/document_detail/32280.html?spm=5176.doc27547.6.268.LCAGyv">地址云-地盘服务用户指南</a>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/knowledge_detail/39405.html">地址云-地盘服务SLA</a>
+                                            <a target="_blank" class="more"
+                                               href="https://help.aliyun.com/product/8314871_slb.html?spm=5176.750001.3.8.sGv4hH">更多&gt;&gt;</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="li-inner current">
+                                            <h5 class="usercase-tab">常见问题</h5>
+                                            <a target="_blank" href="https://bbs.aliyun.com/read/188736.html">地址云-地盘常见咨询问题</a>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/document_detail/slb/faq/product-limit.html">地址云-地盘有哪些产品和业务限制？</a>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/document_detail/slb/faq/slb-vpc.html">地址云-地盘支持VPC的场景和限制</a>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/document_detail/slb/faq/ext-band.html">后端ECS需要公网带宽吗？</a>
+                                            <a target="_blank"
+                                               href="https://help.aliyun.com/document_detail/slb/faq/ecs-access-vip.html">后端ECS为何不能访问地址云-地盘实例？</a>
+                                            <a target="_blank" class="more"
+                                               href="https://help.aliyun.com/document_detail/slb/faq/product-limit.html?spm=5176.product8314871_slb.4.43.HV0e5t">更多&gt;&gt;</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="li-inner current">
+                                            <h5 class="usercase-tab">技术交流</h5>
+                                            <a target="_blank" href="https://bbs.aliyun.com/read/193333.html">关于地址云-地盘不得不知的事情</a>
+                                            <a target="_blank"
+                                               href="https://bbs.aliyun.com/read/245376.html?spm=5176.bbsl208.0.0.zdqrnx">多台ECS数据同步方法详解</a>
+                                            <a target="_blank" href="https://bbs.aliyun.com/read/247025.html">配置SSL证书HTTPS协议方法详解</a>
+                                            <a target="_blank" class="more"
+                                               href="https://bbs.aliyun.com/thread/208.html">更多&gt;&gt;</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="206702" data-moduleid="74698" data-name="aliyun-product-2000" data-guid="206702"
+                         id="guid-206702" data-scene-id="226920" data-scene-version="0" data-hidden=""
+                         data-gitgroup="ali-mod" data-ext="" class="aliyun-product-2000 J_Module"
+                         tms="aliyun-product-2000/0.0.2" tms-datakey="226920">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row aliyun-product-title">
+                                <h4>地址云-地盘 开发者资源</h4></div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="205059" data-moduleid="72062" data-name="aliyun-product-function-2004"
+                         data-guid="205059" id="guid-205059" data-scene-id="225333" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                         class="aliyun-product-function-2004 J_Module" tms="aliyun-product-function-2004/0.0.3"
+                         tms-datakey="225333">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <ul class="dev-resource-list clearfix">
+                                    <li>
+                                        <div class="li-inner">
+                                            <h5>API</h5>
+                                            <p>通过发起HTTP/HTTPS请求调用菜鸟物流云API的方式来使用云产品。</p>
+                                            <a href="https://develop.aliyun.com/api/" target="_blank">了解详情&gt;&gt;</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="li-inner">
+                                            <h5>SDK</h5>
+                                            <p>基于SDK以编写代码的方式来使用云产品，实现对应用、资源和数据更灵活的部署。</p>
+                                            <a href="https://develop.aliyun.com/sdk/java" target="_blank">JAVA SDK</a>
+                                            <a href="https://develop.aliyun.com/sdk/php" target="_blank">PHP SDK</a>
+                                            <a href="https://develop.aliyun.com/sdk/python" target="_blank">Python
+                                                SDK</a>
+                                            <a href="https://develop.aliyun.com/sdk/csharp?spm=5176.1970889.101.5.LY7s7C"
+                                               target="_blank">C# SDK</a>
+                                            <a href="https://develop.aliyun.com/sdk/opensource"
+                                               target="_blank">第三方SDK服务</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="li-inner">
+                                            <h5>开发者工具</h5>
+                                            <p>基于菜鸟物流云开放API建立的手边管理工具，帮您轻松的调试API、管理多个产品。</p>
+                                            <a href="https://develop.aliyun.com/command/cli" target="_blank">CLI</a>
+                                            <a href="https://develop.aliyun.com/command/eclipse" target="_blank">Eclipse插件</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container -->
+    <!-- container -->
+    <div class="layout layout-grid-0">
+        <!--row -->
+        <div class="grid-0">
+            <!-- col -->
+            <div class="col col-main">
+                <div class="main-wrap J_Region">
+                    <!--module -->
+                    <div data-spm="206758" data-moduleid="76603" data-name="aliyun-product-outline-2003"
+                         data-guid="206758" id="guid-206758" data-scene-id="226973" data-scene-version="0"
+                         data-hidden="" data-gitgroup="ali-mod" data-ext="" class="aliyun-product-outline-2003 J_Module"
+                         tms="aliyun-product-outline-2003/0.0.2" tms-datakey="226973">
+                        <div class="module-wrap J_tb_lazyload">
+                            <div class="y-row">
+                                <div class="module-tools-title">
+                                    <h1>云市场中提供更多丰富的软件与工具</h1></div>
+                                <ul class="module-tools-list y-clear tpl2">
+                                    <li class="list-item" style="width: 50%; height: 222px">
+                                        <div class="inner">
+                                            <h5 class="title">FlexGW运行环境</h5>
+                                            <div class="content">提供了VPN、SNAT 基础服务。主要包括功能为：IPSec Site-to-Site 功能；拨号VPN
+                                                功能；SNAT 功能。
+                                            </div>
+                                            <p class="text-left">
+                                                <a href="https://market.aliyun.com/products/56368007/jxsc000028.html"
+                                                   target="_blank">了解详情</a></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-item" style="width: 50%; height: 222px">
+                                        <div class="inner">
+                                            <h5 class="title">Fit2Cloud</h5>
+                                            <div class="content">
+                                                云上一站式应用交付及运维管理平台,基于FIT2CLOUD，企业可以实现应用全生命周期的自动化管理，打通从代码到服务的转化通道，实现云应用的持续交付和自动化运维。
+                                            </div>
+                                            <p class="text-left">
+                                                <a href="https://market.aliyun.com/products/53690006/jxsc000119.html"
+                                                   target="_blank">了解详情</a></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--module --></div>
+            </div>
+            <!--col --></div>
+        <!-- row --></div>
+    <!-- container --></div>
+<!-- body end -->
+<!-- footer block start -->
+<!-- exported styles -->
+<link rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(14)">
+<!--region -->
+<div data-spm="184954" data-moduleid="110323" data-name="aliyun-product-assets-footer" data-guid="184954"
+     id="guid-184954" data-scene-id="205882" data-scene-version="4" data-hidden="" data-gitgroup="ali-mod" data-ext=""
+     class="aliyun-product-assets-footer J_Module" tms="aliyun-product-assets-footer/0.0.12" tms-datakey="205882">
+    <div class="module-wrap J_tb_lazyload">
+        <script>window.product.menubar = [{
+            text: "弹性计算",
+            li1: [{
+                or: "false",
+                p: "可弹性扩展、安全稳定、简单易用的计算服务",
+                link: "//www.aliyun.com/product/ecs/",
+                spm: "elastic01",
+                key: "ecs",
+                h2: "云服务器 ECS"
+            },
+                {
+                    or: "false",
+                    p: "可弹性扩展、高性能、高可靠的块级随机存储",
+                    link: "//www.aliyun.com/product/disk/",
+                    spm: "elastic02",
+                    key: "disk",
+                    h2: "块存储"
+                },
+                {
+                    or: "false",
+                    p: "帮您轻松构建逻辑隔离的专有网络",
+                    link: "//www.aliyun.com/product/vpc/",
+                    spm: "elastic03",
+                    key: "vpc",
+                    h2: "专有网络 VPC"
+                },
+                {
+                    or: "false",
+                    p: "对多台云服务器进行流量分发的地址云-地盘服务",
+                    link: "//www.aliyun.com/product/slb/",
+                    spm: "elastic04",
+                    key: "slb",
+                    h2: "地址云-地盘"
+                },
+                {
+                    or: "false",
+                    p: "自动调整弹性计算资源的管理服务",
+                    link: "//www.aliyun.com/product/ess/",
+                    spm: "elastic05",
+                    key: "ess",
+                    h2: "弹性伸缩"
+                }],
+            key: "elastic",
+            li2: [{
+                or: "false",
+                p: "基于 Hadoop/Spark 的大数据处理分析服务",
+                link: "//www.aliyun.com/product/emapreduce",
+                spm: "elastic06",
+                key: "emapreduce",
+                h2: "E-MapReduce"
+            },
+                {
+                    or: "false",
+                    p: "批量创建、管理、配置云计算资源",
+                    link: "//www.aliyun.com/product/ros/",
+                    spm: "elastic07",
+                    key: "ros",
+                    h2: "资源编排"
+                },
+                {
+                    or: "false",
+                    p: "应用全生命周期管理的 Docker 服务",
+                    link: "//www.aliyun.com/product/containerservice/",
+                    spm: "elastic08",
+                    key: "containerservice",
+                    h2: "容器服务"
+                },
+                {
+                    or: "false",
+                    p: "加速深度学习、渲染和科学计算的 GPU 物理机",
+                    link: "//www.aliyun.com/product/hpc/",
+                    spm: "elastic09",
+                    key: "hpc",
+                    h2: "高性能计算 HPC"
+                }]
+        },
+            {
+                text: "数据库",
+                li1: [{
+                    or: "false",
+                    p: "完全兼容 MySQL，SQLServer，PostgreSQL 协议的关系型数据库服务",
+                    link: "//www.aliyun.com/product/rds/",
+                    spm: "database1",
+                    key: "rds",
+                    h2: "云数据库 RDS"
+                },
+                    {
+                        or: "false",
+                        p: "三节点副本集保证高可用",
+                        link: "//www.aliyun.com/product/mongodb/",
+                        spm: "database2",
+                        key: "mongodb",
+                        h2: "云数据库 MongoDB 版"
+                    },
+                    {
+                        or: "false",
+                        p: "兼容开源 Redis 协议的 Key-Value 类型在线存储服务",
+                        link: "//www.aliyun.com/product/kvstore",
+                        spm: "database3",
+                        key: "kvstore",
+                        h2: "云数据库 Redis 版"
+                    },
+                    {
+                        or: "false",
+                        p: "在线缓存服务，为热点数据的访问提供高速响应",
+                        link: "//www.aliyun.com/product/ocs/",
+                        spm: "database4",
+                        key: "ocs",
+                        h2: "云数据库 Memcache 版"
+                    },
+                    {
+                        or: "false",
+                        p: "支持 PB 级海量数据存储的分布式关系型数据库",
+                        link: "//www.aliyun.com/product/petadata/",
+                        spm: "database5",
+                        key: "petadata",
+                        h2: "PB 级云数据库 PetaData （邀测中）"
+                    }],
+                key: "database",
+                li2: [{
+                    or: "false",
+                    p: "金融级高可靠、高性能、分布式自研数据库",
+                    link: "//www.aliyun.com/product/oceanbase",
+                    spm: "database6",
+                    key: "oceanbase",
+                    h2: "云数据库 OceanBase（邀测中）"
+                },
+                    {
+                        or: "false",
+                        p: "海量数据实时高并发在线分析服务",
+                        link: "//www.aliyun.com/product/ads",
+                        spm: "database7",
+                        key: "ads",
+                        h2: "分析型数据库"
+                    },
+                    {
+                        or: "false",
+                        p: "比GoldenGate更易用，阿里异地多活数据流基础设施",
+                        link: "//www.aliyun.com/product/dts/",
+                        spm: "database8",
+                        key: "dts",
+                        h2: "数据传输"
+                    },
+                    {
+                        or: "false",
+                        p: "比 phpMyAdmin 更强大，比 Navicat 更易用",
+                        link: "//www.aliyun.com/product/dms/",
+                        spm: "database9",
+                        key: "dms",
+                        h2: "数据管理（公测中）"
+                    }]
+            },
+            {
+                text: "存储与 CDN",
+                li1: [{
+                    or: "false",
+                    p: "海量、安全和高可靠的云存储服务",
+                    link: "//www.aliyun.com/product/oss/",
+                    spm: "storage01",
+                    key: "oss",
+                    h2: "对象存储 OSS"
+                },
+                    {
+                        or: "false",
+                        p: "可弹性扩展、高性能、高可靠的块级随机存储",
+                        link: "//www.aliyun.com/product/disk/",
+                        spm: "storage02",
+                        key: "disk",
+                        h2: "块存储"
+                    },
+                    {
+                        or: "false",
+                        p: "无限扩展、多共享、标准文件协议的文件存储服务",
+                        link: "//www.aliyun.com/product/nas",
+                        spm: "storage03",
+                        key: "nas",
+                        h2: "文件存储（公测中）"
+                    },
+                    {
+                        or: "false",
+                        p: "NoSQL 数据存储服务，提供海量结构化数据的存储和实时访问",
+                        link: "//www.aliyun.com/product/ots/",
+                        spm: "storage04",
+                        key: "ots",
+                        h2: "表格存储"
+                    },
+                    {
+                        or: "false",
+                        p: "海量数据的长期归档、备份服务",
+                        link: "//www.aliyun.com/product/oas/",
+                        spm: "storage05",
+                        key: "oas",
+                        h2: "归档存储"
+                    },
+                    {
+                        or: "false",
+                        p: "跨运营商、跨地域全网覆盖的网络加速服务",
+                        link: "//www.aliyun.com/product/cdn/",
+                        spm: "storage07",
+                        key: "cdn",
+                        h2: "CDN"
+                    }],
+                key: "storage",
+                li2: []
+            },
+            {
+                text: "网络",
+                li1: [{
+                    or: "false",
+                    p: "对多台云服务器进行流量分发的地址云-地盘服务",
+                    link: "//www.aliyun.com/product/slb/",
+                    spm: "network01",
+                    key: "slb",
+                    h2: "地址云-地盘"
+                },
+                    {
+                        or: "false",
+                        p: "帮您轻松构建逻辑隔离的专有网络",
+                        link: "//www.aliyun.com/product/vpc/",
+                        spm: "network02",
+                        key: "vpc",
+                        h2: "专有网络 VPC"
+                    },
+                    {
+                        or: "false",
+                        p: "高速稳定的 VPC 互联和专线接入服务",
+                        link: "//www.aliyun.com/product/expressconnect/",
+                        spm: "network03",
+                        key: "expressconnect",
+                        h2: "高速通道"
+                    },
+                    {
+                        or: "false",
+                        p: "跨运营商、跨地域全网覆盖的网络加速服务",
+                        link: "//www.aliyun.com/product/cdn/",
+                        spm: "network04",
+                        key: "cdn",
+                        h2: "CDN"
+                    }],
+                key: "network"
+            },
+            {
+                text: "大规模计算",
+                li1: [{
+                    or: "false",
+                    p: "针对 TB/PB 级数据的分布式处理服务,彻底解决大数据存储与运算瓶颈",
+                    link: "//www.aliyun.com/product/odps/",
+                    spm: "bigdata01",
+                    key: "odps",
+                    h2: "大数据计算服务"
+                },
+                    {
+                        or: "false",
+                        p: "适用于大规模并行批处理作业的分布式云服务",
+                        link: "//www.aliyun.com/product/batchcompute",
+                        spm: "bigdata02",
+                        key: "batchcompute",
+                        h2: "批量计算（公测中）"
+                    },
+                    {
+                        or: "false",
+                        p: "稳定高效、弹性伸缩的数据同步平台",
+                        link: "//www.aliyun.com/product/cdp/",
+                        spm: "bigdata03",
+                        key: "cdp",
+                        h2: "数据集成（公测中）"
+                    },
+                    {
+                        or: "false",
+                        p: "基于 Hadoop/Spark 的大数据处理分析服务",
+                        link: "//www.aliyun.com/product/emapreduce",
+                        spm: "bigdata04",
+                        key: "emapreduce",
+                        h2: "E-MapReduce"
+                    }],
+                key: "bigdata"
+            },
+            {
+                text: "云盾",
+                li1: [{
+                    or: "true",
+                    p: "安全大数据分析，监控漏洞攻击，预警入侵风险",
+                    link: "//www.aliyun.com/product/sas/",
+                    spm: "yundun002",
+                    key: "sas",
+                    h2: "态势感知"
+                },
+                    {
+                        or: "false",
+                        p: "安全运维管理平台，入侵检测、漏洞批量修复",
+                        link: "//www.aliyun.com/product/aegis/",
+                        spm: "yundun001",
+                        key: "aegis",
+                        h2: '安骑士<span style="color:#999">[服务器安全]</span>'
+                    },
+                    {
+                        or: "false",
+                        p: "20-300G防护，按天计算，轻松应对大流量攻击",
+                        link: "//www.aliyun.com/product/ddos/",
+                        spm: "yundun004",
+                        key: "ddos",
+                        h2: 'DDoS 高防 IP<span style="color:#999">[网络安全]</span>'
+                    },
+                    {
+                        or: "false",
+                        p: "防SQL注入、防CC、防网站入侵、防接口被刷",
+                        link: "//www.aliyun.com/product/waf/",
+                        spm: "yundun003",
+                        key: "waf",
+                        h2: 'Web 应用防火墙<span style="color:#999">[网络安全]</span>'
+                    },
+                    {
+                        or: "false",
+                        p: "私密安全众测，渗透测试升级版。安全漏洞按效果付费",
+                        link: "//www.aliyun.com/product/xianzhi/",
+                        spm: "yundun006",
+                        key: "xianzhi",
+                        h2: '先知<span style="color:#999">[安全情报]</span>'
+                    },
+                    {
+                        or: "false",
+                        p: "紧急安全事件入侵分析排查和修复",
+                        link: "https://www.aliyun.com/product/sos",
+                        spm: "yundun005",
+                        key: "sos",
+                        h2: 'SOS服务<span style="color:#999">[安全管家]</span>'
+                    },
+                    {
+                        or: "false",
+                        p: "因黑客攻击导致数据泄露，最高赔偿100万",
+                        link: "https://www.aliyun.com/product/dsi",
+                        spm: "yundun007",
+                        key: "dsi",
+                        h2: '数据安全险<span style="color:#999">[安全管家]</span>'
+                    }],
+                key: "yundun",
+                li2: [{
+                    or: "false",
+                    p: "云上用户的数据加密解决方案",
+                    link: "//www.aliyun.com/product/hsm/",
+                    spm: "yundun011",
+                    key: "hsm",
+                    h2: '加密服务 <span style="color:#999">[数据安全]</span>'
+                },
+                    {
+                        or: "false",
+                        p: "专注违规信息安全监测及管控",
+                        link: "//www.aliyun.com/product/lvwang/",
+                        spm: "yundun009",
+                        key: "lvwang",
+                        h2: '绿网<span style="color:#999">[内容安全]</span>'
+                    },
+                    {
+                        or: "false",
+                        p: "风险业务用户核实、防垃圾注册/营销作弊等",
+                        link: "//www.aliyun.com/product/antifraud/",
+                        spm: "yundun008",
+                        key: "antifraud",
+                        h2: '反欺诈<span style="color:#999">[业务安全]</span>'
+                    },
+                    {
+                        or: "true",
+                        p: "提供一站式的数字证书申请和应用服务",
+                        link: "//www.aliyun.com/product/cas",
+                        spm: "yundun012",
+                        key: "cas",
+                        h2: '证书服务<span style="color:#999">[数据安全]</span>'
+                    },
+                    {
+                        or: "true",
+                        p: "针对移动APP提供漏洞扫描，应用加固等安全服务",
+                        link: "https://www.aliyun.com/product/mobsec",
+                        spm: "yundun016",
+                        key: "mobsec",
+                        h2: "移动安全"
+                    },
+                    {
+                        or: "true",
+                        p: "菜鸟物流云依赖的合作伙伴提供的专业安全产品与服务",
+                        link: "https://www.aliyun.com/product/sppc",
+                        spm: "yundun015",
+                        key: "sppc",
+                        h2: "合作伙伴产品中心"
+                    }]
+            },
+            {
+                text: "管理与监控",
+                li1: [{
+                    or: "false",
+                    p: "指标监控与报警服务",
+                    link: "//www.aliyun.com/product/jiankong/",
+                    spm: "manage001",
+                    key: "jiankong",
+                    h2: "云监控"
+                },
+                    {
+                        or: "false",
+                        p: "管理多因素认证、子账号与授权、角色与 STS 令牌",
+                        link: "//www.aliyun.com/product/ram/",
+                        spm: "manage002",
+                        key: "ram",
+                        h2: "访问控制"
+                    },
+                    {
+                        or: "false",
+                        p: "批量创建、管理、配置云计算资源",
+                        link: "//www.aliyun.com/product/ros/",
+                        spm: "manage003",
+                        key: "ros",
+                        h2: "资源编排"
+                    },
+                    {
+                        or: "false",
+                        p: "详细记录控制台和 API 操作",
+                        link: "//www.aliyun.com/product/actiontrail/",
+                        spm: "manage004",
+                        key: "actiontrail",
+                        h2: "操作审计（公测中）"
+                    },
+                    {
+                        or: "false",
+                        p: "安全、易用、低成本的密钥管理服务",
+                        link: "//www.aliyun.com/product/kms/",
+                        spm: "manage005",
+                        key: "kms",
+                        h2: "密钥管理服务（公测中）"
+                    }],
+                key: "manage"
+            },
+            {
+                text: "应用服务",
+                li1: [{
+                    or: "false",
+                    p: "针对日志收集、存储、查询和分析的服务",
+                    link: "//www.aliyun.com/product/sls/",
+                    spm: "service01",
+                    key: "sls",
+                    h2: "日志服务"
+                },
+                    {
+                        or: "false",
+                        p: "结构化数据搜索托管服务",
+                        link: "//www.aliyun.com/product/opensearch/",
+                        spm: "service02",
+                        key: "opensearch",
+                        h2: "开放搜索"
+                    },
+                    {
+                        or: "false",
+                        p: "性能云测试平台，帮您轻松完成系统性能评估",
+                        link: "//www.aliyun.com/product/pts/",
+                        spm: "service04",
+                        key: "pts",
+                        h2: "性能测试"
+                    },
+                    {
+                        or: "false",
+                        p: "事务邮件、通知邮件、批量邮件的推送服务",
+                        link: "//www.aliyun.com/product/directmail",
+                        spm: "service05",
+                        key: "directmail",
+                        h2: "邮件推送"
+                    },
+                    {
+                        or: "false",
+                        p: "高性能、高可用的 API 托管服务，低成本开放 API",
+                        link: "//www.aliyun.com/product/apigateway",
+                        spm: "service06",
+                        key: "apigateway",
+                        h2: "API 网关"
+                    },
+                    {
+                        or: "false",
+                        p: "助您快速搭建稳定可靠的物联网应用",
+                        link: "//www.aliyun.com/product/iot",
+                        spm: "service07",
+                        key: "iot",
+                        h2: "物联网套件（公测中）"
+                    },
+                    {
+                        or: "true",
+                        p: "永不丢失，消息必达，高并发，高消息堆积能力的分布式消息服务",
+                        link: "https://www.aliyun.com/product/mns",
+                        spm: "service08",
+                        key: "mns",
+                        h2: "消息服务"
+                    }],
+                key: "service"
+            },
+            {
+                text: "互联网中间件",
+                li1: [{
+                    or: "false",
+                    p: "以应用为中心的中间件 PaaS 平台",
+                    link: "//www.aliyun.com/product/edas",
+                    spm: "middlew01",
+                    key: "edas",
+                    h2: "企业级分布式应用服务 EDAS"
+                },
+                    {
+                        or: "false",
+                        p: "阿里中间件自主研发的企业级消息中间件",
+                        link: "//www.aliyun.com/product/ons/",
+                        spm: "middlew02",
+                        key: "ons",
+                        h2: "消息队列"
+                    },
+                    {
+                        or: "false",
+                        p: "水平拆分/读写分离的在线分布式数据库服务",
+                        link: "//www.aliyun.com/product/drds/",
+                        spm: "middlew03",
+                        key: "drds",
+                        h2: "分布式关系型数据库服务 DRDS"
+                    }],
+                key: "middleware"
+            },
+            {
+                text: "移动服务",
+                li1: [{
+                    or: "false",
+                    p: "移动应用数据采集、分析、展示和数据输出服务",
+                    link: "//www.aliyun.com/product/man",
+                    spm: "mobilese1",
+                    key: "man",
+                    h2: "移动数据分析（公测中）"
+                },
+                    {
+                        or: "false",
+                        p: "移动应用通知与消息推送服务",
+                        link: "//www.aliyun.com/product/cps",
+                        spm: "mobilese2",
+                        key: "cps",
+                        h2: "移动推送（公测中）"
+                    },
+                    {
+                        or: "false",
+                        p: "移动应用域名防劫持和精确调度服务",
+                        link: "//www.aliyun.com/product/httpdns",
+                        spm: "mobilese3",
+                        key: "httpdns",
+                        h2: "HTTPDNS"
+                    }],
+                key: "mobileservice"
+            },
+            {
+                text: "视频服务",
+                li1: [{
+                    or: "true",
+                    p: "为多媒体数据提供的转码计算服务",
+                    link: "https://www.aliyun.com/product/mts/",
+                    spm: "video0003",
+                    key: "mts",
+                    h2: "媒体转码"
+                },
+                    {
+                        or: "false",
+                        p: "安全、弹性、高可定制的点播服务",
+                        link: "https://www.aliyun.com/product/vod",
+                        spm: "video0001",
+                        key: "vod",
+                        h2: "视频点播"
+                    },
+                    {
+                        or: "false",
+                        p: "低延迟、高并发的音视频直播服务",
+                        link: "https://www.aliyun.com/product/live",
+                        spm: "video0002",
+                        key: "live",
+                        h2: "视频直播"
+                    }],
+                key: "video"
+            },
+            {
+                text: "域名与网站（万网）",
+                li1: [{
+                    or: "true",
+                    p: "建站主机，环境预装",
+                    link: "http://wanwang.aliyun.com/hosting/",
+                    spm: "webset001",
+                    key: "hosting",
+                    h2: "云虚拟主机"
+                },
+                    {
+                        or: "true",
+                        p: "新一代虚机，独享内存，高性价比",
+                        link: "http://wanwang.aliyun.com/hosting/elastic/",
+                        spm: "webset002",
+                        key: "elastic",
+                        h2: "弹性 Web 托管（弹性虚机）"
+                    },
+                    {
+                        or: "true",
+                        p: "成就网站完美访问，限时8.5折",
+                        link: "http://wanwang.aliyun.com/domain/dns/",
+                        spm: "webset003",
+                        key: "dns",
+                        h2: "云解析DNS"
+                    },
+                    {
+                        or: "true",
+                        p: "极速、安全、多端，办公协同新体验",
+                        link: "http://wanwang.aliyun.com/mail/",
+                        spm: "webset004",
+                        key: "mail",
+                        h2: "云邮箱"
+                    },
+                    {
+                        or: "true",
+                        p: "海量模板与定制网站任您选",
+                        link: "http://market.aliyun.com/jianzhan/",
+                        spm: "webset005",
+                        key: "jianzhan",
+                        h2: "企业建站"
+                    }],
+                key: "webset"
+            }]</script>
+        <script src="#springUrl('statics/yun')/common.js"></script>
+        <script src="#springUrl('statics/yun')/newMain.js"></script>
+        <link rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(15)">
+        <script src="#springUrl('statics/yun')/aliyun_footer"></script>
+        <!-- exported styles -->
+        <link rel="stylesheet" href="#springUrl('statics/yun')/saved_resource(16)">
+        <!--region -->
+        <div data-spm="419246" data-moduleid="142565" data-name="aliyun-common-footer" data-guid="419246"
+             id="guid-419246" data-scene-id="432435" data-scene-version="3" data-hidden="" data-gitgroup="ali-mod"
+             data-ext="" class="aliyun-common-footer J_Module" tms="aliyun-common-footer/0.0.78" tms-datakey="432435">
+            <div class="module-wrap J_tb_lazyload dbl_tms_module_wrap aliyun-common-footer-2016">
+                <div class="y-row" id="J_homePageRegister" style="display: block;">
+                    <p style="border-top:0;padding:32px 0" data-spm-click="gostr=/aliyun;locaid=tongdizhuce"
+                       class="y-align-center home-page-register">
+                        <a target="_blank" href="https://account.aliyun.com/register/register.htm" class="y-btn-blue">免费注册，享新手礼包</a>
+                    </p>
+                </div>
+                <div class="knight-footer" style="position: relative">
+                    <div class="knight-footer-big" style="display: block;">
+                        <div class="ali-main-contact">
+                            <div class="y-row">
+                                <div class="ali-main-time">
+                                    <ul class="ali-main-time-content y-clear">
+                                        <li>
+                                            <a href="https://www.aliyun.com/support/jpfw#gold-tab-05" target="_blank"
+                                               data-spm-click="gostr=/aliyun;locaid=a111">
+                            <span>
+                              <img class="white"
+                                   src="#springUrl('statics/yun')/TB1t1u8LXXXXXXpaXXXXXXXXXXX-100-100.png">
+                              <img class="black"
+                                   src="#springUrl('statics/yun')/TB1Sj6bLXXXXXXPXVXXXXXXXXXX-100-100.png"></span>
+                                                <span class="ali-main-time-what">100倍故障赔偿</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.aliyun.com/support/jpfw#gold-tab-02" target="_blank"
+                                               data-spm-click="gostr=/aliyun;locaid=a222">
+                            <span>
+                              <img class="white"
+                                   src="#springUrl('statics/yun')/TB1Jvy7LXXXXXXoaXXXXXXXXXXX-100-100.png">
+                              <img class="black"
+                                   src="#springUrl('statics/yun')/TB1CZ15LXXXXXbHaXXXXXXXXXXX-100-100.png"></span>
+                                                <span class="ali-main-time-what">7×24小时售后支持</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.aliyun.com/support/jpfw#gold-tab-06" target="_blank"
+                                               data-spm-click="gostr=/aliyun;locaid=a333">
+                            <span>
+                              <img class="white"
+                                   src="#springUrl('statics/yun')/TB17_ThLXXXXXb9XpXXXXXXXXXX-100-100.png">
+                              <img class="black"
+                                   src="#springUrl('statics/yun')/TB14aHiLXXXXXcZXpXXXXXXXXXX-100-100.png"></span>
+                                                <span class="ali-main-time-what">5天无理由退款</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.aliyun.com/support/jpfw#gold-tab-03" target="_blank"
+                                               data-spm-click="gostr=/aliyun;locaid=a444">
+                            <span>
+                              <img class="white"
+                                   src="#springUrl('statics/yun')/TB13HuYLXXXXXanapXXXXXXXXXX-100-100.png">
+                              <img class="black"
+                                   src="#springUrl('statics/yun')/TB1FJm0LXXXXXaVapXXXXXXXXXX-100-100.png"></span>
+                                                <span class="ali-main-time-what">备案多久送多久</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="y-row" style="display:none">
+                                <div class="ali-main-tel y-clear">
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <span>售前咨询电话：95187转1（5×8小时）</span>
+                                    <span>一对一专业服务，助您上云无忧</span>
+                                    <a class="y-btn-white" href="https://free.aliyun.com/" target="_blank">现在立享免费试用</a>
+                                </div>
+                            </div>
+                            <div class="y-row">
+                                <div class="ali-main-know">
+                                    <ul class="ali-main-know-content">
+                                        <li class="ali-main-know-content-li">
+                                            <h3 class="ali-main-know-title">服务与支持</h3>
+                                            <ul class="ali-main-know-subcontent">
+                                                <li>
+                                                    <span style="color:#666">售前咨询： 95187转1（5×8）</span></li>
+                                                <li>
+                                                    <a title="联系客服" target="_blank"
+                                                       href="https://help.aliyun.com/contact/contact.htm"
+                                                       data-spm-click="gostr=/aliyun;locaid=a211">联系客服</a></li>
+                                                <li>
+                                                    <a title="新手学堂" target="_blank"
+                                                       href="https://help.aliyun.com/contact/school.htm"
+                                                       data-spm-click="gostr=/aliyun;locaid=a1233">新手学堂</a></li>
+                                                <li>
+                                                    <a title="上云培训" target="_blank"
+                                                       href="https://www.aliyun.com/support/training"
+                                                       data-spm-click="gostr=/aliyun;locaid=a1234">上云培训</a></li>
+                                                <li>
+                                                    <a title="服务公告" target="_blank"
+                                                       href="https://help.aliyun.com/noticelist.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a1235">服务公告</a></li>
+                                                <li>
+                                                    <a title="信任中心" target="_blank" href="https://security.aliyun.com/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a1236">信任中心</a></li>
+                                                <li>
+                                                    <a title="举报中心" target="_blank" href="https://report.aliyun.com/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a12399">举报中心</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="ali-main-know-content-li">
+                                            <h3 class="ali-main-know-title">账号与支付</h3>
+                                            <ul class="ali-main-know-subcontent">
+                                                <li>
+                                                    <a title="登录常见问题" target="_blank"
+                                                       href="https://help.aliyun.com/knowledge_list/8314758.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123a">登录常见问题</a></li>
+                                                <li>
+                                                    <a title="充值付款" target="_blank"
+                                                       href="https://help.aliyun.com/knowledge_detail/5975134.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123s">充值付款</a></li>
+                                                <li>
+                                                    <a title="线下汇款 / 电汇" target="_blank"
+                                                       href="https://help.aliyun.com/knowledge_detail/5974879.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123d">线下汇款 / 电汇</a></li>
+                                                <li>
+                                                    <a title="合同申请" target="_blank"
+                                                       href="https://help.aliyun.com/knowledge_detail/5975145.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123f">合同申请</a></li>
+                                                <li>
+                                                    <a title="索取发票" target="_blank"
+                                                       href="https://help.aliyun.com/knowledge_detail/5975160.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123g">索取发票</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="ali-main-know-content-li">
+                                            <h3 class="ali-main-know-title">快速入口</h3>
+                                            <ul class="ali-main-know-subcontent">
+                                                <li>
+                                                    <a title="管理控制台" target="_blank"
+                                                       href="https://home.console.aliyun.com/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123z">管理控制台</a></li>
+                                                <li>
+                                                    <a title="备案管理" target="_blank"
+                                                       href="https://bsn.console.aliyun.com/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123x">备案管理</a></li>
+                                                <li>
+                                                    <a title="账号管理" target="_blank"
+                                                       href="https://account.console.aliyun.com/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123c">账号管理</a></li>
+                                                <li>
+                                                    <a title="域名信息查询（WHOIS）" target="_blank"
+                                                       href="https://whois.aliyun.com/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123v">域名信息查询（WHOIS）</a>
+                                                </li>
+                                                <li>
+                                                    <a title="域名控制台" target="_blank"
+                                                       href="https://dc.aliyun.com/login/loginx"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123b">域名控制台</a></li>
+                                                <li>
+                                                    <a title="万网主机控制面板" target="_blank"
+                                                       href="https://cp.hichina.com/login"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123n">万网主机控制面板</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="ali-main-know-content-li">
+                                            <h3 class="ali-main-know-title">其它</h3>
+                                            <ul class="ali-main-know-subcontent">
+                                                <li>
+                                                    <a title="客户案例" target="_blank"
+                                                       href="https://www.aliyun.com/customer/"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123r">客户案例</a></li>
+                                                <li>
+                                                    <a title="产品图标" target="_blank"
+                                                       href="https://www.aliyun.com/icon/download.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123f">产品图标</a></li>
+                                                <li>
+                                                    <a title="海外上云" target="_blank"
+                                                       href="https://promotion.aliyun.com/ntms/act/overseas-regions.html"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123h">海外上云</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="ali-main-know-content-li ali-main-attion">
+                                            <h3 class="ali-main-know-title">关注菜鸟物流云</h3>
+                                            <ul class="ali-main-know-subcontent">
+                                                <li class="ali-main-know-cell qr-code">
+                                                    <a href="https://promotion.aliyun.com/ntms/mobile.html"
+                                                       target="_blank" data-spm-click="gostr=/aliyun;locaid=a123p">菜鸟物流云APP</a>
+                                                    <img class="ali-main-know-cell-qr" style="display:block"
+                                                         src="#springUrl(
+                                                             'statics/yun')/TB1snwnLXXXXXczaXXXXXXXXXXX-84-84.png"></li>
+                                                <li class="ali-main-know-cell qr-code">
+                                                    <a style="text-decoration: none">菜鸟物流云微信</a>
+                                                    <img class="ali-main-know-cell-qr" src="#springUrl(
+                                                        'statics/yun')/TB12GsJLXXXXXcWXpXXXXXXXXXX-84-84.png"></li>
+                                                <li class="ali-main-know-cell qr-code">
+                                                    <a href="http://weibo.com/aliyun?sudaref=www.aliyun.com"
+                                                       target="_blank"
+                                                       data-spm-click="gostr=/aliyun;locaid=a123l">菜鸟物流云微博</a>
+                                                    <img class="ali-main-know-cell-qr" src="#springUrl(
+                                                        'statics/yun')/TB1zE3rLXXXXXXsaXXXXXXXXXXX-84-84.png"></li>
+                                                <li class="ali-main-know-cell qr-code">
+                                                    <a style="text-decoration: none">菜鸟物流云服务中心</a>
+                                                    <img class="ali-main-know-cell-qr" src="#springUrl(
+                                                        'statics/yun')/TB1FbUWLXXXXXa1XXXXXXXXXXXX-84-84.png"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copyright-100">
+                        <div class="y-row copyright">
+                            <p class="big" style="display: inline-block">
+                                <a href="https://www.aliyun.com/about" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=about">关于我们</a>
+                                <a href="https://www.aliyun.com/about/law" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=law">法律声明</a>
+                                <a href="http://jubao.alibaba.com/internet/readme.htm" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=jubao">廉正举报</a>
+                                <a href="https://www.aliyun.com/links" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=links">友情链接</a></p>
+                            <div class="footer-search">
+                                <form class="frm-search" action="https://www.aliyun.com/ss">
+                                    <input placeholder="搜索" name="k">
+                                    <button class="btn-search" type="submit">
+                                        <i class="icon-Search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="select-choice y-right">
+                                <img src="#springUrl('statics/yun')/TB1y5NmKFXXXXckXFXXXXXXXXXX-32-32.png">中国站
+                                <i class="icon-down3"></i>
+                                <i class="icon-up3"></i>
+                                <ul>
+                                    <li>
+                                        <img src="#springUrl('statics/yun')/TB1AmBvKFXXXXazXpXXXXXXXXXX-32-32.png">International
+                                    </li>
+                                </ul>
+                            </div>
+                            <p class="link-wrap">
+                                <a class="link-item" href="http://www.alibabagroup.com/cn/global/home" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8001">阿里巴巴集团</a>
+                                <a class="link-item" href="https://www.taobao.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8002">淘宝网</a>
+                                <a class="link-item" href="https://www.tmall.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8003">天猫</a>
+                                <a class="link-item" href="https://ju.taobao.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8004">聚划算</a>
+                                <a class="link-item" href="http://www.aliexpress.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8005">全球速卖通</a>
+                                <a class="link-item" href="http://www.alibaba.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8006">阿里巴巴国际交易市场</a>
+                                <a class="link-item" href="http://www.1688.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8007">1688</a>
+                                <a class="link-item" href="http://www.alimama.com/index.htm" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8008">阿里妈妈</a>
+                                <a class="link-item" href="https://www.alitrip.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8009">阿里旅行去啊</a>
+                                <a class="link-item" href="http://www.aliyun.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8010">菜鸟物流云计算</a>
+                                <a class="link-item" href="http://www.yunos.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8011">YunOS</a>
+                                <a class="link-item" href="https://aliqin.tmall.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8012">阿里通信</a>
+                                <a class="link-item" href="http://wanwang.aliyun.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8013">万网</a>
+                                <a class="link-item" href="http://www.autonavi.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8014">高德</a>
+                                <a class="link-item" href="http://www.uc.cn/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8015">UC</a>
+                                <a class="link-item" href="http://www.umeng.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8016">友盟</a>
+                                <a class="link-item" href="http://www.xiami.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8017">虾米</a>
+                                <a class="link-item" href="http://www.ttpod.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8018">天天动听</a>
+                                <a class="link-item" href="http://www.laiwang.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8019">来往</a>
+                                <a class="link-item" href="http://www.dingtalk.com/?lwfrom=20150205111943449"
+                                   target="_blank" data-spm-click="gostr=/aliyun;locaid=d8020">钉钉</a>
+                                <a class="link-item" href="https://www.alipay.com/" target="_blank"
+                                   data-spm-click="gostr=/aliyun;locaid=d8021">支付宝</a></p>
+                            <p class="copyright">© 2009-2016 Aliyun.com 版权所有 ICP证：浙B2-20080101
+                    <span>
+                      <a href="http://idinfo.zjaic.gov.cn/bscx.do?method=hddoc&amp;id=33010800001867" target="_blank"
+                         data-spm-click="gostr=/aliyun;locaid=d3338">
+                        <img src="#springUrl('statics/yun')/TB1dG7pJXXXXXXCXVXXiC47GVXX-44-44.png"
+                             style="display:inline-block;width: 22px"></a>
+                      <a href="http://www.aliyun.com/djcp" target="_blank">
+                        <img src="#springUrl('statics/yun')/TB18_.kJXXXXXcOXVXXiC47GVXX-44-44.png"
+                             style="display:inline-block;width: 22px"></a>
+                    </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <script src="#springUrl('statics/yun')/saved_resource(17)"></script>
+                <script>window.aliyun_xiaoyun_ad = [{}]</script>
+                <script src="#springUrl('statics/yun')/data-statistics.js"></script>
+                <script src="#springUrl('statics/yun')/cloud_helper.js"></script>
+            </div>
+        </div>
+        <!--region -->
+        <!-- exported scripts -->
+        <script src="#springUrl('statics/yun')/saved_resource(18)"></script>
+        <script>window.criteo_q = window.criteo_q || [],
+                window.criteo_q.push({
+                            event: "setAccount",
+                            account: 19037
+                        },
+                        {
+                            event: "setSiteType",
+                            type: "d"
+                        },
+                        {
+                            event: "setHashedEmail",
+                            email: ""
+                        },
+                        {
+                            event: "viewItem",
+                            item: window.product.code
+                        })</script>
+    </div>
+</div>
+<div id="criteo-tags-div" style="display: none;">
+    <script async="true" type="text/javascript" src="#springUrl('statics/yun')/event"></script>
+    <iframe height="0" width="0" src="#springUrl('statics/yun')/dis.html" style="display: none;"></iframe>
+</div>
+<!--region -->
+<!-- exported scripts -->
+<script src="#springUrl('statics/yun')/saved_resource(19)"></script>
+<!-- footer block end -->
+<!-- page export scripts -->
+<script src="#springUrl('statics/yun')/saved_resource(20)"></script>
+<!-- page export scripts end -->
+<script type="text/javascript">(function (e) {
+    if (!e["_med"]) e["_med"] = {};
+    var t = e["_med"];
+    t.cookie = function (e, t, a) {
+        if (t !== undefined) {
+            a = a || {};
+            if (typeof a.expires === "number") {
+                var o = a.expires,
+                        l = a.expires = new Date;
+                l.setTime(+l + o * 864e5)
+            }
+            return document.cookie = [e, "=", String(t), a.expires ? "; expires=" + a.expires.toUTCString() : "", a.path ? "; path=" + a.path : "", a.domain ? "; domain=" + a.domain : "", a.secure ? "; secure" : ""].join("")
+        }
+        var r = e ? undefined : {};
+        var i = document.cookie ? document.cookie.split("; ") : [];
+        for (var n = 0,
+                     s = i.length; n < s; n++) {
+            var b = i[n].split("=");
+            var d = b.shift();
+            var p = b.join("=");
+            if (e && e === d) {
+                r = p;
+                break
+            }
+            if (!e && p !== undefined) {
+                r[d] = p
+            }
+        }
+        return r
+    };
+    var a = document;
+    var o = e.devicePixelRatio || 1,
+            l = a.documentElement.clientWidth,
+            r = a.documentElement.clientHeight,
+            i, n, s, b = /initial-scale=([\d\.]+?),/i,
+            d, p;
+    if (a.querySelector) {
+        p = a.querySelector('meta[name="viewport"]');
+        if (p) {
+            d = b.exec(p.content + ",");
+            if (d) {
+                s = parseFloat(d[1], 10)
+            }
+        }
+    }
+    if (s) {
+        l = l * s;
+        r = r * s
+    }
+    if (screen) {
+        if (Math.abs(screen.width - l * o) < .2 * screen.width) {
+            l = screen.width / o;
+            r = screen.height / o;
+            i = screen.width;
+            n = screen.height
+        } else {
+            l = screen.width;
+            r = screen.height;
+            i = screen.width * o;
+            n = screen.height * o
+        }
+    } else {
+        i = l * o;
+        n = r * o
+    }
+    var m = "createTouch" in a && "ontouchstart" in e ? 1 : 0;
+    var c = ["dw:" + l, "dh:" + r, "pw:" + i, "ph:" + n, "ist:" + m].join("&");
+    t.cookie("_med", c, {
+        expires: 3650
+    })
+})(window);</script>
+<div class="cloud-helper-body-wrap" data-spm="364"></div>
+<div class="float-tool" data-spm="101" style="  width: 38px;height: initial;margin-bottom:50px;">
+    <div id="J_cloudHelper" style="cursor: pointer;" data-spm="601">
+        <a id="J_cloud" data-ga="首页A.客户服务.小云帮助" data-spm-click="gostr=/aliyun;locaid=d201433">
+            <img style="width: 38px;" src="#springUrl('statics/yun')/TB1jSwyLXXXXXbHXFXXXXXXXXXX-80-80.png"
+                 hover="//img.alicdn.com/tps/TB1y9IJLXXXXXaDXpXXXXXXXXXX-80-80.png"></a>
+    </div>
+    <div aliyun-lego-data="//www.aliyun.com/lego/xiaoyun/combine" aliyun-lego-tip="true">
+        <link rel="stylesheet" type="text/css" href="#springUrl('statics/yun')/index(2).css">
+        <link rel="stylesheet" type="text/css" href="#springUrl('statics/yun')/index(3).css">
+        <link rel="stylesheet" type="text/css" href="#springUrl('statics/yun')/index(4).css">
+        <link rel="stylesheet" type="text/css" href="#springUrl('statics/yun')/index(5).css">
+        <!-- exported styles -->
+        <!--region -->
+        <div data-spm="429679" data-moduleid="140651" data-name="aliyun-common-xiaoyun" data-guid="429679"
+             id="guid-429679" data-scene-id="442736" data-scene-version="0" data-hidden="" data-gitgroup="ali-mod"
+             data-ext="" class="aliyun-common-xiaoyun J_Module" tms="aliyun-common-xiaoyun/0.0.9" tms-datakey="442736">
+            <div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+                <!-- exported styles -->
+                <!--region -->
+                <div data-spm="427158" data-moduleid="134496" data-name="aliyun-common-intelligent-cell"
+                     data-guid="427158" id="guid-427158" data-scene-id="440242" data-scene-version="0" data-hidden=""
+                     data-gitgroup="ali-mod" data-ext="" class="aliyun-common-intelligent-cell J_Module"
+                     tms="aliyun-common-intelligent-cell/0.0.43" tms-datakey="440242" done="true">
+                    <div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+                        <!-- exported styles -->
+                        <!--region -->
+                        <div data-spm="390384" data-moduleid="133455" data-name="aliyun-common-intelligent"
+                             data-guid="390384" id="guid-390384" data-scene-id="403897" data-scene-version="4"
+                             data-hidden="" data-gitgroup="ali-mod" data-ext=""
+                             class="aliyun-common-intelligent J_Module" tms="aliyun-common-intelligent/0.0.13"
+                             tms-datakey="403897">
+                            <div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+                                <textarea name="all_module" style="display: none">[]</textarea></div>
+                        </div>
+                        <!--region -->
+                        <!-- exported scripts -->
+                        <input style="display: none" name="debug_module">
+                        <textarea style="display: none" name="priority_module">[]</textarea>
+                        <textarea style="display: none" name="cell_module">[{"result":"400fy","aliyun_prd_retain":[{"vm":"false","mail":"false","rds":"true","cdn":"true","domain":"false","ecs":"true","oss":"true","slb":"false"}]}]</textarea>
+                    </div>
+                </div>
+                <!--region -->
+                <!--region -->
+                <div data-spm="346012" data-moduleid="140628" data-name="www-aliyun-lego-common-tel" data-guid="346012"
+                     id="guid-346012" data-scene-id="360428" data-scene-version="1" data-hidden=""
+                     data-gitgroup="ali-mod" data-ext="" class="www-aliyun-lego-common-tel J_Module"
+                     tms="www-aliyun-lego-common-tel/0.0.17" tms-datakey="360428">
+                    <div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+                        <script>window.aliyunLegoCommonTel20160608 = [{
+                            text: "95187转1",
+                            host: "www.aliyun.com",
+                            unlogin: "true",
+                            pathname: "/product/ecs",
+                            day: "7"
+                        },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/product/rds",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/product/aegis",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/product/ddos",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/price",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/support/jpfw",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/easybuy",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "promotion.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/ntms/act/newbaby.html",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/solution/web",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "free.aliyun.com",
+                                unlogin: "true",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/solution/ecommerce/",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/solution/media",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/product/oss/",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/product/cdn/",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "help.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/contact/school.htm",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "help.aliyun.com",
+                                unlogin: "true",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "market.aliyun.com",
+                                unlogin: "true",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "www.aliyun.com",
+                                unlogin: "true",
+                                pathname: "/support",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "beian.aliyun.com",
+                                unlogin: "true",
+                                day: "7"
+                            },
+                            {
+                                text: "95187转1",
+                                host: "ecs-buy.aliyun.com",
+                                unlogin: "true",
+                                day: "7"
+                            }]</script>
+                        <textarea style="width: 100%;height: 600px;display: none" name="module"></textarea>
+                        <div class="tel-box" style="display: block;">
+                            <img style="width: 38px" class="white"
+                                 src="#springUrl('statics/yun')/TB1aXZxLXXXXXXAXVXXXXXXXXXX-80-80.png">
+                            <img style="width: 38px" class="blue"
+                                 src="#springUrl('statics/yun')/TB1NF.sLXXXXXcGXVXXXXXXXXXX-80-80.png">
+                            <div class="showTel" style="left: -112px; display: none;">
+                                <img src="#springUrl('statics/yun')/TB1.FkxLXXXXXXfXVXXXXXXXXXX-224-110.png"
+                                     style="width: 112px"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--region -->
+                <!-- exported scripts -->
+                <div id="xiaoyun_count" class="xiaoyu-box" style="position: relative;display: none">
+                    <span id="J_net_cart_count"
+                          style="color: #fff;top: -9px;border-radius: 10px;padding: 2px 8px;background-color: #F60;position: absolute;font-size: 12px;left: -14px">0</span>
+                    <a href="https://netcn.console.aliyun.com/core/domain/buylist" target="_blank">
+                        <img style="width: 38px" src="#springUrl('statics/yun')/TB10mcRLXXXXXbRXXXXXXXXXXXX-80-80.png"
+                             hover="//img.alicdn.com/tps/TB1JvZJLXXXXXb5XpXXXXXXXXXX-80-80.png"></a>
+                </div>
+                <div id="xiaoyun_code" class="xiaoyu-box" style="position: relative;display: none">
+                    <div class="big"
+                         style="display: none;background-color: #eee;padding: 5px;left: -125px;position: absolute;top: -87px;border: 1px solid #e5e5e5">
+                        <img src="#springUrl('statics/yun')/TB1cZIOLXXXXXXdXpXXXXXXXXXX-298-296.png" width="110"></div>
+                    <a>
+                        <img style="width: 38px" src="#springUrl('statics/yun')/TB1agwVLXXXXXXFXXXXXXXXXXXX-80-80.png"
+                             hover="//img.alicdn.com/tps/TB1wtZSLXXXXXbFXXXXXXXXXXXX-80-80.png"></a>
+                </div>
+                <div id="xiaoyun_app" class="xiaoyu-box" style="position: relative;display: none">
+                    <div class="big"
+                         style="display: none;background-color: #eee;padding: 5px;left: -125px;position: absolute;top: -87px;border: 1px solid #e5e5e5">
+                        <img src="#springUrl('statics/yun')/TB1ecUxLXXXXXXLXVXXXXXXXXXX-328-402.png" width="110"></div>
+                    <a>
+                        <img style="width: 38px" src="#springUrl('statics/yun')/TB1fVUwLXXXXXaoXVXXXXXXXXXX-80-80.png"
+                             hover="//img.alicdn.com/tps/TB17XIALXXXXXb.XFXXXXXXXXXX-80-80.png"></a>
+                </div>
+            </div>
+        </div>
+        <!--region -->
+        <!-- exported scripts -->
+        <script src="#springUrl('statics/yun')/index(6).js"></script>
+        <script src="#springUrl('statics/yun')/index(7).js"></script>
+        <script src="#springUrl('statics/yun')/index(8).js"></script>
+        <script src="#springUrl('statics/yun')/index(9).js"></script>
+    </div>
+    <div id="J_gotoTop" style="cursor: pointer; display: none;">
+        <img style="width: 38px;" src="#springUrl('statics/yun')/TB1bIwsLXXXXXbFXVXXXXXXXXXX-80-80.png"
+             hover="//img.alicdn.com/tps/TB1hzkTLXXXXXXNXXXXXXXXXXXX-80-80.png"></div>
+</div>
+<img height="0" width="0" src="#springUrl('statics/yun')/saved_resource(21)"
+     style="left: -9999px; border-style: none; position: absolute;">
+<script src="#springUrl('statics/yun')/index(10).js"></script>
+</body>
+
+</html>

@@ -4,7 +4,6 @@ import com.sera.config.SequenceConfig;
 import com.sera.entity.FavGroupEntity;
 import com.sera.entity.FavListEntity;
 import com.sera.helper.SequenceHelper;
-import com.sera.helper.UserHelper;
 import com.sera.service.FavService;
 import com.sera.service.UploadService;
 import org.apache.commons.io.FileUtils;
@@ -42,24 +41,25 @@ public class UploadServiceImpl implements UploadService {
     private SequenceHelper sequenceHelper;
 
     @Override
-    public boolean parse(long userID,String userName, String fileName) {
+    public boolean parse(long userID, String userName, String fileName) {
         File file = new File(fileName);
         try {
 
             String str = FileUtils.readFileToString(file, "UTF-8");
+            List<FavGroupEntity> groupList = favService.findFavGroup(userID, 0);
             //解析间接菜单
-            parseByRegx(userID,userName, str);
-            parseByJsoup(userID,userName, str);
+            parseByRegx(userID, userName, str, groupList);
+            parseByJsoup(userID, userName, str, groupList);
             return true;
         } catch (Exception e) {
             log.error("解析上传标签异常");
             return false;
-        }finally {
+        } finally {
             file.delete();
         }
     }
 
-    private void parseByJsoup(long userID, String userName, String str) {
+    private void parseByJsoup(long userID, String userName, String str, List<FavGroupEntity> groupList) {
         //解析直接菜单
         Document doc = Jsoup.parse(str, "UTF-8");
 
@@ -96,13 +96,17 @@ public class UploadServiceImpl implements UploadService {
             }
         }
         if (!nodoList.isEmpty()) {
-            FavGroupEntity group = new FavGroupEntity();
-            long groupId = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
-            group.setGroupId(groupId);
-            group.setUserId(userID);
-            group.setUserName(userName);
-            group.setGroupName("未分组");
-            favService.addFavGroup(group);
+            long groupId =  getGroupID("未分组",groupList);
+            if(groupId<1){
+                FavGroupEntity group = new FavGroupEntity();
+                groupId = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
+                group.setGroupId(groupId);
+                group.setUserId(userID);
+                group.setUserName(userName);
+                group.setGroupName("未分组");
+                favService.addFavGroup(group);
+            }
+
             for (Element elt : nodoList) {
                 Elements cc = elt.select("a");
                 for (Element kk : cc) {
@@ -117,7 +121,7 @@ public class UploadServiceImpl implements UploadService {
                         FavListEntity fav = new FavListEntity();
                         fav.setFavUrl(linkHref);
                         fav.setFavTitle(linkText);
-                        fav.setGroupId(group.getGroupId());
+                        fav.setGroupId(groupId);
                         fav.setUserId(userID);
                         fav.setUserName(userName);
                         favService.addFav(fav);
@@ -129,7 +133,7 @@ public class UploadServiceImpl implements UploadService {
         }
     }
 
-    private void parseByRegx(long userID, String userName, String arg) {
+    private void parseByRegx(long userID, String userName, String arg, List<FavGroupEntity> groupList) {
         arg = arg.replaceAll("\\s*|\t|\r|\n", "");
         String rg = "ADD_DATE=\"(\\d+)\"";
         arg = arg.replaceAll(rg, "");
@@ -143,13 +147,17 @@ public class UploadServiceImpl implements UploadService {
             try {
                 String groupName = matcher.group(1);
                 if (StringUtils.isBlank(groupName)) continue;
-                long groupId = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
-                FavGroupEntity group = new FavGroupEntity();
-                group.setGroupId(groupId);
-                group.setUserId(userID);
-                group.setUserName(userName);
-                group.setGroupName(groupName);
-                favService.addFavGroup(group);
+                long groupId =  getGroupID(groupName,groupList);
+                if(groupId<1){
+                    groupId = sequenceHelper.getSeq(SequenceConfig.FAV_GROUP_SEQ);
+                    FavGroupEntity group = new FavGroupEntity();
+                    group.setGroupId(groupId);
+                    group.setUserId(userID);
+                    group.setUserName(userName);
+                    group.setGroupName(groupName);
+                    favService.addFavGroup(group);
+                }
+
                 String urlstr = matcher.group(2) + "</A>";
                 Pattern pattern2 = Pattern.compile("<AHREF=\"(.*?)\">(.*?)</A>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
                 Matcher matcher2 = pattern2.matcher(urlstr);
@@ -165,7 +173,7 @@ public class UploadServiceImpl implements UploadService {
                         FavListEntity fav = new FavListEntity();
                         fav.setFavUrl(linkHref);
                         fav.setFavTitle(urlName);
-                        fav.setGroupId(group.getGroupId());
+                        fav.setGroupId(groupId);
                         fav.setUserId(userID);
                         fav.setUserName(userName);
                         favService.addFav(fav);
@@ -178,5 +186,18 @@ public class UploadServiceImpl implements UploadService {
             }
 
         }
+    }
+
+
+    private long getGroupID(String groupName, List<FavGroupEntity> groupList) {
+
+        if (groupList == null || groupList.isEmpty()) return 0L;
+        for (FavGroupEntity entity : groupList) {
+            if (groupName.equals(entity.getGroupName())) {
+                return entity.getGroupId();
+            }
+        }
+
+        return 0L;
     }
 }
